@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="https://i.imgur.com/RCMBfPu.png%22%3E">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+    <title>Header</title>
+</head>
+<body>
+
+<div class="header__container" th:fragment="header-cline">
+    <div class="header__top">
+        <div sec:authorize ="isAuthenticated()">
+            <button class="btn btn-primary " type="button"
+                    style="background-color: #FFCC20; border: 1px solid #FFCC20" sec:authorize="hasRole('ADMIN') or hasRole('SALER')">
+                <div class="header__management" sec:authorize="hasRole('ADMIN') or hasRole('SALER')">
+                    <i class="material-icons" title="Account" style="font-size: 25px;cursor: pointer;"
+                       data-uw-styling-context="true">person</i>
+                    <span class="caret"  th:if="${admin != null}">
+                        <a style="text-decoration: none; color:white"  href="/admin/">Quản lý</a>
+                     </span>
+
+                    <span class="caret"  th:if="${admin==null}" >
+                         <a  style="text-decoration: none; color:white"  href="/product/list">Truy cập đến shop</a>
+                    </span>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class="header__second">
+
+        <div class="header__logo">
+            <!-- <img src="./Images/Logo-Neffex.png" alt=""> -->
+            <a href="/">
+                <!--            <img src="/Images/SeekPng.com_pouring-milk-png_2829187.png" alt="">-->
+                <img src="/Images/Logo-Neffex.png" />
+            </a>
+        </div>
+
+        <div class="header__search">
+            <form method="get" action="/timKiem" class="d-flex">
+                <input  placeholder="" class="header__search-input" type="search" name="tenSp"
+                        aria-label="Search">
+                <label class="header__search-label">Tìm kiếm</label>
+                <select name="maDanhMuc" class="form-control mr-2 custom-select">
+                    <option th:value="0">Tất cả danh mục</option>
+                    <option th:each="danhmuc:${category}" th:text="${danhmuc.getCategoryName()}" th:value="${danhmuc.getIdCategory()}"></option>
+                </select>
+                <span class="header__span">
+                    <button type="submit">
+                     <img src="https://cdn.icon-icons.com/icons2/2566/PNG/512/search_icon_153438.png" alt="">
+                    </button>
+                </span>
+            </form>
+        </div>
+        <div class="button__login" th:unless="${nguoiDung}">
+            <span class="txt"><a style="color: white" href="/login">
+                            Đăng nhập
+                        </a></span>
+        </div>
+        <div class="header__navigation" th:if="${nguoiDung}">
+            <div class="header__navigation-img">
+                <a href="/showCart">
+                    <img src="/Images/cart-nav-white.00018279d92b8685ff0d50c146eefe5491200c0b.svg" alt="">
+                </a>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                        style="background-color: #FFCC20; border: 1px solid #FFCC20; display: flex;align-items: center">
+                    <i class="material-icons" title="Account" style="font-size: 25px;cursor: pointer;"
+                       data-uw-styling-context="true">person</i>
+                    <span class="caret" >Chào mừng, [[${nguoiDung.name}]]</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a th:if="${nguoiDung}" th:href="@{/ProfileDetail/__${nguoiDung.idUser}__}">Hồ sơ cá nhân</a></li>
+                    <li><a href="/showCart">Giỏ Hàng</a></li>
+                    <li><a href="/logout">Đăng Xuất</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

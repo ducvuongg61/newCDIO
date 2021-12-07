@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
+
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/Vinh/css/Header.css">
+  <link rel="stylesheet" href="/Vinh/css/Footer.css">
+  <link rel="stylesheet" href="/nha/css/auction/ProductDetail.css">
+
+
+  <title>Auction Page</title>
+</head>
+
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+
+<!-- Main -->
+
+
+<div class="page__container">
+  <div class="page">
+    <div class="page__layout">
+      <div class="page__left">
+        <div class="page__wrapper">
+          <div class="product__thumbnail">
+            <img class="thumbnail" th:src='@{${"/Images/"+sanPham.image}}' alt="Hinh">
+            <img class="thumbnail" th:src='@{${"/Images/"+sanPham.image1}}' alt="Hinh">
+            <img class="thumbnail" th:src='@{${"/Images/"+sanPham.image2}}' alt="Hinh">
+
+          </div>
+
+          <div class="product__image">
+            <img th:src='@{${"/Images/"+sanPham.image}}' id="image" alt="Hinh">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="page__right">
+
+        <h2 class="product__title" th:text="${sanPham.productName}">
+        </h2>
+        <div class="product__size">
+          <button>Size XXX</button>
+        </div>
+        <div class="product__auction">
+          <p class="product__auction-time" id="time-remain"></p>
+          <div class="product__auction-info">
+            <div class="product__auction-price">
+              <h5>GIÁ THẦU HIỆN TẠI</h5>
+              <p th:if="${nguoiCaoNhat}" th:text="${#numbers.formatDecimal(nguoiCaoNhat.startingPrice, 0, 'POINT', 0, 'COMMA')}+' VND'"></p>
+            </div>
+            <div class="product__auction-winner">
+              <h5>NGƯỜI CHIẾN THẮNG</h5>
+              <p th:if="${nguoiCaoNhat}" : th:text="${nguoiCaoNhat.user.name}"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bid-level">
+          <form action="/dauGia" method="get">
+            <input type="hidden" name="idSP" class="moneyDauGia" th:value="${sanPham.idProduct}">
+            <button id="minus-btn" class="minus__btn" onclick="handleDecreasePrice()" type="button">-</button>
+            <input style="text-align: center" type="text" th:value="${giaDau}" class="moneyDauGia" id="input-level"  name="money">
+            <button id="plus-btn"  class="plus__btn" onclick="handleIncreasePrice()" type="button">+</button>
+            <button sec:authorize="isAuthenticated()" type="submit" class="bid-btn"
+                    id="btn-dauGia" style="color: white">
+              <span class="btn-icon"><ion-icon name="hammer"></ion-icon></span>
+              Đấu giá
+            </button>
+            <button th:if="${userName}" type="button" class="bid-btn">
+              <span class="btn-icon"><ion-icon name="hammer"></ion-icon></span>
+              <a th:href="@{/afterLogin/auction-detail/{id}(id=${sanPham.idProduct})}">
+                <span class="btn-text">Đăng nhập</span>
+              </a>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="table__auction">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Người đấu giá</th>
+          <th>Giá đấu</th>
+          <th>Số lượng</th>
+          <th>Thời gian</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="itemAuction:${dauGia}">
+          <td style="position: relative">
+            <img th:if="${itemAuction.startingPrice==giaCaoNhat}" src="/Images/itemWin.png" style="width: auto;height: 25px;
+            position: absolute;left: 60px;">
+            <span th:text="${itemAuction.user.name}"></span>
+          </td>
+          <td th:text="${#numbers.formatDecimal(itemAuction.startingPrice, 0, 'POINT', 0, 'COMMA')}+' VND'"></td>
+          <td>1</td>
+          <td th:text="${itemAuction.auctionEndTime}"></td>
+        </tr>
+        <tr>
+        </tbody>
+      </table>
+    </div>
+    <button style="display: none" type="button"  class="btn btn-primary" id="btnNoti" data-toggle="modal" data-target="#exampleModal1">
+      Win
+    </button>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" th:if="${winner}" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel" >Hết thời gian!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="modal__layout">
+              <!-- Đổ dữ liệu -->
+              <div class="modal__left">
+                <div class="modal__left-img">
+                  <img th:src="@{${'/Images/'+sanPham.image}}" alt="images"> alt="">
+
+                </div>
+              </div>
+
+              <div class="modal__right">
+                <h3 class="modal__right-title">Bạn đã chiến thắng</h3>
+
+                <div class="modal__right-info">
+                  <p>Sản phẩm</p>
+                  <h4 th:text="${sanPham.productName}"></h4>
+                </div>
+
+                <div class="modal__right-info">
+                  <p>Giá đã đấu</p>
+                  <h4 th:text="${#numbers.formatDecimal(nguoiCaoNhat.startingPrice, 0, 'POINT', 0, 'COMMA')}+' VND'"></h4>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class="button__close" th:href="@{/showCart/addCart/__${sanPham.idProduct}__}">
+              Thêm vào giỏ hàng
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-dialog" th:unless="${winner}" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel2" >Hết thời gian!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="modal__layout">
+              <!-- Đổ dữ liệu -->
+              <div class="modal__left">
+                <div class="modal__left-img">
+                  <img th:src="@{${'/Images/'+sanPham.image}}" alt="">
+                </div>
+              </div>
+
+              <div class="modal__right">
+                <h3 class="modal__right-title">Chúc bạn may mắn lần sau</h3>
+
+                <div class="modal__right-info">
+                  <p>Sản phẩm</p>
+                  <h4 th:text="${sanPham.productName}"> </h4>
+                </div>
+
+                <div class="modal__right-info">
+                  <p>Giá đã đấu</p>
+                  <h4 th:text="${#numbers.formatDecimal(nguoiCaoNhat.startingPrice, 0, 'POINT', 0, 'COMMA')}+' VND'"></h4>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button class="button__close" data-dismiss="modal">
+                  <a href="#"><span>Close</span></a>
+                </button> -->
+            <button class="button__close" data-dismiss="modal">
+              <a>Đóng</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product__description">
+      <h4 class="product__description-title">
+        Mô tả sản phẩm
+      </h4>
+      <p id="submit" th:text="${sanPham.description}">
+      <p style="display: none" id="mota"  th:text="${sanPham.description}">
+    </div>
+
+
+    <div class="product__comment">
+      <h3 class="product__comment-title">
+        NHẬN XÉT VÀ ĐÁNH GIÁ
+      </h3>
+
+      <p class="product__comment-sub">Viết đánh giá</p>
+
+      <div class="product__comment-space">
+        <input type="text" placeholder="Viết bình luận tại đây">
+        <button class="button__review">Đánh Giá</button>
+      </div>
+
+      <div class="product__comment-review">
+        <h4 class="product__comment-review-title">
+          ĐÁNH GIÁ - NHẬN XÉT TỪ KHÁCH HÀNG
+        </h4>
+
+        <div class="product__comment-content">
+          <div class="comment__left-side">
+            <div class="comment__img">
+              <img
+                      src="https://www.bing.com/images/search?view=detailV2&ccid=22sRFqFG&id=35DE1AF180B8157CD3AE9E5ADE4A0A92FE3DC625&thid=OIP.22sRFqFGX3YYAtah66MjuAHaJQ&mediaurl=https%3a%2f%2fhinhanhdep.vn%2fwp-content%2fuploads%2f2019%2f07%2fd63b8e62f5221c7c4533.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.db6b1116a1465f761802d6a1eba323b8%3frik%3dJcY9%252fpIKSt5ang%26pid%3dImgRaw%26r%3d0&exph=825&expw=660&q=Hinh+Anh+Girl+Xinh&simid=608051929146992097&FORM=IRPRST&ck=20C0AB97A92D2D1D8341696558CAB511&selectedIndex=0"
+                      alt="">
+              <p class="comment__user">Hậu Ma tóe</p>
+            </div>
+          </div>
+
+
+          <div class="comment__right-side">
+            <div class="comment__rate">
+              <input class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5"
+                                                                                        for="star-5"></label> <input class="star star-4" id="star-4" type="radio" name="star" /> <label
+                    class="star star-4" for="star-4"></label> <input class="star star-3" id="star-3" type="radio"
+                                                                     name="star" /> <label class="star star-3" for="star-3"></label> <input class="star star-2" id="star-2"
+                                                                                                                                            type="radio" name="star" /> <label class="star star-2" for="star-2"></label> <input
+                    class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1"
+                                                                                       for="star-1"></label>
+            </div>
+            <p class="comment__purpot">Hello Motha</p>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer__layout">
+
+      <div class="footer__img">
+        <img src="/Images/Walmart_logo.svg" alt="">
+      </div>
+
+      <ul class="footer__category">
+        <h5 class="footer__category-title">Về Neffex</h5>
+        <li class="footer__category-item">Thông tin về chúng tôi</li>
+        <li class="footer__category-item">Danh sách cửa hàng</li>
+        <li class="footer__category-item">Liên hệ</li>
+        <li class="footer__category-item">Flash sale</li>
+      </ul>
+
+      <ul class="footer__category">
+        <h5 class="footer__category-title">Theo dõi chúng tôi tại</h5>
+        <li class="footer__category-item">
+
+          Facebook
+        </li>
+        <li class="footer__category-item">Instagram</li>
+        <li class="footer__category-item">Google</li>
+        <li class="footer__category-item">Twitter</li>
+      </ul>
+
+      <ul class="footer__category">
+        <h5 class="footer__category-title">Thanh toán</h5>
+        <img src="/Images/visalogo.svg" alt="">
+        <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+        <img src="/Images/JCBlogo.svg" alt="">
+        <img src="/Images/mastercard.webp" alt="">
+      </ul>
+    </div>
+  </div>
+</div>
+<p hidden="hidden" id="gioKetThuc" th:text="${producTimeEnd}"></p>
+<div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
+
+  <div class="footer__content">
+
+    <div class="footer__img">
+      <img src="/Images/Walmart_logo.svg" alt="">
+    </div>
+
+    <ul class="footer__list">
+      <h5 class="footer__list-title">Về Neffex</h5>
+      <li class="footer__item">Thông tin về chúng tôi</li>
+      <li class="footer__item">Danh sách cửa hàng</li>
+      <li class="footer__item">Liên hệ</li>
+      <li class="footer__item">Flash sale</li>
+    </ul>
+
+    <ul class="footer__list">
+      <h5 class="footer__list-title">Theo dõi chúng tôi tại</h5>
+      <li class="footer__item">
+        Facebook
+      </li>
+      <li class="footer__item">Instagram</li>
+      <li class="footer__item">Google</li>
+      <li class="footer__item">Twitter</li>
+    </ul>
+
+    <ul class="footer__list">
+      <h5 class="footer__list-title">Thanh toán</h5>
+      <img src="/Images/visalogo.svg" alt="">
+      <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+      <img src="/Images/JCBlogo.svg" alt="">
+      <img src="/Images/mastercard.webp" alt="">
+    </ul>
+  </div>
+</div>
+<script src="content.js"></script>
+<script>
+  var timeTemp = document.getElementById("gioKetThuc").innerText;
+  var timeEnd = timeTemp.split(":");
+  var date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var hour = timeEnd[0];
+  var minute = timeEnd[1];
+  var btn = document.getElementById("btnNoti");
+  var countDownDate = new Date(year, month, day, hour, minute, 0, 0).getTime();
+
+  // Run myfunc every second
+  var myfunc = setInterval(function () {
+
+    var now = new Date().getTime();
+    var timeleft = countDownDate - now;
+    // Calculating the days, hours, minutes and seconds left
+    // var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+    // Result is output to the specific element
+    document.getElementById("time-remain").innerHTML = hours + ":" + minutes + ":" + seconds
+    // Display the message when countdown is over
+    if (timeleft < 0) {
+      clearInterval(myfunc);
+      document.getElementById("time-remain").innerHTML = "Hết giờ";
+      document.getElementById("btn-dauGia").style.display = "none";
+      btn.click();
+    }
+  }, 1000);
+</script>
+<script>
+  let mystring = document.getElementById("mota");
+  let mota = mystring.innerHTML;
+  let sep = [".", "/-"];
+  let submit = document.getElementById("submit");
+  let resut = "";
+  for (let i = 0; i < mota.length; i++) {
+    if (mota[i] === sep[0]) {
+      resut += mota[i] + "</br>";
+    }
+            // else if(mota[i]+mota[i+1] === sep[1]){
+            //     resut += mota[i]+"</br>";
+    // }
+    else {
+      resut += mota[i];
+    }
+  }
+  submit.innerHTML = resut;
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/Vinh/js/auction.js"></script>
+<script src="/Vinh/js/content.js"></script>
+</body>
+</html>

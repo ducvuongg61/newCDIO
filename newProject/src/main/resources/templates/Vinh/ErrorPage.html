@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Vinh/css/ErrorPage.css">
+    <title>Error Page</title>
+</head>
+
+<body>
+
+<h1>404 Error Page </h1>
+<p class="zoom-area"><b> Không</b>  tìm thấy trang bạn mong muốn </p>
+<section class="error-container">
+    <span class="four"><span class="screen-reader-text">4</span></span>
+    <span class="zero"><span class="screen-reader-text">0</span></span>
+    <span class="four"><span class="screen-reader-text">4</span></span>
+</section>
+<h3 class="btn btn-secondary" style="margin-left: 40%;" th:if="${mgs != null}" th:value="${mgs}">Bạn không có quyền truy cập
+</h3>
+<div class="link-container">
+    <a target="_blank" href="/login" class="more-link">Quay lại trang chủ</a>
+</div>
+
+</body>
+
+</html>

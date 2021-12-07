@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/vuong/css/css1/style.css">
+    <link rel="stylesheet" href="vuong/css/chat.css">
+<!--    <link href="/vuong/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">-->
+<!--    <link href="/vuong/css/bootstrap4.css" rel="stylesheet" type="text/css" media="all">-->
+    <script src="/vuong/js/jquery-1.11.0.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="/vuong/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/vuong/css/flexslider.css" type="text/css" media="screen"/>
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<!--    Vinh-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+    <link rel="stylesheet" href="/Vinh/css/Footer.css">
+    <style>
+        .btn-dau-gia{
+            margin-left: 11px;
+        }
+    </style>
+</head>
+<body>
+
+<header th:insert="~{HeaderFooter/Header::header-cline}"></header>
+
+<script src="js/responsiveslides.min.js"></script>
+<script>
+    $(function () {
+        $("#slider").responsiveSlides({
+            auto: true,
+            speed: 500,
+            namespace: "callbacks",
+            pager: false,
+            nav: true,
+        });
+    });
+</script>
+
+
+<div class="services">
+    <div class="container">
+
+        <div class="services-main">
+            <div class="services__layout">
+                <div class="services-top" >
+                    <button class="btn ">
+                        <a th:href="@{/product/list}">Sản Phẩm Của Bạn</a>
+                    </button>
+                </div>
+                <div class="services-top" >
+                    <button class="btn ">
+                        <a th:href="@{/product/listApproved}">Sản Phẩm Chưa Duyệt</a>
+                    </button>
+                </div>
+                <div class="services-top" >
+                    <button class="btn ">
+                        <a th:href="@{/product/NotApprove}">Sản Phẩm Không Duyệt</a>
+                    </button>
+                </div>
+                <div class="services-top" >
+                    <button class="btn ">
+                        <a th:href="@{/product/create}">Thêm Sản Phẩm</a>
+                    </button>
+                </div>
+        </div>
+            <div style="clear: both">
+                <span class="alert alert-success" th:if="${mgsedit}">Sửa sản phẩm thành công!</span>
+            </div>
+            <div>
+                <span class="alert alert-success" th:if="${mgstk}">Không tìm thấy sản phẩm!</span>
+            </div>
+            <div>
+                <span class="alert alert-success" th:if="${mgsdelete}">Xóa sản phẩm thành công!</span>
+            </div>
+            <div>
+                <span class="alert alert-success" th:if="${mgs}">Thêm mới sản phẩm thành công. Sản phẩm sẽ được đấu giá khi admin duyệt!</span>
+            </div>
+            <br>
+            <div class="services-bottom">
+                <div class="row">
+                    <div class="col-sm-6 col-md-2 ser item-dau-gia" th:each="product:${listProduct}">
+                        <div class="thumbnail itemProduct">
+                            <div class="img-dau-gia">
+                                <a><img
+                                        style="cursor: pointer"
+                                        th:src="@{${'/Images/' + product.image1}}"
+                                        alt="lỗi ảnh!"></a>
+                            </div>
+                            <div class="caption">
+                                <a th:href="@{/product-detail/{id}(id=${product.idProduct})}"><h3
+                                        th:text="${product.productName}" class="nameProduct"></h3>
+                                    <p th:text="${product.category.categoryName}"></p></a>
+                                <div class="row rowProduct" style=" padding: 0em 0em 0.5em 0em;border-bottom: 0px">
+                                    <span class="col-md-6 time"></span>
+                                    <p class="col-md-6 price" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'COMMA')}+'₫'"></p>
+                                </div>
+                                <div class="row" style="display: flex">
+                                    <a th:href="@{/product/view(id = ${product.idProduct})}"
+                                       class="btn btn-dau-gia  button__detail ">Chi tiết</a>
+                                    <button class="btn btn-dau-gia btn-danger" data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            th:onclick="preparedelete([[${product.idProduct}]],[[${product.productName}]])">
+                                        Xóa
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="exampleModal" class="modal fade modal__container">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Mã sản Phẩm :
+                    <span id="maSanPham"></span></p>
+                <p>Bạn có chắc chắn muốn xóa
+                    <span id="tenSanPham"></span>
+                    Không ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy
+                </button>
+                <button onclick="deleteService($('#maSanPham').html())" type="button"
+                        class="btn btn-default" data-dismiss="modal">
+                    Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function preparedelete(maSanPham, tenSanPham) {
+        $('#maSanPham').html(maSanPham)
+        $('#tenSanPham').html(tenSanPham)
+    }
+
+    function deleteService(maSanPham) {
+        console.log(maSanPham);
+        $.ajax(
+            {
+                type: 'get',
+                url: "/product/delete/" + maSanPham,
+                success: function () {
+                    window.location.href = "http://localhost:8080/product/list";
+                }
+            }
+        )
+    }
+</script>
+
+<footer th:insert="~{HeaderFooter/Footer::footer_clinet}"></footer>
+
+</div>
+
+<link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+<script type="text/javascript" src="js/nivo-lightbox.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#nivo-lightbox-demo a').nivoLightbox({effect: 'fade'});
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

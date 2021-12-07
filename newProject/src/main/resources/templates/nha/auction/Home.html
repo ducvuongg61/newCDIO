@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Link font-awesome -->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/nha/css/Home.css">
+    <title>Trang chủ</title>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+    </script>
+</head>
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+<!-- Main -->
+<div class="main">
+
+    <div class="main__banner">
+        <img src="/Images/k1.jpg" alt="" id="img">
+
+        <div class="main__button">
+            <button class="btn" onclick="handlePrev()"> Prev </button>
+            <button class="btn" onclick="handleNext()">Next </button>
+        </div>
+    </div>
+
+    <div class="main__category">
+        <h4 class="main__category-title">Danh mục</h4>
+        <div class="main__category-item" th:each="danhmuc:${category}">
+            <img th:src="@{${'/Images/' + danhmuc.categoryImg}}" alt="">
+            <p th:text="${danhmuc.getCategoryName()}">Thời trang nam</p>
+        </div>
+    </div>
+
+    <div class="main__spotlight">
+
+        <h4 class="main__spotlight-title">
+            Sản phẩm nổi bật
+        </h4>
+
+        <div class="main__spotlight-item">
+            <img src="https://cf.shopee.vn/file/6f8bb9cd5e698e22169bc433c22936f2_tn" alt="">
+
+            <div class="main__spotlight-info">
+                <p>Tivi Sony</p>
+                <p>50.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src="https://cf.shopee.vn/file/ce2e781d70c4ba3a6ff51425a936bbb1_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Laptop Asus</p>
+                <p>25.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src="https://cf.shopee.vn/file/a4665b23a84979e8141cdf5f7207ba00_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Máy giặt Samsung</p>
+                <p>50.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src="https://cf.shopee.vn/file/a9b87eee4ac18b0151db95f7aaba59a4_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Bàn là Sharp</p>
+                <p>4.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src="https://cf.shopee.vn/file/7879897bdeab80c0bec123ca76f00205_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Tủ lạnh LG</p>
+                <p>27.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src="https://cf.shopee.vn/file/b4fc6dc540e2d540b209184cb4fd2e28_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Iphone 12</p>
+                <p>45.000.000</p>
+            </div>
+        </div>
+
+
+        <div class="main__spotlight-item">
+            <img src=" https://cf.shopee.vn/file/548b056c7600667ed4c382b2a77e349c_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Phím cơ Akko T2</p>
+                <p>1.875.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src=" https://cf.shopee.vn/file/6de59939316b634e2f6f81ce4fa7fd09_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Giày Nike Jordan</p>
+                <p>3.875.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src="     https://cf.shopee.vn/file/c7946e2d60105b0b1d2c6df81a0b4f91_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Áo Mu 21/22</p>
+                <p>2.150.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img src=" https://cf.shopee.vn/file/a256a89d3b7b4b80224e768d9ff6fdff_tn" alt="">
+            <div class="main__spotlight-info">
+                <p>Apple airpod</p>
+                <p>3.150.000</p>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${MensFashion.size() >0}">
+
+        <h4 class="main__bestseller-title">Sản phẩm MensFashion </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${MensFashion}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+                    <span class="col-md-6 time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${WomanFashion.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm WomanFashion </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${WomanFashion}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Accessory.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Accessory </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Accessory}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Bags.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Bags </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Bags}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Camera.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Camera </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Camera}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${FootwareMan.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm FootwareMan </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${FootwareMan}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${FootwareWoman.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm FootwareWoman </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${FootwareWoman}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Health.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Health}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Houseware.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Houseware </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Houseware}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Laptop.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Laptop </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Laptop}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Makeup.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Makeup}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${MotherAndBaby.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${MotherAndBaby}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Smartphone.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Smartphone </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Smartphone}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Television.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Television </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Television}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Watch.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Watch}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Sport.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Sport </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Sport}">
+            <p hidden="hidden" class="gioKetThuc" th:text="${sanPham.dateEndAuction}"></p>
+            <div class="main__bestseller-item">
+                <a th:href="@{/auction-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+
+                    <span class="time"></span>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer" th:fragment="footer_clinet">
+
+    <div class="footer__content">
+
+        <div class="footer__img">
+            <img src="/Images/Walmart_logo.svg" alt="">
+        </div>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Về Neffex</h5>
+            <li class="footer__item">Thông tin về chúng tôi</li>
+            <li class="footer__item">Danh sách cửa hàng</li>
+            <li class="footer__item">Liên hệ</li>
+            <li class="footer__item">Flash sale</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Theo dõi chúng tôi tại</h5>
+            <li class="footer__item">
+                Facebook
+            </li>
+            <li class="footer__item">Instagram</li>
+            <li class="footer__item">Google</li>
+            <li class="footer__item">Twitter</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Thanh toán</h5>
+            <img src="/Images/visalogo.svg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+            <img src="/Images/JCBlogo.svg" alt="">
+            <img src="/Images/mastercard.webp" alt="">
+        </ul>
+    </div>
+</div>
+<script>
+    for (let i = 0; i <= 100; i++) {
+        var timeTemp = document.getElementsByClassName("gioKetThuc")[i].innerText;
+        console.log(timeTemp +"= thoi gian")
+        var timeEnd = timeTemp.split(":");
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+        var hour = timeEnd[0];
+        var minute = timeEnd[1];
+        var countDownDate = new Date(year, month, day, hour, minute, 0, 0).getTime();
+
+        // Run myfunc every second
+        var myfunc = setInterval(function () {
+            var now = new Date().getTime();
+            var timeleft = countDownDate - now;
+            // var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" +seconds: seconds;
+            document.getElementsByClassName('time')[i].innerHTML = hours + ":" + minutes + ":" + seconds
+            if (timeleft < 0) {
+                clearInterval(myfunc);
+                document.getElementsByClassName('time')[i].innerHTML = "Hết giờ";
+            }
+        }, 1000);
+    }
+</script>
+<script src="/nha/JS/Home.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+</body>
+</html>

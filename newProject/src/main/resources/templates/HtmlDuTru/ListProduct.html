@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/nha/css/style.css">
+  <title>Title</title>
+</head>
+<body>
+<section class="page-container">
+  <div>
+    <h2>Tất Cả Sản Phẩm</h2>
+  </div>
+  <div class="filter-side">
+
+    <form action="/admin/search" method="get">
+      <label>Tên Sản Phẩm : </label>
+      <input type="text" name="tensanpham" th:value="${tensanpham}" id="mem-name"/>
+      <button class="filter-btn" type="submit">Lọc kết quả</button>
+    </form>
+    <center>
+      <div>
+        <span class="alert alert-success" th:if="${mgs}"> Không tìm thấy sản phẩm</span>
+      </div>
+      <div>
+        <span class="alert alert-success" th:if="${mgs2}"> Sửa tình trạng sản phẩm thành công!</span>
+      </div>
+      <div>
+        <span class="alert alert-success" th:if="${mgsxoa1}" th:text="${mgsxoa1}">Xóa thành công! </span>
+      </div>
+    </center>
+  </div>
+  <hr>
+  <div class="data-table" th:unless="${mgs}">
+    <table id="mem-data">
+      <tr>
+        <th>Tên Sản phẩm</th>
+        <th>Người Đăng</th>
+        <th>Danh Mục</th>
+        <th>Trạng Thái</th>
+        <th>Sửa</th>
+        <th>Xóa</th>
+      </tr>
+      <tr th:each="sanpham: ${sanphams1}">
+        <td th:text="${sanpham.productName}"></td>
+        <td th:text="${sanpham.accounts.user.name}"></td>
+        <td th:text="${sanpham.category.categoryName}"></td>
+        <td th:text="${sanpham.status}"></td>
+        <td>
+          <a th:href="@{/admin/edit(id = ${sanpham.idProduct})}">
+            Sửa
+          </a>
+        </td>
+        <td>
+          <a  th:href="@{/admin/delete/{id}(id=${sanpham.idProduct})}">Xóa
+          </a>
+        </td>
+      </tr>
+    </table>
+    <div class="center" th:if="${tensanpham == null}">
+            <span class="pagination">
+                <a th:if="${sanphams1.hasPrevious()}" th:href="@{/admin/list(page=${sanphams1.number - 1})}">Trước</a>
+            </span>
+      <span class="pagination">
+                    <a th:href="@{/admin/list(page = ${pageNo})}" th:text="${sanphams1.number}"></a>
+            </span>
+      <span class="pagination">
+                <a th:if="${sanphams1.hasNext()}" th:href="@{/admin/list(page=${sanphams1.number + 1})}">Sau</a>
+            </span>
+    </div>
+
+
+    <div class="center" th:if="${tensanpham != null}">
+            <span class="pagination">
+                <a th:if="${sanphams1.hasPrevious()}"
+                   th:href="@{/admin/list(page=${sanphams1.number - 1}, tensanpham=${tensanpham})}">Trước</a>
+            </span>
+      <span class="pagination">
+                    <a th:href="@{/admin/list(page = ${pageNo},tensanpham=${tensanpham})}" th:text="${pageNo}"></a>
+            </span>
+      <span class="pagination">
+                <a th:if="${sanphams1.hasNext()}"
+                   th:href="@{/admin/list(page=${sanphams1.number + 1},tensanpham=${tensanpham})}">Sau</a>
+            </span>
+    </div>
+  </div>
+</section>
+</body>
+</html>

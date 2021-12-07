@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/Vinh/css/Pay.css">
+  <link rel="stylesheet" href="/Vinh/css/Header.css">
+  <title>Thanh Toan</title>
+</head>
+
+<body>
+
+<div th:insert="~{/HeaderFooter/Header::header-cline}" ></div>
+
+<!-- Main -->
+
+
+<div class="main-contaner ">
+  <div class="main-content ">
+    <form action="/bill/pay" method="get" th:object="${bill}">
+    <div class="checkout-main-left">
+      <div class="checkout-bill_content">
+        <input type="hidden" th:field="*{idBill}">
+        <input type="hidden" th:field="*{user}">
+        <input type="hidden" th:field="*{status}">
+        <input type="hidden" th:field="*{totalCost}">
+        <input type="hidden" th:field="*{dateOder}">
+        <div class="bill-title">
+          <h2 >Địa chỉ nhận hàng</h2>
+        </div>
+
+        <div class="bill-name_info">
+          <div class="input-content">
+            <label >
+              Địa chỉ email
+              <span style="color:red">*</span>
+            </label>
+            <input type="text" placeholder="Địa chỉ email" name="email" th:field="*{user.gmail}" />
+            <div class="text-warning"></div> <!-- Hien thi loi -->
+          </div>
+
+          <div class="input-content">
+            <label >
+              Số điện thoại
+              <span style="color:red">*</span>
+            </label>
+            <input type="text" placeholder="Số điện thoại" name="phone" />
+            <div class="text-warning"></div> <!-- Hien thi loi -->
+          </div>
+
+          <div class="input-content">
+            <label >
+              Địa chỉ
+              <span style="color:red">*</span>
+            </label>
+            <input type="text" placeholder="Địa chỉ" name="address" th:field="*{addressOder}"/>
+            <div class="text-warning"></div> <!-- Hien thi loi -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="checkout-main-right">
+      <div class="checkout-title">
+        <h2>Gói hàng</h2>
+      </div>
+
+
+      <div class="checkout_cart-container">
+        <div class="checkout_cart-subtitle">
+          <h2>Sản phẩm</h2>
+            <h2>Giá</h2>
+        </div>
+        <div class="item-container">
+          <div th:if="${carts!=null}" class="item-content" th:each="item:${carts}">
+            <ul class="checkout-cart-list" >
+              <li style="display: flex;">
+                <span class="checkout-cart-list__custom-text" th:text="${item.value.product.productName}"></span>
+                <span class="checkout-cart-list__custom-text" th:text="${item.value.quantity}"></span>
+              </li>
+              <li th:text="${item.value.maxPrice}"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="checkout_cart-grand-total-area">
+          <h4>Tổng cộng</h4>
+          <h4 th:text="${total}"></h4>
+        </div>
+      </div>
+      <button class="btn-order" type="submit">Thanh toán khi nhận hàng</button>
+      <button class="btn-order" formaction="/pay" >
+        Thanh toán Paypal
+      </button>
+    </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Footer -->
+
+<div class="footer">
+  <div class="footer__layout">
+
+    <div class="footer__img">
+      <img src="../Images/Walmart_logo.svg" alt="">
+    </div>
+
+    <ul class="footer__category">
+      <h5 class="footer__category-title">Về Neffex</h5>
+      <li class="footer__category-item">Thông tin về chúng tôi</li>
+      <li class="footer__category-item">Danh sách cửa hàng</li>
+      <li class="footer__category-item">Liên hệ</li>
+      <li class="footer__category-item">Flash sale</li>
+    </ul>
+
+    <ul class="footer__category">
+      <h5 class="footer__category-title">Theo dõi chúng tôi tại</h5>
+      <li class="footer__category-item">
+
+        Facebook
+      </li>
+      <li class="footer__category-item">Instagram</li>
+      <li class="footer__category-item">Google</li>
+      <li class="footer__category-item">Twitter</li>
+    </ul>
+
+    <ul class="footer__category">
+      <h5 class="footer__category-title">Thanh toán</h5>
+      <img src="/Images/visalogo.svg" alt="">
+      <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+      <img src="../Images/JCBlogo.svg" alt="">
+      <img src="../Images/mastercard.webp" alt="">
+    </ul>
+  </div>
+</div>
+
+
+</body>
+
+</html>

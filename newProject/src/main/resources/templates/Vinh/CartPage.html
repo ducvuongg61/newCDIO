@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Vinh/css/CartPage.css">
+
+
+</head>
+
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}" ></div>
+<div class="cart">
+    <div class="cart__banner">
+        <h2>Giỏ hàng</h2>
+        <img src="/Images/cartbg.jpg" alt="">
+    </div>
+
+    <div class="cart__container">
+        <table class="cart-container__cart-table-container">
+            <thead>
+            <tr>
+                <th class="cart-table-container__cart-name" colSpan="2">sản phẩm</th>
+                <th class="cart-table-container__cart-category">Danh mục</th>
+                <th class="cart-table-container__cart-price">Giá tiền</th>
+                <th class="cart-table-container__cart-quantity">Số lượng</th>
+                <th class="cart-table-container__cart-subtotal">Tổng cộng</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:if="${carts!=null}" th:each="item,iterStat:${carts}" class="cart__row">
+
+                <td class="cart-thumbnail">
+                    <img th:src='@{${"/Images/"+item.value.product.image1}}' />
+                </td>
+                <td class="product-name" >
+                    <div th:text="${item.value.getProduct().productName}"></div>
+                </td>
+                <td class="product-category" style="cursor: pointer;text-align: center;">
+                    <div th:text="${item.value.getProduct().getCategory().categoryName}"></div>
+                </td>
+                <td class="product-price}">
+                    <div th:class="product__price+${iterStat.count}" th:text="${item.value.getProduct().price}"></div>
+                    <input type="hidden" th:id="product__price+${iterStat.count}" th:value="${item.value.getProduct().price}">
+                <td class="product-quantity">
+                    <div class="plus-cart-minus">
+                        <input style="display:none;" type="hidden" th:id="maxquantily+${iterStat.count}" th:value="${item.value.product.quantity}">
+                        <button class="minus-btn" th:onclick="handleDescrease[[${iterStat.count}]]()">&#8722;</button>
+                        <input type="text" style="text-align:center" name="" th:class="plus-minus-cart-box+${iterStat.count}" th:id="submitQuantily+${iterStat.count}" th:value="${item.value.quantity}" />
+                        <button class="plus-btn" th:onclick="handleIncrease[[${iterStat.count}]]()">&#43;</button>
+                    </div>
+                </td>
+                <td class="total-price">
+                    <input type="hidden" th:id="totalMoney+${iterStat.count}"  th:value="${item.value.maxPrice}">
+                    <div th:id="totalMoneySubmit+${iterStat.count}" th:text="${#numbers.formatDecimal(item.value.maxPrice, 0, 'POINT', 0, 'COMMA')}+' VND'"></div>
+                </td>
+
+                <td class="product-remove">
+                    <button class="delete-product">
+                        <a th:href="@{/deleteCart/{id}(id=${item.key})}">X</a>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+            <h5 th:unless="${cartSize}"  class="cart__subtitle">Giỏ hàng hiện đang trống,hãy mua sản phẩm</h5>
+        </table>
+    </div>
+
+    <div class="cart__bill">
+        <div class="cart__bill-content">
+            <form action="/bill/getData" method="get">
+                <div class="cart__bill-price">
+                    <h3>Tổng thanh toán: </h3>
+                    <input id="grand__total" class="grand__total">
+                    <input id="grand__total1" type="hidden" class="grand__total" name="tongTien">
+                    <input type="hidden" id="grand__quantily" name="soLuong">
+                </div>
+                <button class="button__buy" type="submit">Mua Hàng</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer__layout">
+
+        <div class="footer__img">
+            <img src="/Images/Logo-Neffex.png" />
+        </div>
+
+        <ul class="footer__category">
+            <h5 class="footer__category-title">Về Neffex</h5>
+            <li class="footer__category-item">Thông tin về chúng tôi</li>
+            <li class="footer__category-item">Danh sách cửa hàng</li>
+            <li class="footer__category-item">Liên hệ</li>
+            <li class="footer__category-item">Flash sale</li>
+        </ul>
+
+        <ul class="footer__category">
+            <h5 class="footer__category-title">Theo dõi chúng tôi tại</h5>
+            <li class="footer__category-item">
+
+                Facebook
+            </li>
+            <li class="footer__category-item">Instagram</li>
+            <li class="footer__category-item">Google</li>
+            <li class="footer__category-item">Twitter</li>
+        </ul>
+
+        <ul class="footer__category">
+            <h5 class="footer__category-title">Thanh toán</h5>
+            <img src="/Images/visalogo.svg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+            <img src="/Images/JCBlogo.svg" alt="">
+            <img src="/Images/mastercard.webp" alt="">
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<script src="/Vinh/js/cart.js"></script>
+</body>
+
+</html>

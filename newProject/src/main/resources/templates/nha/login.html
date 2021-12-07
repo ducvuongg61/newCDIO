@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/nha/css/index.css">
+    <title>Login Page</title>
+</head>
+<body>
+<div class="login">
+
+    <div class="login__content">
+        <div class="login__img">
+            <img src="/Images/Logo-Neffex.png" />
+        </div>
+    <form th:action="@{/j_spring_security_check}" method="POST">
+        <h5 class="login__form-title">Sign in to your Walmart account</h5>
+        <center>
+            <div th:if="${#request.getParameter('error') == 'true'}"
+                 style="color:red;margin:10px 0px;">
+                Đăng Nhập Thất Bại!!!<br/>
+                Lý do :
+                <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+                      th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary</span>
+            </div>
+        </center>
+        <div class="login__form">
+            <form>
+                <div class="login__field">
+                    <input class="login__field-input" type="text" name="username" autofocus placeholder=" ">
+                    <label class="login__field-label" >Email address</label>
+                </div>
+                <div class="login__field">
+                    <input class="login__field-input" type="password" name="password" placeholder=" ">
+                    <label class="login__field-label" >Password</label>
+                </div>
+                <div class="login__forgot">
+                    <p>Forgot password ?</p>
+                </div>
+                <div class="login__check">
+                    <div class="login__check-remember">
+                        <input type="checkbox" />
+                        <h6>Keep me signed in</h6>
+                    </div>
+                    <p>Uncheck if using a public device. <span>More</span></p>
+                </div>
+                <div class="login__btn">
+                    <button class="button__signin" type="submit">Sign in</button>
+                    <p>Don't have an account ? </p>
+                    <button class="button__account"><a href="/register"> Create account</a></button>
+                </div>
+            </form>
+        </div>
+    </form>
+    </div>
+
+</div>
+</body>
+</html>

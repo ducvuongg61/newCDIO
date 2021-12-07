@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+   <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/nha/css/style.css">
+
+</head>
+<body>
+<div class="services">
+    <div class="container">
+        <div class="services-main">
+            <div class="services-top">
+                <h3 class="btn btn-secondary">Sản phẩm Của Bạn</h3>
+            </div>
+
+            <div>
+                <span class="alert alert-success" th:if="${mgsedit}">Sửa sản phẩm thành công!</span>
+            </div>
+            <div>
+                <span class="alert alert-success" th:if="${mgstk}">Không tìm thấy sản phẩm!</span>
+            </div>
+            <div>
+                <span class="alert alert-success" th:if="${mgsdelete}">Xóa sản phẩm thành công!</span>
+            </div>
+            <div>
+                <span class="alert alert-success" th:if="${mgs}">Thêm mới sản phẩm thành công. Sản phẩm sẽ được đấu giá khi admin duyệt!</span>
+            </div>
+            <br>
+            <div class="services-bottom">
+                <div class="row">
+                    <div class="col-sm-6 col-md-2 ser item-dau-gia" th:each="sanPham:${listSP}">
+                        <div class="thumbnail itemProduct">
+                            <div class="img-dau-gia">
+                                <a><img
+                                        th:src="@{${'/Images/' + sanPham.image}}"
+                                        alt=""></a>
+                            </div>
+                            <div class="caption">
+                                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><h3
+                                        th:text="${sanPham.productName}" class="nameProduct"></h3>
+                                    <p th:text="${sanPham.category.categoryName}"></p></a>
+                                <div class="row rowProduct" style=" padding: 0em 0em 0.5em 0em;border-bottom: 0px">
+                                    <span class="col-md-6 time"></span>
+                                    <p class="col-md-6 price" th:text="${#numbers.formatDecimal(sanPham.price, 0, 'POINT', 0, 'COMMA')}+'₫'"></p>
+                                </div>
+                                <div class="row" style="display: flex">
+                                    <a th:href="@{/sanpham/xem(id = ${sanPham.idProduct})}"
+                                       class="btn btn-dau-gia btn-secondary">Chi tiết</a>
+                                    <button class="btn btn-dau-gia btn-secondary" data-toggle="modal"
+                                            data-target="#exampleModal"
+                                            th:onclick="preparedelete([[${sanPham.idProduct}]],[[${sanPham.productName}]])">
+                                        Xóa
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="exampleModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Mã sản Phẩm :
+                    <span id="maSanPham"></span></p>
+                <p>Bạn có chắc chắn muốn xóa
+                    <span id="tenSanPham"></span>
+                    Không ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy
+                </button>
+                <button onclick="deleteService($('#maSanPham').html())" type="button"
+                        class="btn btn-default" data-dismiss="modal">
+                    Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function preparedelete(maSanPham, tenSanPham) {
+        $('#maSanPham').html(maSanPham)
+        $('#tenSanPham').html(tenSanPham)
+    }
+
+    function deleteService(maSanPham) {
+        console.log(maSanPham);
+        $.ajax(
+            {
+                type: 'get',
+                url: "/sanpham/delete/" + maSanPham,
+                success: function () {
+                    window.location.href = "http://localhost:8080/sanpham/list";
+                }
+            }
+        )
+    }
+</script>
+</body>
+</html>

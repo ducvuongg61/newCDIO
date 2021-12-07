@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/nha/css/Demo.css">
+  <title>Admin</title>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="header__img">
+    <img src="/Images/Logo-Neffex.png" />
+  </div>
+</div>
+
+
+<div class="main">
+  <div th:insert="~{/nha/admin/ListProduct::main__left}"></div>
+
+  <div class="main__right">
+
+    <table class="table__container">
+      <thead class="table__thead">
+      <tr>
+        <th>Tên sản phẩm</th>
+        <th>Hình ảnh sản phẩm</th>
+        <th>Giá sản phẩm</th>
+        <th>Hành động</th>
+      </tr>
+
+
+      </thead>
+
+      <tbody class="table__tbody">
+      <tr>
+        <td>
+          <h4>Nike</h4>
+        </td>
+        <td>
+          <img src="/Images/nike.png" alt="">
+        </td>
+        <td>
+          550.000 VND
+        </td>
+
+        <td>
+          <button class="button__action background-blue ">
+            <span>Cập nhật</span>
+          </button>
+          <button class="button__action background-red">
+                <span>
+                  &#88;
+                </span>
+          </button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h4>Nike</h4>
+        </td>
+        <td>
+          <img src="/Images/sb-chron-2-skate-shoe-vNX1Xx.png" alt="">
+        </td>
+        <td>
+          550.000 VND
+        </td>
+
+        <td>
+          <button class="button__action background-blue ">
+                <span>
+                    Cập nhật
+                </span>
+          </button>
+          <button class="button__action background-red">&#88;</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h4>Nike</h4>
+        </td>
+        <td>
+          <img src="/Images/air-presto-shoes-QdhgZW (1).png" alt="">
+        </td>
+        <td>
+          550.000 VND
+        </td>
+
+        <td>
+          <button class="button__action background-blue ">
+                <span>
+                  <!-- <img src="/Images/iconmonstr-pencil-thin.svg" style="width:auto;height:25px" alt=""> -->
+                  Cập nhật
+                </span>
+          </button>
+          <button class="button__action background-red">&#88;</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h4>Nike</h4>
+        </td>
+        <td>
+          <img src="/Images/court-vision-low-shoe-bv8p57.png" alt="">
+        </td>
+        <td>
+          550.000 VND
+        </td>
+
+        <td>
+          <button class="button__action background-blue ">
+            <span>Cập nhật</span>
+          </button>
+          <button class="button__action background-red">&#88;</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h4>Nike</h4>
+        </td>
+        <td>
+          <img src="/Images/nike.png" alt="">
+        </td>
+        <td>
+          550.000 VND
+        </td>
+
+        <td>
+          <button class="button__action background-blue ">
+            <span>Cập nhật</span>
+          </button>
+          <button class="button__action background-red">&#88;</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h4>Nike</h4>
+        </td>
+        <td>
+          <img src="/Images/nike.png" alt="">
+        </td>
+        <td>
+          550.000 VND
+        </td>
+
+        <td>
+          <button class="button__action background-blue ">
+            <span>Cập nhật</span>
+          </button>
+          <button class="button__action background-red">&#88;</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- Cho phan trang -->
+    <p>Phan trang</p>
+    <!--  -->
+  </div>
+</div>
+<!--///để tạm-->
+<!--        <div class="containerHeaderLeft">-->
+<!--        <div class="col-lg-6 itemHeaderLeft" th:unless="${nguoiDung}">-->
+<!--            <span class="txt"><a style="color: white" href="/login">-->
+<!--                            Đăng nhập-->
+<!--                        </a></span>-->
+<!--        </div>-->
+<!--        <div class="col-lg-5 " th:if="${nguoiDung}">-->
+<!--            <div class="dropdown">-->
+<!--                <div class="dropdown__select">-->
+<!--                    <img src="/css/styles_khoa/img/user.png" class="cart-white" alt="user">-->
+<!--                    <span class="dropdown__selected">Chào mừng, [[${nguoiDung.name}]]</span>-->
+<!--                    <i class="fa fa-caret-down dropdown__caret"></i>-->
+<!--                </div>-->
+<!--                <ul class="dropdown__list">-->
+<!--                    <li class="dropdown__item">-->
+<!--                        <i class="fa fa-user dropdown__icon"></i>-->
+<!--                        <span class="dropdown__text">-->
+<!--                                            <a style="color:#005884;" th:if="${nguoiDung}" th:href="@{/ProfileDetail/__${nguoiDung.idUser}__}">Hồ Sơ Cá Nhân</a>-->
+<!--                                           </span>-->
+<!--                    </li>-->
+<!--                    <li class="dropdown__item">-->
+<!--                        <i class="fa fa-map-marker dropdown__icon"></i>-->
+<!--                        <span class="dropdown__text">Địa chỉ</span>-->
+<!--                    </li>-->
+<!--                    <li class="dropdown__item">-->
+<!--                        <i class="fa fa-bars dropdown__icon"></i>-->
+<!--                        <span class="dropdown__text"><a href="/showCart" style="color:#005884;">-->
+<!--                                           Đơn hàng của tôi-->
+<!--                                        </a></span>-->
+<!--                    </li>-->
+<!--                    <li class="dropdown__item">-->
+<!--                        <i class="fa fa-circle dropdown__icon"></i>-->
+<!--                        <span class="dropdown__text">-->
+<!--                                                <a href="/logout" style="color: #005884">-->
+<!--                                                    Đăng Xuất-->
+<!--                                                </a></span>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </div>-->
+</body>
+
+</html>

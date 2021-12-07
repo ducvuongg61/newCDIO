@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/nha/css/style.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+    <link rel="stylesheet" href="/Vinh/css/Footer.css">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+<div class="container">
+    <form method="post" action="/admin/duyetok" th:object="${product}">
+        <div class="services-top">
+            <h3 class="btn btn-secondary"> Chi Tiết Sản Phẩm Cần Duyệt </h3>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Mã Sản Phẩm:</label>
+            <div class="col-sm-8">
+                <span th:utext="*{idProduct}">  </span>
+                <input type="text" th:field="*{idProduct}" class="form-control is-invalid" hidden="hidden">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Tên sản phẩm:</label>
+            <div class="col-sm-8">
+                <span th:utext="*{productName}"></span>
+                <input type="text" th:field="*{productName}" class="form-control is-invalid" hidden="hidden">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Người đăng:</label>
+            <div class="col-sm-8">
+                <span th:utext="${product.accounts.user.name}"></span>
+                <select class="form-control  is-invalid" th:field="*{accounts}" hidden="hidden">
+                    <option th:text="${product.accounts.user.name}"
+                            th:value="${product.accounts.idAccount}" class="form-control is-invalid"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Số Lượng:</label>
+            <div class="col-sm-8">
+                <span th:utext="*{quantity}"></span>
+                <input type="number" th:field="*{quantity}" class="form-control is-invalid" hidden="hidden">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label readonly class="col-sm-2 col-form-label">Danh Mục:</label>
+            <div class="col-sm-8">
+                <select class="form-control  is-invalid" th:field="*{category}" hidden="hidden">
+                    <option th:text="${product.category.categoryName}"
+                            th:value="${product.category.idCategory}"></option>
+                </select>
+                <span th:utext="${product.category.categoryName}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Hình ảnh sản phẩm:</label>
+            <div class="col-sm-8">
+                <img th:src="@{${'/Images/' + product.image1}}" alt="Image" style="width: 150px; height: auto">
+                <img th:src="@{${'/Images/' + product.image2}}" alt="Image" hidden="hidden">
+                <img th:src="@{${'/Images/' + product.image3}}" alt="Image" hidden="hidden">
+                <br/>
+                <span th:utext="*{image1}" hidden="hidden"></span>
+                <span th:utext="*{image2}" hidden="hidden"></span>
+                <span th:utext="*{image3}" hidden="hidden"></span>
+                <input type="text" th:field="*{image1}" hidden="hidden">
+                <input type="text" th:field="*{image2}" hidden="hidden">
+                <input type="text" th:field="*{image3}" hidden="hidden">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Giá ban đầu:</label>
+            <div class="col-sm-8">
+                <span th:utext="*{price}"></span>
+                <input type="number" th:field="*{price}" class="form-control is-invalid" hidden="hidden">
+            </div>
+        </div>
+        <!--        <div class="form-group row">-->
+        <!--            <label class="col-sm-2 col-form-label">Bước giá:</label>-->
+        <!--            <div class="col-sm-8">-->
+        <!--                <span th:utext="*{mucGia}"></span>-->
+        <!--                <input th:field="*{mucGia}" type="number" class="form-control is-invalid"-->
+        <!--                       placeholder="Là giá thấp nhất trong mỗi lần tăng giá" hidden="hidden">-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <div class="form-group row">-->
+        <!--            <label class="col-sm-2 col-form-label">Giờ bắt đầu:</label>-->
+        <!--            <div class="col-sm-5">-->
+        <!--                <span th:utext="*{gioBatDau}"></span>-->
+        <!--                <input type="time" th:field="*{gioBatDau}" class="form-control is-invalid" hidden="hidden">-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <div class="form-group row">-->
+        <!--            <label class="col-sm-2 col-form-label">Ngày Bắt đầu:</label>-->
+        <!--            <div class="col-sm-5">-->
+        <!--                <span th:utext="*{ngayBatDau}"></span>-->
+        <!--                <input type="date" th:field="*{ngayBatDau}" class="form-control is-invalid" hidden="hidden">-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <div class="form-group row">-->
+        <!--            <label class="col-sm-2 col-form-label">Giờ Kết thúc:</label>-->
+        <!--            <div class="col-sm-5">-->
+        <!--                <span th:utext="*{gioKetThuc}"></span>-->
+        <!--                <input type="time" th:field="*{gioKetThuc}" class="form-control is-invalid" hidden="hidden">-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <div class="form-group row">-->
+        <!--            <label class="col-sm-2 col-form-label">Ngày kết thúc:</label>-->
+        <!--            <div class="col-sm-5">-->
+        <!--                <span th:utext="*{ngayKetThuc}"></span>-->
+        <!--                <input type="date" th:field="*{ngayKetThuc}" class="form-control is-invalid" hidden="hidden">-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Thông tin chi tiết:</label>
+            <div class="col-sm-10">
+                <span th:utext="*{description}"></span>
+                <textarea type="textarea" th:field="*{description}" class="form-control is-invalid" rows="6"
+                          hidden="hidden"> </textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Ngày đăng ký:</label>
+            <div class="col-sm-8">
+                <span th:utext="*{datePost}"></span>
+                <input type="date" th:field="*{datePost}" class="form-control is-invalid" hidden="hidden">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Tình Trạng:</label>
+            <div class="col-sm-8">
+                <span th:utext="*{status}"></span>
+                <input type="text" th:field="*{status}" class="form-control is-invalid" hidden="hidden">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" name="submit" value="duyet" style="background:#1ab7ea;color: white"
+                        class="form-control">Duyệt
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" name="submit" value="khongduyet" style="background:#1ab7ea;color: white"
+                        class="form-control">Không Duyệt
+                </button>
+            </div>
+        </div>
+        </fieldset>
+    </form>
+</div>
+<div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
+
+    <div class="footer__content">
+
+        <div class="footer__img">
+            <img src="/Images/Walmart_logo.svg" alt="">
+        </div>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Về Neffex</h5>
+            <li class="footer__item">Thông tin về chúng tôi</li>
+            <li class="footer__item">Danh sách cửa hàng</li>
+            <li class="footer__item">Liên hệ</li>
+            <li class="footer__item">Flash sale</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Theo dõi chúng tôi tại</h5>
+            <li class="footer__item">
+                Facebook
+            </li>
+            <li class="footer__item">Instagram</li>
+            <li class="footer__item">Google</li>
+            <li class="footer__item">Twitter</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Thanh toán</h5>
+            <img src="/Images/visalogo.svg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+            <img src="/Images/JCBlogo.svg" alt="">
+            <img src="/Images/mastercard.webp" alt="">
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/Vinh/css/ReceiptPage.css">
+  <link rel="stylesheet" href="/Vinh/css/Header.css">
+  <title>Receipt Page</title>
+</head>
+
+<body>
+
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+
+
+<div class="main">
+  <div class="receipt__card">
+    <div class="receipt__card-top">
+      <img src="/Images/Walmart_logo.svg" alt="">
+      <h5>Your order is confirmed!</h5>
+      <div class="recipt__card-user">
+        <h5>Hi</h5>
+        <h4>Adele</h4>
+      </div>
+    </div>
+
+    <div class="receipt__card-address">
+      <div class="receipt__card-address-info">
+        <p>Mã Hóa Đơn</p>
+        <p>DH[[${hoaDon.bill.idBill}]]</p>
+      </div>
+      <div class="receipt__card-address-info">
+        <p>Tên người nhận: </p>
+        <p th:text="${hoaDon.bill.user.name}"></p>
+      </div>
+      <div class="receipt__card-address-info">
+        <p>Số điện thoại</p>
+        <p th:text="${hoaDon.bill.productBills}"></p>
+      </div>
+
+      <div class="receipt__card-address-info">
+        <p>Trạng thái đơn hàng</p>
+        <p th:text="${hoaDon.bill.status}"></p>
+      </div>
+
+      <div class="receipt__card-address-info">
+        <p>Địa chỉ giao hàng</p>
+        <p th:text="${hoaDon.bill.addressOder}"></p>
+      </div>
+    </div>
+
+    <div class="receipt__card-info">
+      <div class="receipt__card-item" th:each="cart:${carts}">
+        <div class="receipt__card-img">
+          <img th:src="@{${'/Images/' + cart.value.product.image1}}" alt="hinh">
+          <div class="receipt__card-name">
+            <h4 th:text="${cart.value.product.productName}"></h4>
+          </div>
+        </div>
+
+        <div class="receipt__card-quantity">
+          <p  th:text="'Số Lượng :'+${cart.value.quantity}"></p>
+        </div>
+
+        <div class="receipt__card-price">
+          <p th:text="${#numbers.formatDecimal(cart.value.maxPrice, 0, 'POINT', 0, 'COMMA')}+' VND'"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="receipt__card-bill">
+      <div class="receipt__card-bill-total">
+        <div class="receipt__card-bill-title">
+          <h3>Total</h3>
+        </div>
+        <div class="receipt__card-bill-price">
+          <h3 th:text="${#numbers.formatDecimal(inputTotal, 0, 'POINT', 0, 'COMMA')}+' VND'"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <div class="footer__layout">
+
+      <div class="footer__img">
+        <img src="/Images/Walmart_logo.svg" alt="">
+      </div>
+
+      <ul class="footer__category">
+        <h5 class="footer__category-title">Về Neffex</h5>
+        <li class="footer__category-item">Thông tin về chúng tôi</li>
+        <li class="footer__category-item">Danh sách cửa hàng</li>
+        <li class="footer__category-item">Liên hệ</li>
+        <li class="footer__category-item">Flash sale</li>
+      </ul>
+
+      <ul class="footer__category">
+        <h5 class="footer__category-title">Theo dõi chúng tôi tại</h5>
+        <li class="footer__category-item">
+
+          Facebook
+        </li>
+        <li class="footer__category-item">Instagram</li>
+        <li class="footer__category-item">Google</li>
+        <li class="footer__category-item">Twitter</li>
+      </ul>
+
+      <ul class="footer__category">
+        <h5 class="footer__category-title">Thanh toán</h5>
+        <img src="/Images/visalogo.svg" alt="">
+        <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+        <img src="/Images/JCBlogo.svg" alt="">
+        <img src="/Images/mastercard.webp" alt="">
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+
+</html>

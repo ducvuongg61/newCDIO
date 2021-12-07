@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/nha/css/register.css">
+    <title>Register Page</title>
+</head>
+
+<body>
+<div class="register">
+
+    <div class="register__form-background">
+        <div class="register__form-img">
+            <img src="/Images/Logo-Neffex.png" />
+        </div>
+
+        <h5 class="register__form-title">Create your Walmart account</h5>
+        <form action="/register" method="post" th:object="${register}">
+
+            <div class="form__register-content">
+
+                <div class="form__field">
+                    <input type="text" class="form__field-input" placeholder=" " th:field="*{name}" autofocus>
+                    <label class="form__field-label" >Họ và tên</label>
+                    <p th:if="${#fields.hasErrors('name1')}" th:errors="*{name}" class="form__field-error"></p>
+                </div>
+
+                <div class="form__field">
+                    <p class="form__field-error" style="color: red;font-size: 13px" th:if="${errEmail}">Email đã tồn tại trong hệ thống</p>
+                    <input type="text"  class="form__field-input"  placeholder=" " th:field="*{gmail}" autofocus>
+                    <label class="form__field-label" >Email</label>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('gmail1')}" th:errors="*{gmail}"></p>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('gmail1')}" th:errors="*{gmail}"></p>
+                </div>
+            </div>
+            <div class="form__register-content">
+
+                <div class="form__field">
+
+                    <input type="text" class="form__field-input"  placeholder=" " th:field="*{idUser}" autofocus>
+                    <label class="form__field-label" >Tên đăng nhập</label>
+                    <p  class="form__field-error" style="color: red;font-size: 13px" th:if="${errTK}">Tên tài khoản đã tồn tại</p>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('userName1')}" th:errors="*{account.idAccount}"></p>
+
+                </div>
+
+                <div class="form__field">
+                    <input type="password"  class="form__field-input"  placeholder=" " th:field="*{account.password}">
+                    <label class="form__field-label" >Mật khẩu</label>
+
+                    <p class="form__field-error" th:if="${#fields.hasErrors('passWord1')}" ></p>
+                    <p class="form__field-error" th:errors="*{account.password}"></p>
+                </div>
+
+            </div>
+
+
+            <div class="form__register-content">
+
+                <div class="form__field">
+                    <input type="date" class="form__field-input"  placeholder=" " th:field="*{dateTime}" autofocus>
+                    <p style="color: red;font-size: 13px" th:if="${#fields.hasErrors('dateTime1')}"
+                       th:errors="*{dateTime}"></p>
+                </div>
+
+                <div class="form__field">
+
+                    <div class="form__field-gender">
+                        <select>
+                            <option value="1" id="nam" th:field="*{sex}">Nam</option>
+                            <option value="0" id="nu" th:field="*{sex}">Nu</option>
+                        </select>
+                        <!-- <input type="radio" placeholder=" ">
+                        <label for="nam" class="form__field-label">Nam</label>
+
+                        <input type="radio" placeholder=" " class="form__field-gender">
+                        <label for="nu" class="form__field-label">Nữ</label> -->
+                    </div>
+                </div>
+            </div>
+            <div class="form__register-content">
+                <div class="form__field">
+
+                    <input type="text" class="form__field-input" placeholder=" "  th:field="*{phoneUser}"  autofocus>
+                    <label class="form__field-label">Số điện thoại</label>
+                    <p class="form__field-error"  th:if="${#fields.hasErrors('phoneUser1')}" th:errors="*{phoneUser}"></p>
+                </div>
+                <div class="form__field">
+
+                    <input type="text" class="form__field-input" placeholder=" " th:field="*{address}" autofocus>
+                    <label class="form__field-label" >Địa chỉ</label>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('address1')}" th:errors="*{address}"></p>
+                </div>
+            </div>
+            <div class="form__field">
+                <input type="text" class="form__field-input" placeholder=" " th:field="*{numberCard}" />
+                <label class="form__field-label" >Căn cước cá nhân</label>
+                <p class="form__field-error" th:if="${#fields.hasErrors('numberCard1')}" th:errors="*{numberCard}"></p>
+            </div>
+            <div class="form__checkbox">
+                <div class="form__checkbox-content">
+                    <input type="checkbox" />
+                    <h5>Keep me signed in</h5>
+                </div>
+                <p>Uncheck emails about new arrivals, hot items, daily savings, &more</p>
+            </div>
+
+            <div class="form__button">
+                <button class="form__button-register"  type="submit">Create account</button>
+
+                <p>Already have account ? </p>
+
+                <button class="form__button-signin" ><a href="/login">Sign in</a></button>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+</body>
+
+
+</html>

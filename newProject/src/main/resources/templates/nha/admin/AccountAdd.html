@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/Vinh/css/Header.css">
+  <link rel="stylesheet" href="/Vinh/css/Footer.css">
+  <link rel="stylesheet" href="/nha/css/Demo.css">
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+<div class="main">
+  <div th:insert="~{/nha/admin/ListProduct::main__left}"></div>
+  <div class="main__right">
+    <div id="content">
+      <div class="container-fluid">
+        <center>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Thêm thành viên</h1>
+          </div></center>
+        <div class="card-body">
+          <form id="profileForm" class="css" th:action="@{/admin/save}" th:method="post"
+                th:object="${user}">
+
+            <div class="form-row">
+              <div class="name">Tài khoản <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input th:field="*{account.idAccount}" type="text" class="input--style-5"
+                         required="true">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="name">Mật khẩu <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input th:field="*{account.password}" type="text" class="input--style-5"
+                         required="true">
+                </div>
+              </div>
+            </div>
+            <input th:field="*{idUser}" type="hidden" class="input--style-5">
+            <div class="form-row">
+              <div class="name">Họ và tên <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input id="name" th:field="*{name}" type="text" class="input--style-5"
+                         required="true">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">Email <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input id="email" th:field="*{gmail}" type="text" class="input--style-5"
+                         required="true">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">Ngày sinh <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input id="dateOfBirth" th:field="*{dateTime}" type="date" class="input--style-5"
+                         required="true">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">Địa chỉ <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input id="address" th:field="*{address}" type="text" class="input--style-5"
+                         required="true">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">SĐT <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input id="phone" th:field="*{phoneUser}" type="number" class="input--style-5"
+                         required="true">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="name">CMND <span>*</span></div>
+              <div class="value">
+                <div class="input-group">
+                  <input id="cmnd" th:field="*{numberCard}" type="number" class="input--style-5"
+                         required="true" value="">
+                </div>
+              </div>
+            </div>
+            <div class="containerBtn">
+              <div>
+                <button class="btn btn--radius-2 btn--red" type="submit" value="Submit">Thêm</button>
+              </div>
+              <div>
+                <button class="btn btn--radius-2 btn--red" type="submit" value="reset">Nhập Lại</button>
+              </div>
+              <div>
+                <button class="btn btn--radius-2 btn--red" type="submit"><a
+                        th:href="@{/admin/account}">Hủy</a></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
+
+  <div class="footer__content">
+
+    <div class="footer__img">
+      <img src="/Images/Logo-Neffex.png" />
+    </div>
+
+    <ul class="footer__list">
+      <h5 class="footer__list-title">Về Neffex</h5>
+      <li class="footer__item">Thông tin về chúng tôi</li>
+      <li class="footer__item">Danh sách cửa hàng</li>
+      <li class="footer__item">Liên hệ</li>
+      <li class="footer__item">Flash sale</li>
+    </ul>
+
+    <ul class="footer__list">
+      <h5 class="footer__list-title">Theo dõi chúng tôi tại</h5>
+      <li class="footer__item">
+        Facebook
+      </li>
+      <li class="footer__item">Instagram</li>
+      <li class="footer__item">Google</li>
+      <li class="footer__item">Twitter</li>
+    </ul>
+
+    <ul class="footer__list">
+      <h5 class="footer__list-title">Thanh toán</h5>
+      <img src="/Images/visalogo.svg" alt="">
+      <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+      <img src="/Images/JCBlogo.svg" alt="">
+      <img src="/Images/mastercard.webp" alt="">
+    </ul>
+  </div>
+</div>
+</body>
+</html>

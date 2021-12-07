@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+
+
+    <!-- Link font-awesome -->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/nha/css/Home.css">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="../../static/nha/css/Home.css">
+</head>
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+<!-- Main -->
+<div class="main">
+<!--    <div class="search__space">-->
+<!--        <form method="get" action="/timKiem" class="d-flex">-->
+<!--            <input class="form-control input__search " type="search" name="tenSp" placeholder="Tên Sản Phẩm"-->
+<!--                   aria-label="Search" >-->
+<!--            <select name="maDanhMuc" class="form-control mr-2 custom-select">-->
+<!--                <option th:value="0">Tất cả danh mục</option>-->
+<!--                <option th:each="danhmuc: ${danhmucs}" th:text="${danhmuc.categoryName}" th:value="${danhmuc.idCategory}"></option>-->
+<!--            </select>-->
+<!--            <button type="submit" class="btn btn-secondary button__search" >Tìm kiếm-->
+<!--            </button>-->
+<!--        </form>-->
+<!--    </div>-->
+    <div class="main__banner">
+        <!--        <img class="d-block w-100" src="/Images/k2.jpg" alt="First slide">-->
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-auto h-300" src="/Images/k2.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-auto h-300" src="/Images/k4.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-auto h-300" src="/Images/k6.jpg" alt="Third slide">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main__category">
+        <h4 class="main__category-title">Danh mục</h4>
+        <div class="main__category-item" th:each="danhmuc:${category}">
+            <img th:src="@{${'/Images/' + danhmuc.categoryImg}}" alt="">
+            <p th:text="${danhmuc.getCategoryName()}">Thời trang nam</p>
+        </div>
+    </div>
+    <div>
+        <span class="alert alert-success" th:if="${mgskt}">Không có sản phẩm bạn muốn tìm kiếm</span>
+    </div>
+    <div class="main__bestseller" th:if="${products}" >
+        <div class="main__bestseller-list" th:each="sanPham:${products}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image1}}" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main__spotlight">
+
+        <h4 class="main__spotlight-title">
+            Sản phẩm nổi bật
+        </h4>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/6f8bb9cd5e698e22169bc433c22936f2_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                 alt=""
+            >
+
+            <div class="main__spotlight-info">
+                <p>Tivi Sony</p>
+                <p>50.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/ce2e781d70c4ba3a6ff51425a936bbb1_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt=""
+            >
+            <div class="main__spotlight-info">
+                <p>Laptop Asus</p>
+                <p>25.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/a4665b23a84979e8141cdf5f7207ba00_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt=""
+            >
+            <div class="main__spotlight-info">
+                <p>Máy giặt Samsung</p>
+                <p>50.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/a9b87eee4ac18b0151db95f7aaba59a4_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt=""
+            >
+            <div class="main__spotlight-info">
+                <p>Bàn là Sharp</p>
+                <p>4.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/7879897bdeab80c0bec123ca76f00205_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt=""
+            >
+            <div class="main__spotlight-info">
+                <p>Tủ lạnh LG</p>
+                <p>27.000.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/b4fc6dc540e2d540b209184cb4fd2e28_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt="">
+            <div class="main__spotlight-info">
+                <p>Iphone 12</p>
+                <p>45.000.000</p>
+            </div>
+        </div>
+
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src=" https://cf.shopee.vn/file/548b056c7600667ed4c382b2a77e349c_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt="">
+            <div class="main__spotlight-info">
+                <p>Phím cơ Akko T2</p>
+                <p>1.875.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src=" https://cf.shopee.vn/file/6de59939316b634e2f6f81ce4fa7fd09_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt="">
+            <div class="main__spotlight-info">
+                <p>Giày Nike Jordan</p>
+                <p>3.875.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/c7946e2d60105b0b1d2c6df81a0b4f91_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt="">
+            <div class="main__spotlight-info">
+                <p>Áo Mu 21/22</p>
+                <p>2.150.000</p>
+            </div>
+        </div>
+
+        <div class="main__spotlight-item">
+            <img
+                    lazy-src="https://cf.shopee.vn/file/a256a89d3b7b4b80224e768d9ff6fdff_tn"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    alt=""
+            >
+            <div class="main__spotlight-info">
+                <p>Apple airpod</p>
+                <p>3.150.000</p>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${MensFashion.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm MensFashion </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${MensFashion}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${WomanFashion.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm WomanFashion </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${WomanFashion}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img"
+                    >
+                </a>
+                <div class="main__bestseller-info">
+                    <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Accessory.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Accessory </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Accessory}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Bags.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Bags </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Bags}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Camera.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Camera </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Camera}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${FootwareMan.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm FootwareMan </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${FootwareMan}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${FootwareWoman.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm FootwareWoman </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${FootwareWoman}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img"
+                    >
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Health.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Health}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Houseware.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Houseware </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Houseware}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Laptop.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Laptop </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Laptop}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Makeup.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Makeup}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img"
+                    >
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${MotherAndBaby.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${MotherAndBaby}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+<!--                    <p th:text="${sanPham.price}"></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Smartphone.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Smartphone </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Smartphone}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                    >
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+<!--                    <p th:text="${sanPham.price}"></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Television.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Television </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Television}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img"
+                    >
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Watch.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Health </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Watch}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+                    <img th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                         alt="img"
+                    >
+
+
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main__bestseller" th:if="${Sport.size() >0}">
+        <h4 class="main__bestseller-title">Sản phẩm Sport </h4>
+
+        <div class="main__bestseller-list" th:each="sanPham:${Sport}">
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}">
+<!--                    <img th:src="@{${'/Images/' + sanPham.image}}" alt="img">-->
+
+<!--                    Dang lam o day nek -->
+                    <img
+                        th:lazy-src="@{${'/Images/' + sanPham.image1}}"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
+                        alt="img"
+                    >
+                </a>
+                <div class="main__bestseller-info">
+                    <p th:text="${sanPham.productName}"></p>
+                    <p th:text="${sanPham.price}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer" th:fragment="footer_clinet">
+
+    <div class="footer__content">
+
+        <div class="footer__img">
+            <img src="/Images/Logo-Neffex.png" />
+        </div>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Về Neffex</h5>
+            <li class="footer__item">Thông tin về chúng tôi</li>
+            <li class="footer__item">Danh sách cửa hàng</li>
+            <li class="footer__item">Liên hệ</li>
+            <li class="footer__item">Flash sale</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Theo dõi chúng tôi tại</h5>
+            <li class="footer__item">
+                Facebook
+            </li>
+            <li class="footer__item">Instagram</li>
+            <li class="footer__item">Google</li>
+            <li class="footer__item">Twitter</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Thanh toán</h5>
+            <img src="/Images/visalogo.svg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+            <img src="/Images/JCBlogo.svg" alt="">
+            <img src="/Images/mastercard.webp" alt="">
+        </ul>
+    </div>
+</div>
+<script src="/nha/JS/Home.js"></script>
+<script src="/Vinh/js/intersectionObserve.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/Vinh/css/productdetail.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+
+    <title>Product Detail</title>
+
+
+</head>
+
+
+<body>
+
+
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+
+<div class="page__container">
+    <div class="page">
+        <div class="page__layout">
+            <div class="page__left">
+                <div class="page__wrapper">
+                    <div class="product__thumbnail">
+                        <img class="thumbnail" th:src="@{${'/Images/'+ product.image1}}" alt="">
+                        <img class="thumbnail" th:src="@{${'/Images/'+product.image2}}" alt="">
+                        <img class="thumbnail" th:src="@{${'/Images/'+product.image3}}" alt="">
+                    </div>
+                    <div class="product__image">
+                        <img th:src="@{${'/Images/'+product.image1}}" id="image" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="page__right">
+                <h2 class="product__title" th:text="${product.productName}">
+                </h2>
+                <div class="product__price">
+                    <p th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'COMMA')}" id="price"></p>
+                    <p style="margin-left: 10px">VND</p>
+                </div>
+                <div class="product__color">
+                    <h3>Màu Sắc:</h3>
+                    <div class="product__color-button">
+                        <button>
+                            Xanh
+                        </button>
+                        <button>
+                            Cam
+                        </button>
+                    </div>
+                </div>
+                <div class="product__quantity">
+                    <h3>Số lượng: </h3>
+
+                    <div class="product__quantity-button">
+                        <button onclick="handleDescrease()">
+                            <span>&#8722;</span>
+                        </button>
+                        <input type="text" value="1" name="soluongs" id="count" readonly="readonly"/>
+                        <input type="text" th:value="${product.quantity}" style="display: none" id="countMax"/>
+                        <button onclick="handleIncrease()">
+                            <span>&#43;</span>
+                        </button>
+                    </div>
+
+                </div>
+                <form th:action="@{/showCart/LayDuLieu/__${product.idProduct}__}" method="get">
+                    <div class="space__add">
+                        <input type="hidden" value="1" name="soluongs" id="totalQuantity"/>
+                        <input type="hidden" name="tongTien" id="totalMonet" th:value="${product.price}">
+                        <button sec:authorize="isAuthenticated()" type="submit" class="product__add">Thêm vào giỏ
+                        </button>
+                    </div>
+                </form>
+                <div class="space__add">
+                    <a th:href="@{/afterLogin/product-detail/{id}(id=${product.idProduct})}">
+                        <button th:if="${userName}" class="product__add" type="button">Đăng Nhập</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="product__description">
+            <h4 class="product__description-title">
+                Mô tả sản phẩm
+            </h4>
+            <p id="submitDescription" th:text="${product.description}">
+            <p hidden="hidden" id="description" th:text="${product.description}">
+            </p>
+        </div>
+        <div class="product__comment">
+            <h3 class="product__comment-title">
+                NHẬN XÉT VÀ ĐÁNH GIÁ
+            </h3>
+
+            <p class="product__comment-sub">Viết đánh giá</p>
+            <!--            <form th:action="/product-detail/+${sanPhamBT.idProduct}" th:object="${comment}" method="post">-->
+            <!--                <div class="product__comment-space">-->
+            <!--                    <input type="text" th:field="*{content}" placeholder="Viết bình luận tại đây">-->
+            <!--                    <button class="button__review" type="submit">Đánh Giá</button>-->
+            <!--                </div>-->
+            <!--            </form>-->
+            <div class="product__comment-review">
+                <h4 class="product__comment-review-title">
+                    ĐÁNH GIÁ - NHẬN XÉT TỪ KHÁCH HÀNG</h4>
+                <div class="product__comment-content" th:each="comment:${product.getComments()}">
+                    <div class="comment__left-side">
+                        <div class="comment__img">
+                            <img
+                                    src="https://scontent.fdad2-1.fna.fbcdn.net/v/t1.15752-9/242494465_1053848422022293_8726655823271253393_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=ae9488&_nc_ohc=yiIjCECoaNkAX9Wj9fo&tn=I3qahprvjNSrt1Fz&_nc_ht=scontent.fdad2-1.fna&oh=cc4923ddcf75c6a449acf0ab019b33af&oe=6173376B"
+                                    alt="">
+                            <p class="comment__user">Hậu Ma tóe</p>
+                        </div>
+                    </div>
+
+
+                    <div class="comment__right-side">
+                        <div class="comment__rate">
+                            <input class="star star-5" id="star-5" type="radio" name="star"/> <label class="star star-5"
+                                                                                                     for="star-5"></label>
+                            <input class="star star-4" id="star-4" type="radio" name="star"/> <label
+                                class="star star-4" for="star-4"></label>
+                            <input class="star star-3" id="star-3" type="radio" name="star"/> <label class="star star-3"
+                                                                                                     for="star-3"></label>
+                            <input class="star star-2" id="star-2" type="radio" name="star"/> <label class="star star-2"
+                                                                                                     for="star-2"></label>
+                            <input
+                                    class="star star-1" id="star-1" type="radio" name="star"/> <label
+                                class="star star-1"
+                                for="star-1"></label>
+                        </div>
+                        <p class="comment__purpot" th:text="${comment.content}"></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer__layout">
+
+            <div class="footer__img">
+                <img src="/Images/Walmart_logo.svg" alt="">
+            </div>
+
+            <ul class="footer__category">
+                <h5 class="footer__category-title">Về Neffex</h5>
+                <li class="footer__category-item">Thông tin về chúng tôi</li>
+                <li class="footer__category-item">Danh sách cửa hàng</li>
+                <li class="footer__category-item">Liên hệ</li>
+                <li class="footer__category-item">Flash sale</li>
+            </ul>
+
+            <ul class="footer__category">
+                <h5 class="footer__category-title">Theo dõi chúng tôi tại</h5>
+                <li class="footer__category-item">
+
+                    Facebook
+                </li>
+                <li class="footer__category-item">Instagram</li>
+                <li class="footer__category-item">Google</li>
+                <li class="footer__category-item">Twitter</li>
+            </ul>
+
+            <ul class="footer__category">
+                <h5 class="footer__category-title">Thanh toán</h5>
+                <img src="/Images/visalogo.svg" alt="">
+                <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+                <img src="/Images/JCBlogo.svg" alt="">
+                <img src="/Images/mastercard.webp" alt="">
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let mystring = document.getElementById("description");
+    let mota = mystring.innerHTML;
+    let sep = [".", "/-"];
+    let submittt = document.getElementById("submitDescription");
+    let resut = "";
+    for (let i = 0; i < mota.length; i++) {
+        if (mota[i] === sep[0]) {
+            resut += mota[i] + "</br>";
+        }
+            // else if(mota[i]+mota[i+1] === sep[1]){
+            //     resut += mota[i]+"</br>";
+        // }
+        else {
+            resut += mota[i];
+        }
+    }
+    submittt.innerHTML = resut;
+</script>
+<!-- Import Js -->
+<script src="/Vinh/js/main.js"></script>
+<script src="/Vinh/js/productDetail.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+*{
+    box-sizing: border-box;
+}
+
+body,h1,h2,h3,h4,h5,h6{
+    margin:0px;
+    padding:0px;
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background-image: url('/Images/pexels-daria-shevtsova-1070945.jpg');*/
+    /*background-image: url('/Images/pexels-photo-2387793.jpg');*/
+    background-image: url("https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    /* height: 100vh; */
+}
+
+
+.register__form-background {
+    height: auto;
+    padding: 24px;
+    margin: 20px 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* background: #041E42; */
+    box-shadow: 3px 6px 10px rgba(0,0,0,0.3);
+}
+
+.register__form-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register__form-img img {
+    width: auto;
+    height: 100px;
+}
+
+.register__form-title {
+    text-align: center;
+    color:#333;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color:white
+}
+
+.form__register-content {
+    display: flex;
+    justify-content: center;
+    margin: 9px 0px 0px 0px;
+}
+
+.form__field {
+    position: relative;
+    margin: 15px;
+    min-width: 300px;
+}
+
+.form__field-error {
+    position: absolute;
+    /*bottom: -50px;*/
+    color: red;
+    margin:0px;
+}
+
+.form__field-input {
+    padding: 16px;
+    border: 2px solid #9d9fa2;
+    border-radius: 4px;
+    width: 100%;
+    height: 56px;
+    outline: none;
+    cursor: pointer;
+
+}
+
+
+.form__field-label {
+    position: absolute;
+    top:50%;
+    left: 20px;
+    transform: translateY(-50%);
+    margin:0px;
+    padding:0px;
+    transition: 0.25s ease;
+    color:#333;
+    font-size: 18px;
+    cursor: pointer;
+    pointer-events: none;
+    user-select: none;
+}
+
+.form__field-input:not(:placeholder-shown) + .form__field-label,
+.form__field-input:focus + .form__field-label{
+    top:-10px;
+    left:10px;
+    padding:5px;
+    background: none;
+    color:rgb(130,235,214);
+    font-weight: 500;
+
+}
+
+.form__field-gender select {
+    min-width: 300px;
+    height: 56px;
+    text-align: center;
+    border: 2px solid #9d9fa2;
+}
+
+
+.form__checkbox {
+    margin-left: 15px;
+}
+
+.form__checkbox-content {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.form__checkbox-content h5 {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.form__checkbox p {
+    margin-top: 10px;
+    color:white;
+    font-weight: 15px;
+}
+
+.form__button p {
+    position: relative;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+
+.form__button button{
+    margin: 10px 0px;
+    border-radius: 9999px;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+}
+
+.form__button-register {
+    background: #FFCC20;
+    color: white;
+    border:none;
+    animation: ease-in-out all 600ms;
+}
+
+.form__button-register:hover {
+    background-color: #d4b106 ;
+}
+
+.form__button-signin {
+    background-color: white;
+    color: black;
+    border-color: #6d6e71;
+    animation: ease-in-out all 600ms;
+}
+
+.form__button-signin:hover {
+    color: #6D6E71;
+}

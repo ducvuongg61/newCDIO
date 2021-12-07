@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <!--    <strong class="main__title">-->
+    <!--        Thanh toán-->
+    <!--    </strong>-->
+    <div class="main__content">
+        <div class="container__left">
+            <!--            <ul class="main__list">-->
+            <!--                <li class="main__list-item">-->
+            <!--                    <a ><span>Địa chỉ thanh toán</span></a>-->
+            <!--                </li>-->
+            <!--                <li class="main__list-item">-->
+            <!--                    <a ><span>Hình thức giao hàng</span></a>-->
+            <!--                </li>-->
+            <!--                <li class="main__list-item">-->
+            <!--                    <a ><span>Tình trang đơn hàng</span></a>-->
+            <!--                </li>-->
+            <!--            </ul>-->
+            <strong class="main__title" style="margin-left: 34%;">
+                Địa Chỉ Thanh Toán
+            </strong>
+            <div>
+                <form action="/hoaDon/thanhToan" method="get" th:object="${donHang}">
+                    <input type="hidden" th:field="*{maDonHang}">
+                    <input type="hidden" th:field="*{nguoiDung}">
+                    <input type="hidden" th:field="*{trangThai}">
+                    <input type="hidden" th:field="*{tongTien}">
+                    <table class="container__ship">
+                        <tr>
+                            <td>Địa Chỉ </td>
+                            <td><input size="50" type="text" placeholder="Địa chỉ" th:field="*{diaChi}"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Email </td>
+                            <td><input size="50" ID="email" type="text" name="email" placeholder="email@gmail.com"  >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Di Động </td>
+                            <td><input type="number" value=""  th:field="*{soDienThoai}"  placeholder="Số điện thoại"></td>
+                        </tr>
+                    </table>
+                    <div class="button">
+                        <button class="btn btn-danger" style="margin-left: 136px;" type="submit">Thanh toán khi nhận hàng</button>
+                        <button class="btn btn-primary" style="margin-left: 30px" formaction="/pay"><img style="height: 20px" width="30" src="https://th.bing.com/th/id/OIP.DYFhJieoB5xq4KpQtogzjQAAAA?pid=ImgDet&rs=1">
+                            Thanh toán Paypal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="container__right">
+            <div class="cart">
+                <div class="cart__contact">
+                    <h2 class="cart__title">Các Câu Hỏi</h2>
+                    <p>Vui lòng liên hệ bộ phận hỗ trợ 24h của chúng tôi</p>
+                </div>
+
+                <div class="cart__number">
+                    <p> Sdt: 0956326980</p>
+                </div>
+            </div>
+            <div class="bill">
+                <h2>Tổng Tiền</h2>
+                <ul class="bill__list">
+                    <li class="bill__list-item">Thành Tiền:</li>
+                    <li class="bill__list-item" th:text="${#numbers.formatDecimal(tongTien, 0, 'POINT', 0, 'COMMA')}+' VND'"></li>
+                </ul>
+                <div class="bill__button">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

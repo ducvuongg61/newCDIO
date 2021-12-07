@@ -1,0 +1,167 @@
+*{
+    box-sizing: border-box;
+}
+
+body,h1,h2,h3,h4,h5,h6{
+    margin: 0px;
+    padding:0px;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background-image: url('/Images/pexels-daria-shevtsova-1070945.jpg');*/
+    background-image: url("https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+
+}
+
+.login__img {
+    display: flex;
+    justify-content: center;
+
+}
+
+.login__content {
+    padding: 24px;
+    margin: 20px 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* background: #041E42; */
+    box-shadow: 3px 6px 10px rgba(0,0,0,0.3);
+}
+
+
+.login__img img {
+    width: auto;
+    height: 100px;
+}
+
+.login__form {
+    width: 500px;
+    padding: 0px  40px;
+}
+
+.login__form-title {
+    text-align: center;
+    color:#fff;
+    font-weight: 600;
+    margin: 15px 0px;
+}
+
+.login__field{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:25px 0px;
+}
+
+.login__field-input {
+    width: 450px;
+    height: 56px;
+    padding: 16px;
+    border: 2px solid #9d9fa2;
+    border-radius: 4px;
+    outline: none;
+}
+
+.login__field-input:not(:placeholder-shown) + .login__field-label,
+.login__field-input:focus + .login__field-label{
+    top:-10px;
+    left:15px;
+    background-color: none;
+    color:#FFCC20;
+}
+
+
+.login__field-label {
+    position: absolute;
+    top:50%;
+    left: 20px;
+    transform: translateY(-50%);
+    margin:0px;
+    padding:0px;
+    transition: 0.25s ease;
+    color:#9d9fa2;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+
+.login__forgot {
+    position: relative;
+    text-align: right;
+    cursor: pointer;
+    color: white;
+}
+
+
+
+.login__check-remember{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+
+.login__check-remember > h6 {
+    margin:0px 10px;
+    font-weight: 600;
+    color: white;
+}
+
+.login__check > p {
+    font-weight: 400;
+    font-size: 15px;
+    margin-top: 10px;
+    color: white;
+}
+
+.login__check span {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.login__btn button {
+    margin: 10px 0px;
+    border-radius: 9999px;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+}
+
+.login__btn p {
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.button__signin {
+    background: #FFCC20;
+    color: white;
+    border:none;
+    animation: ease-in-out all 600ms;
+}
+
+.button__signin:hover {
+    background-color: #d4b106;
+}
+
+.button__account {
+    background-color: white;
+    color: black;
+    border-color: #6d6e71;
+    animation: ease-in-out all 600ms;
+}
+
+.button__account:hover {
+    color: #6D6E71;
+
+}

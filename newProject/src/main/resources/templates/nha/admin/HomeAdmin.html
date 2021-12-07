@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+
+    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <!--  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <style>
+        .box {
+            transition: 0.5s;
+            font-family: sans-serif;
+            border-radius: 20px;
+            margin: 7px;
+            float: left;
+            border: 1px solid #041E42;
+            position: relative;
+            width: 250px;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: white;
+            box-shadow: 0 30px 60px rgb(0, 0, 0, .2);
+        }
+        .box:hover{
+            transition: 0.5s;
+            top:-10px;
+        }
+        .box:before{
+            position: absolute;
+            content: '';
+            width: 50%;
+            background-color: #0a53be;
+        }
+        .box .percent {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .box .percent svg {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .box .percent svg circle {
+            width: 150px;
+            height: 150px;
+            fill: none;
+            stroke-width: 10;
+            stroke: #000;
+            transform: translate(5px, 5px);
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+        }
+
+        .box .percent svg .circle1:nth-child(1) {
+            stroke-dashoffset: 0;
+            stroke: #f3f3f3;
+        }
+
+        .box .percent svg .circle1:nth-child(2) {
+            stroke-dashoffset: calc(440 - (440 * 47) / 100);
+            stroke: #041E42;
+        }
+
+        .box .percent svg .circle2:nth-child(1) {
+            stroke-dashoffset: 0;
+            stroke: #f3f3f3;
+        }
+
+        .box .percent svg .circle2:nth-child(2) {
+            stroke-dashoffset: calc(440 - (440 * 87) / 100);
+            stroke: #041E42;
+        }
+
+        .box .percent svg .circle3:nth-child(1) {
+            stroke-dashoffset: 0;
+            stroke: #f3f3f3;
+        }
+
+        .box .percent svg .circle3:nth-child(2) {
+            stroke-dashoffset: calc(440 - (440 * 27) / 100);
+            stroke: #041E42;
+        }
+
+        .box .percent svg .circle4:nth-child(1) {
+            stroke-dashoffset: 0;
+            stroke: #f3f3f3;
+        }
+
+        .box .percent svg .circle4:nth-child(2) {
+            stroke-dashoffset: calc(440 - (440 * 59) / 100);
+            stroke: #041E42;
+        }
+
+        .box .percent .number {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #111;
+
+        }
+
+        .box .percent .number h2 {
+            font-size: 48px;
+        }
+
+        .box .percent .number h2 span {
+            font-size: 24px;
+        }
+
+        .box .text {
+            padding: 10px 0 0;
+            color:  #041E42;
+            font-weight: 700;;
+            letter-spacing: 1px;
+        }
+        .title1{
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px
+        ;  font-weight: 700;;
+        }
+    </style>
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+    <link rel="stylesheet" href="/Vinh/css/Footer.css">
+    <link rel="stylesheet" href="/nha/css/Demo.css">
+    <link rel="stylesheet" href="/static/Hau/static.css">
+</head>
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+<div class="main main__admin">
+    <div th:insert="~{/nha/admin/ListProduct::main__left}"></div>
+    <div class="main__right">
+
+    <h2 class="title1">Biểu đồ doanh  thu theo từng quý</h2>
+        <div class="box">
+            <div class="percent">
+                <svg>
+                    <circle class="circle1" cx="70" cy="70" r="70"></circle>
+                    <circle class="circle1" cx="70" cy="70" r="70"></circle>
+                </svg>
+                <div class="number">
+                    <h2>47<span>%</span></h2>
+                </div>
+            </div>
+            <h2 class="text"> Qúy 1</h2>
+        </div>
+
+
+        <div class="box">
+            <div class="percent">
+                <svg>
+                    <circle class="circle2" cx="70" cy="70" r="70"></circle>
+                    <circle class="circle2" cx="70" cy="70" r="70"></circle>
+                </svg>
+                <div class="number">
+                    <h2>87<span>%</span></h2>
+                </div>
+            </div>
+            <h2 class="text"> Quý 2</h2>
+        </div>
+
+
+        <div class="box">
+            <div class="percent">
+                <svg>
+                    <circle class="circle3" cx="70" cy="70" r="70"></circle>
+                    <circle class="circle3" cx="70" cy="70" r="70"></circle>
+                </svg>
+                <div class="number">
+                    <h2>27<span>%</span></h2>
+                </div>
+            </div>
+            <h2 class="text"> Quý 3</h2>
+        </div>
+
+
+        <div class="box">
+            <div class="percent">
+                <svg>
+                    <circle class="circle4" cx="70" cy="70" r="70"></circle>
+                    <circle class="circle4" cx="70" cy="70" r="70"></circle>
+                </svg>
+                <div class="number">
+                    <h2>59<span>%</span></h2>
+                </div>
+            </div>
+            <h2 class="text"> Quý 4</h2>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{/HeaderFooter/Footer::footer_clinet}"></div>
+
+</body>
+</html>

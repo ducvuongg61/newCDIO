@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="/vuong/css/css1/ionicons.min.css">
+    <link rel="stylesheet" href="/vuong/css/css1/style.css">
+
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    <link href="/vuong/css/main.css" rel="stylesheet" media="all">
+
+
+    <link href="/vuong/css/pagnition.css" rel="stylesheet">
+    <link href="/vuong/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link href="/vuong/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/vuong/css/bootstrap4.css" rel="stylesheet" type="text/css" media="all">
+    <script src="/vuong/js/jquery-1.11.0.min.js"></script>
+    <!-- Custom Theme files -->
+    <link href="/vuong/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/vuong/css/flexslider.css" type="text/css" media="screen"/>
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+
+    </script>
+    <meta name="keywords"
+          content="Auction Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndriodCompatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <!--Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+    </script>
+
+    <!--    Vinh-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+    <link rel="stylesheet" href="/Vinh/css/Footer.css">
+
+    <style>
+        label {
+            color: #027ca5;
+        }
+    </style>
+</head>
+<body>
+
+<header th:insert="~{HeaderFooter/Header::header-cline}"></header>
+
+<script>
+    $(function () {
+        $("#slider").responsiveSlides({
+            auto: true,
+            speed: 500,
+            namespace: "callbacks",
+            pager: false,
+            nav: true,
+        });
+    });
+</script>
+
+<div class="row">
+    <div class="col-sm-2">
+
+    </div>
+    <div class="col-sm-8">
+        <div class="container" style="display: flex; max-width: 1400px;} ">
+            <form method="post" action="/product/edit" th:object="${products}" style="width: 100%;margin-left: 25px;">
+                <fieldset>
+                    <div class="services-top">
+                        <h3 class="btn btn-secondary"> Sửa Sản Phẩm </h3>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Mã Sản Phẩm *</label>
+                        <div class="col-sm-7">
+                            <span th:utext="*{idProduct}"></span>
+                            <input type="text" th:field="*{idProduct}" class="form-control is-invalid" hidden="hidden">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Tên sản phẩm
+                            *</label>
+                        <div class="col-sm-7">
+                            <input type="text" th:field="*{productName}" class="form-control is-invalid">
+                            <p style="color: red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">
+                                Error</p>
+
+                        </div>
+                    </div>
+                    <select class="form-control  is-invalid" th:field="*{accounts}" hidden="hidden">
+                        <option th:text="${products.accounts.user.name}"
+                                th:value="${products.accounts.getIdAccount()}"></option>
+                    </select>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Số Lượng *</label>
+                        <div class="col-sm-7">
+
+                            <input type="number" th:field="*{quantity}" class="form-control is-invalid">
+                            <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">
+                                Error</p>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Danh Mục *</label>
+                        <div class="col-sm-7">
+                            <select class="form-control custom-select is-invalid" th:field="*{category}">
+                                <option th:text="${products.category.categoryName}"
+                                        th:value="${products.category.idCategory}"></option>
+                                <option th:each="danhmuc: ${category}" th:text="${danhmuc.categoryName}"
+                                        th:value="${danhmuc.idCategory}"></option>
+                            </select>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Hình ảnh *</label>
+                        <div class="col-sm-7">
+                            <img style="height: 250px;width: auto;" th:src="@{${'/Images/' + products.image1}}"
+                                 alt="Lỗi ảnh">
+                            <br/>
+<!--                            <span th:utext="*{image}"></span>-->
+                            <input type="text" th:field="*{image1}" class="form-control is-invalid " hidden="hidden">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Giá
+                            *</label>
+                        <div class="col-sm-7">
+                            <input type="number" th:field="*{price}" class="form-control is-invalid">
+                            <p style="color: red" th:if="${#fields.hasErrors('price')}"
+                               th:errors="*{price}">
+                                Error</p>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Thông tin chi tiết</label>
+                        <div class="col-sm-9">
+                            <textarea type="textarea" th:field="*{description}" class="form-control is-invalid"
+                                      rows="6"> </textarea>
+                            <p style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</p>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Ngày đăng
+                            *</label>
+                        <div class="col-sm-6">
+                            <input type="date" th:field="*{datePost}" class="form-control is-invalid">
+                            <p style="color: red" th:if="${#fields.hasErrors('datePost')}"
+                               th:errors="*{datePost}">
+                                Error</p>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" style="padding: 10px 20px 10px 5px;">Tình Trạng</label>
+                        <div class="col-sm-7">
+                            <span th:utext="*{status}">
+
+                            </span>
+                            <input type="text" th:field="*{status}" class="form-control is-invalid" hidden="hidden">
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="submit" style="background:#1ab7ea;color: white" class="form-control"
+                                   value="sửa">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+    <div class="col-sm-2">
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#nivo-lightbox-demo a').nivoLightbox({effect: 'fade'});
+    });
+</script>
+
+
+<script src="/vuong/js/countTime.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<footer th:insert="~{HeaderFooter/Footer::footer_clinet}"></footer>
+
+</body>
+</html>
+
+

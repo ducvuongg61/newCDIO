@@ -1,0 +1,232 @@
+body {
+    background-color: #eaeef0;
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 0px;
+}
+
+.page-container {
+    padding: 30px 100px 50px 100px;
+    background-color: #fff;
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr a {
+    text-decoration: none;
+}
+
+.manage-member {
+    border-bottom: solid 5px #1ac2fa;
+}
+
+.manage-member h1 {
+    margin: 0px 0px 15px 10px;
+    color: #027ca5;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 40px;
+    transition: all .5s ease-in-out;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.page-container h2 {
+    text-align: center;
+    color: #027ca5;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 30px;
+    transition: all .5s ease-in-out;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+    margin: 30px 0px 50px 0px;
+}
+
+label:first-child {
+    margin-left: 40px;
+}
+
+.filter-size, label {
+    margin-left: 10px;
+}
+
+.filter-size, label, select {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 2px;
+    margin-bottom: 10px;
+}
+
+.filter-size, input, select {
+    border: 1px solid #1ab7ea;
+    border-radius: 2px;
+}
+
+#mem-id {
+    width: 40px;
+    font-size: 12px;
+    padding: 3px;
+}
+
+#mem-name {
+    width: 120px;
+    font-size: 12px;
+    padding: 3px;
+}
+
+#mem-add {
+    width: 120px;
+    font-size: 12px;
+    padding: 3px;
+}
+
+#mem-email {
+    width: 160px;
+    font-size: 12px;
+    padding: 3px;
+}
+
+#mem-rank {
+    padding: 3px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.filter-btn {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px;
+    margin-left: 5px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #1ab7ea;
+    border: thin;
+}
+
+.filter-btn a {
+    text-decoration: none;
+    color: white;
+}
+
+#add-btn {
+    margin-left: 38%;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+
+.data-table {
+    margin-top: 20px;
+}
+td a{
+    color: #0095c6;
+}
+
+#mem-data {
+    border: solid 1px rgb(214, 214, 214);
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 95%;
+    margin: 0 auto;
+}
+
+#mem-data th {
+    padding: 8px;
+    font-size: 14px;
+    border: solid 1px rgb(214, 214, 214);
+}
+
+#mem-data td {
+    color: rgb(59, 59, 59);
+    padding: 8px;
+    font-size: 13px;
+    border: solid 1px rgb(214, 214, 214);
+
+}
+
+#mem-data tr:nth-child(even) {
+    background-color: #eaeef0;
+}
+
+
+#mem-data th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1ab7ea;
+    color: white;
+}
+
+.center {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+.pagination a {
+    background-color: #1ab7ea;
+    color: white;
+    border: 1px solid #1ab7ea;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #76d3f8;
+}
+
+.function-btn button {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 20px 30px;
+    padding: 8px;
+    border-radius: 5px;
+    color: white;
+    background-color: #1ab7ea;
+    border: none;
+    text-decoration: none;
+}
+
+.function-btn button a {
+    font-size: 14px;
+    font-weight: 500px;
+    color: white;
+    background-color: #1ab7ea;
+    border: none;
+    text-decoration: none;
+}
+
+.page-current {
+    margin-bottom: 15px;
+}
+
+.page-current span {
+    font-size: 16px;
+    font-weight: bold;
+}

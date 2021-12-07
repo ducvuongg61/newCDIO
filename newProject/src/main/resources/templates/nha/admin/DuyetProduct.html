@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+    <link rel="stylesheet" href="/Vinh/css/Footer.css">
+    <link rel="stylesheet" href="/nha/css/Demo.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/nha/css/style.css">
+
+    <title>Title</title>
+</head>
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+<div class="main">
+    <div th:insert="~{/nha/admin/ListProduct::main__left}"></div>
+    <div class="main__right">
+        <form action="/admin/approve" method="get">
+            <label>Tên Sản Phẩm :</label>
+            <input type="text" name="tensanpham" id="mem-name"/>
+            <button class="filter-btn" type="submit">Lọc kết quả</button>
+        </form>
+        <table class="table__container"  th:unless="${mgs}">
+            <thead class="table__thead">
+            <tr>
+                <th>Tên Sản phẩm</th>
+                <th>Người Đăng</th>
+                <th>Danh Mục</th>
+                <th>Ngày Đăng Ký</th>
+                <th>Trạng Thái</th>
+                <th>Hành Động</th>
+            </tr>
+            </thead>
+
+            <tbody class="table__tbody">
+            <tr th:each="sanpham : ${product}">
+                <td>
+                    <h4 th:text="${sanpham.productName}"></h4>
+                </td>
+                <td ><h4 th:text="${sanpham.accounts.user.name}"></h4>
+                </td>
+                <td th:text="${sanpham.category.categoryName}">
+                </td>
+                <td th:text="${sanpham.datePost}"></td>
+                <td th:text="${sanpham.status}"></td>
+                <td>
+                    <a th:href="@{/admin/view(id = ${sanpham.idProduct})}">
+                        <button class="button__action background-blue " th:href="@{/admin/edit(id = ${sanpham.idProduct})}">
+                            <span>Cập nhật</span>
+                        </button>
+                    </a>
+                    <a th:href="@{/admin/delete1/{id}(id=${sanpham.idProduct})}">
+                        <button class="button__action background-red" th:href="@{/admin/delete/{id}(id=${sanpham.idProduct})}">
+                <span>
+                  &#88;
+                </span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
+
+    <div class="footer__content">
+
+        <div class="footer__img">
+            <img src="/Images/Logo-Neffex.png" />
+        </div>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Về Neffex</h5>
+            <li class="footer__item">Thông tin về chúng tôi</li>
+            <li class="footer__item">Danh sách cửa hàng</li>
+            <li class="footer__item">Liên hệ</li>
+            <li class="footer__item">Flash sale</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Theo dõi chúng tôi tại</h5>
+            <li class="footer__item">
+                Facebook
+            </li>
+            <li class="footer__item">Instagram</li>
+            <li class="footer__item">Google</li>
+            <li class="footer__item">Twitter</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Thanh toán</h5>
+            <img src="/Images/visalogo.svg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+            <img src="/Images/JCBlogo.svg" alt="">
+            <img src="/Images/mastercard.webp" alt="">
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

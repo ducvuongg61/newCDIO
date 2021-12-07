@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+body,h1,h2,h3,h4,h5,h6 {
+    margin: 0px;
+    padding:0px;
+    /* font-family: 'Koh Santepheap', cursive; */
+    font-family: 'BenchNine', Arial, sans-serif;
+}
+
+
+
+/* Footer */
+
+
+.footer {
+    margin-top: 60px;
+    padding: 20px 100px;
+    width: 100%;
+    background-color: white;
+}
+
+
+.footer__layout{
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__img {
+    display: flex;
+    align-items: center;
+}
+
+.footer__img img {
+    width: auto;
+    height: 80px;
+    cursor: pointer;
+}
+
+
+
+.footer__category{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin:0px;
+    padding:0px;
+    list-style-type:none;
+    height: 100%;
+}
+
+.footer__category img {
+    width: auto;
+    height: 36px;
+    cursor: pointer;
+}
+
+.footer__category-item {
+    position: relative;
+    cursor: pointer;
+    /* font-size: 20px; */
+    font-weight: 550;
+    color: rgba(0,0,0,.54);
+    margin-bottom: 20px;
+}
+
+.footer__category-item::after{
+    content: '';
+    position: absolute;
+    left: 0%;
+    display: block;
+    margin: auto;
+    transition: all 0.5s;
+    height: 2px;
+    background-color: #ffc220;
+    width: 0%;
+}
+
+.footer__category-item:hover::after{
+    width: 100%;
+    left: 2%;
+}
+
+
+.footer__category-title{
+    font-weight: 700;
+    color: rgba(0,0,0,.54);
+    margin:40px 0px 20px;
+    font-size: 20px;
+}
