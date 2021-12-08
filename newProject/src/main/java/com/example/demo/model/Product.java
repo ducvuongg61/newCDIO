@@ -34,6 +34,7 @@ public class Product {
     private String image1;
     private String image2;
     private String image3;
+    @Column(length = 2500)
     private String description;
     private String datePost;
     private String status;

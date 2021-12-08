@@ -51,7 +51,7 @@ public class BillController {
         return new HashMap<>();
     }
 
-    @ModelAttribute("user")
+    @ModelAttribute("userNames")
     public AccUser getDauGia() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepo.findByAccount_IdAccount(auth.getName());

@@ -74,7 +74,7 @@ public class CartController {
     public static ProductBill orderDetail = new ProductBill();
     public static HashMap<Double, Product> productListBillTemp = new HashMap<>();
 
-    @ModelAttribute("user")
+    @ModelAttribute("userNames")
     public AccUser getDauGia() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return userRepo.findByAccount_IdAccount(auth.getName());

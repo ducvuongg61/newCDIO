@@ -41,6 +41,7 @@ public class ProductController {
     @Autowired
     ColorService colorService;
 
+
     @GetMapping(value = "/product/list")
     public String user(Model model, Principal principal, @PageableDefault(size = 5) Pageable pageable) {
         String userName = principal.getName();
@@ -49,7 +50,7 @@ public class ProductController {
             model.addAttribute("saler", "là saler");
         }
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("listProduct", productService.findProduct(userName));
         return "/vuong/ListProductSaler";
     }
@@ -62,7 +63,7 @@ public class ProductController {
             model.addAttribute("admin", "là admin");
         }
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("listSP", productService.findAllByNotApprovedYet("Chưa duyệt", userName));
         return "/vuong/listchuaduyet";
     }
@@ -91,7 +92,7 @@ public class ProductController {
             model.addAttribute("saler", "là saler");
         }
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("userName", principal.getName());
         model.addAttribute("account", accountService.findAll());
         model.addAttribute("category", categoryService.findAll());
@@ -118,7 +119,7 @@ public class ProductController {
 //        new Product().validate(product, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-            model.addAttribute("user", user);
+            model.addAttribute("userNames", user);
             model.addAttribute("userName", principal.getName());
             model.addAttribute("account", accountService.findAll());
             model.addAttribute("category", categoryService.findAll());
@@ -128,7 +129,7 @@ public class ProductController {
         }
         this.productService.save(product);
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("listProduct", productService.findAccount(idAccount));
         model.addAttribute("mgs", "thêm mới sản phẩm thành công");
         return "/vuong/ListProductSaler";
@@ -141,7 +142,7 @@ public class ProductController {
             model.addAttribute("saler", "là saler");
         }
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("products", productService.findById(id));
         model.addAttribute("category", categoryService.findAll());
         return "/vuong/edit";
@@ -154,7 +155,7 @@ public class ProductController {
             model.addAttribute("admin", "là admin");
         }
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("products", productService.findById(id));
         model.addAttribute("category", categoryService.findAll());
         return "/vuong/view";
@@ -170,11 +171,11 @@ public class ProductController {
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
 //        new Product().validate(product, bindingResult);
         if (bindingResult.hasFieldErrors()) {
-            model.addAttribute("user", user);
+            model.addAttribute("userNames", user);
             model.addAttribute("category", categoryService.findAll());
             return "/vuong/edit";
         }
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("product", productService.findAccount(idAccount));
         model.addAttribute("category", categoryService.findAll());
 //        System.out.println("ten -----------" + product.getAccounts().getUserName());
@@ -197,7 +198,7 @@ public class ProductController {
             model.addAttribute("saler", "là saler");
         }
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("listProduct", productService.findAccount(idAccount));
         model.addAttribute("mgsdelete", "Xóa sản phẩm thành công!");
         return "/vuong/ListProductSaler";
@@ -215,13 +216,13 @@ public class ProductController {
         List<Product> products = productService.findByNotApprovedYet("Chưa duyệt", userName, nameProduct);
         if (products.size() == 0) {
             System.out.println("Đang rỗng nè coi đo dai bao nhieu nao  ====================" + products.size());
-            model.addAttribute("user", user);
+            model.addAttribute("userNames", user);
             model.addAttribute("products", products);
             model.addAttribute("mgstk", "Không tìm thấy sản phẩm");
             return "/vuong/listchuaduyet";
         } else {
             System.out.println("Đang rỗng nè coi đo dai bao nhieu nao  ====================" + products.size());
-            model.addAttribute("user", user);
+            model.addAttribute("userNames", user);
             model.addAttribute("products", products);
             model.addAttribute("mgstk1", "sản phẩm được tìm thấy");
             return "/vuong/listchuaduyet";
@@ -240,13 +241,13 @@ public class ProductController {
         List<Product> products = productService.findByNameProduct(idAccount, nameProduct);
         if (products.size() == 0) {
             System.out.println("Đang rỗng nè coi đo dai bao nhieu nao  ====================" + products.size());
-            model.addAttribute("user", user);
+            model.addAttribute("userNames", user);
             model.addAttribute("products", products);
             model.addAttribute("mgstk", "Không tìm thấy sản phẩm");
             return "/vuong/ListProductSaler";
         } else {
             System.out.println("Đang rỗng nè coi đo dai bao nhieu nao  ====================" + products.size());
-            model.addAttribute("user", user);
+            model.addAttribute("userNames", user);
             model.addAttribute("products", products);
             model.addAttribute("mgstk1", "sản phẩm được tìm thấy");
             return "/vuong/ListProductSaler";

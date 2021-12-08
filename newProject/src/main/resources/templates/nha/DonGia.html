@@ -29,11 +29,11 @@
     <br><br><br>
     <table class="table table-hover text-center">
         <thead>
-        <form action="/nha/pageList" method="post">
+        <form action="/nhas/pagaList" method="post">
             <label>Tên Người Dùng</label>
-            <input type="text" name="tenNguoiDung" id="mem-name"/>
+            <input type="text" name="nameUser" id="mem-name"/>
             <label>Tên Sản Phẩm</label>
-            <input type="text" name="tenSanPham" id="mem-add"/>
+            <input type="text" name="nameProduct" id="mem-add"/>
             <button class="filter-btn" type="submit">Lọc kết quả</button>
         </form>
         <tr style=" color: #027ca5;">
@@ -42,7 +42,6 @@
             <th>Thời gian </th>
             <th>Người mua</th>
             <th>Tên sản phẩm</th>
-            <th>Số lượng</th>
             <th>Thành tiền</th>
             <th>Tình trạng giao dịch</th>
             <th>Xóa</th>
@@ -52,11 +51,10 @@
         <tr th:each="listProduct,iterStat:${listDonGia}">
             <td th:text="${iterStat.count}"></td>
             <td th:text="${listProduct.bill.idBill}"></td>
-            <td th:text="${listProduct.bill.dateOder}"></td>
+            <td th:text="${listProduct.bill.current}"></td>
             <td th:text="${listProduct.bill.user.name}"></td>
-            <td th:text="${listProduct.products.productName}"></td>
-            <td th:text="${listProduct.quantity}"></td>
-            <td th:text="${listProduct.price}"></td>
+            <td th:text="${listProduct.product.productName}"></td>
+            <td th:text="${listProduct.bill.current}"></td>
             <td th:text="${listProduct.bill.status}"></td>
             <td>
                 <a class="btn btn-success" th:href="@{/nhas/{id}/delete(id=${listProduct.bill.idBill})}">Xóa</a>

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,8 +23,8 @@
 
 
     <title>Quản Lý Danh Mục</title>
-<!--    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">-->
-<!--    <link rel="stylesheet" href="/nha/css/bootstrap.min.css">-->
+    <!--    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">-->
+    <!--    <link rel="stylesheet" href="/nha/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="/Vinh/css/Header.css">
     <link rel="stylesheet" href="/Vinh/css/Footer.css">
     <link rel="stylesheet" href="/nha/css/Demo.css">
@@ -41,20 +41,18 @@
             </div>
             <hr>
             <div class="data-table">
-                <form method="post" action="/admin/category/create" th:object="${category}">
+                <form method="post" action="/admin/category/create" th:object="${categorys}">
                     <fieldset>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" style="text-align: center">Tên Danh Mục *</label>
                             <div class="col-sm-10">
-                                <input type="text" th:field="*{category.categoryName}" class="form-control is-invalid" id="inputEmail3">
-                                <p style="color: red" th:if="${#fields.hasErrors('categoryName')}" th:errors="*{category.categoryName}"></p>
+                                <input type="text" th:field="*{categoryName}" class="form-control is-invalid" id="inputEmail3">
+                                <p style="color: red" th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}"></p>
                                 <p style="color: red;font-size: 13px" th:if="${mgsdm}">Danh mục đã tồn tại.</p>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="button__create" >
-<!--                                <input type="submit" class="form-control "-->
-<!--                                       value="Thêm">-->
                                 <button type="submit">
                                     Thêm
                                 </button>
