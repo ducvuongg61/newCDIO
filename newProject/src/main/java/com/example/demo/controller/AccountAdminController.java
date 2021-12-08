@@ -31,7 +31,7 @@ public class AccountAdminController {
     @RequestMapping("/account")
     public String listAll(@RequestParam(defaultValue = "0") int page, Principal principal, Model model){
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user",user);
+        model.addAttribute("userNames",user);
         Page<AccUser> userPage;
         Pageable pageable = PageRequest.of(page,5);
         userPage = userService.findAll(pageable);
@@ -63,14 +63,14 @@ public class AccountAdminController {
         model.addAttribute("addresses", addresses);
         model.addAttribute("nameUser", nameUser);
         model.addAttribute("address",address);
-        model.addAttribute("user",user);
+        model.addAttribute("userNames",user);
         return "/nha/admin/AccountAdmin";
     }
 
     @GetMapping("/add_member")
     public String create(Model model, Principal principal) {
-        AccUser user1 = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("users", user1);
+        AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
+        model.addAttribute("userNames", user);
         model.addAttribute("user", new AccUser());
         return "nha/admin/AccountAdd";
     }
@@ -86,7 +86,7 @@ public class AccountAdminController {
         System.out.println(users.getIdUser());
         userService.save(users);
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         redirectAttributes.addFlashAttribute("success", "Created!");
         return "redirect:/admin/account";
     }
@@ -94,7 +94,7 @@ public class AccountAdminController {
     public String edit(@PathVariable int id, Model model, Principal principal) {
         AccUser user = userService.findById(id);
         AccUser user1 = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user1);
+        model.addAttribute("userNames", user1);
         model.addAttribute("findUser", userService.findById(id));
         model.addAttribute("userName", user.getName());
         return "nha/admin/AccountEdit";
@@ -104,7 +104,7 @@ public class AccountAdminController {
     public String edit(@ModelAttribute("user") AccUser user, Model model, RedirectAttributes redirectAttributes, Principal principal) {
         userService.save(user);
         AccUser user1 = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user1", user1);
+        model.addAttribute("userNames", user1);
         redirectAttributes.addFlashAttribute("success", "Updated!");
         model.addAttribute("userName", user.getName());
         return "redirect:/admin/account";

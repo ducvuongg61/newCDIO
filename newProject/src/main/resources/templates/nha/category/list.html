@@ -47,7 +47,7 @@
   <div class="main__right">
     <div class="create__category">
       <button>
-        <a th:href="@{/admin/danhmuc/create}">
+        <a th:href="@{/admin/category/create}">
          Thêm Thể Loại Sản Phẩm
        </a>
       </button>
@@ -76,48 +76,23 @@
         <td><img th:href="@{'/Images/'+${danhmuc.categoryImg}}">
         </td>
         <td>
-          <a th:href="@{/admin/danhmuc/edit(id = ${danhmuc.idCategory})}">
-            <button class="button__action background-blue " th:href="@{/admin/danhmuc/edit(id = ${danhmuc.idCategory})}">
+          <a th:href="@{/admin/category/edit(id = ${danhmuc.idCategory})}">
+            <button class="button__action background-blue " th:href="@{/admin/category/edit(id = ${danhmuc.idCategory})}">
               <span>Cập nhật</span>
             </button>
           </a>
-            <button class="button__action background-red"  th:onclick="preparedelete([[${danhmuc.idCategory}]],[[${danhmuc.categoryName}]])" >
-                <span>
-                  &#88;
-                </span>
+          <a th:href="@{/admin/category/delete/{id}(id = ${danhmuc.idCategory})}">
+            <button class="button__action background-red ">
+              <span>X</span>
             </button>
+          </a>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
-<div id="exampleModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"
-                aria-hidden="true">
-          &times;
-        </button>
-      </div>
-      <div class="modal-body">
-        <span id="maDanhMuc"></span>
-        <p>Bạn có chắc chắn muốn xóa
-          <span id="tenDanhMuc"></span>
-          Không ?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy
-        </button>
-        <button style="color: red" onclick="deleteService($('#maDanhMuc').html())" type="button"
-                class="btn btn-default" data-dismiss="modal">
-          Xóa
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+
 <div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
 
   <div class="footer__content">
@@ -153,24 +128,6 @@
     </ul>
   </div>
 </div>
-<script>
-  function preparedelete(maDanhMuc,tenSanPham) {
-    $(`#maDanhMuc`).html(maDanhMuc);
-    $('#tenSanPham').html(tenSanPham);
-  }
-  function deleteService(maDanhMuc) {
-    console.log(maDanhMuc);
-    $.ajax(
-            {
-              type: 'get',
-              url: "/admin/danhmuc/delete/" + maDanhMuc,
-              success: function () {
-                window.location.href = "/admin/danhmuc/list";
-              }
-            }
-    )
-  }
-</script>
 <script src="/bootstrap/js/jquery.js"></script>
 </body>
 </html>

@@ -65,12 +65,12 @@
                 </span>
             </form>
         </div>
-        <div class="button__login" th:unless="${nguoiDung}">
+        <div class="button__login" th:unless="${userNames}">
             <span class="txt"><a style="color: white" href="/login">
                             Đăng nhập
                         </a></span>
         </div>
-        <div class="header__navigation" th:if="${nguoiDung}">
+        <div class="header__navigation" th:if="${userNames}">
             <div class="header__navigation-img">
                 <a href="/showCart">
                     <img src="/Images/cart-nav-white.00018279d92b8685ff0d50c146eefe5491200c0b.svg" alt="">
@@ -81,10 +81,10 @@
                         style="background-color: #FFCC20; border: 1px solid #FFCC20; display: flex;align-items: center">
                     <i class="material-icons" title="Account" style="font-size: 25px;cursor: pointer;"
                        data-uw-styling-context="true">person</i>
-                    <span class="caret" >Chào mừng, [[${nguoiDung.name}]]</span>
+                    <span class="caret" >Chào mừng, [[${userNames.name}]]</span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a th:if="${nguoiDung}" th:href="@{/ProfileDetail/__${nguoiDung.idUser}__}">Hồ sơ cá nhân</a></li>
+                    <li><a th:if="${userNames}" th:href="@{/ProfileDetail/__${userNames.idUser}__}">Hồ sơ cá nhân</a></li>
                     <li><a href="/showCart">Giỏ Hàng</a></li>
                     <li><a href="/logout">Đăng Xuất</a></li>
                 </ul>

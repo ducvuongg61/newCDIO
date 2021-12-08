@@ -1,12 +1,16 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.AccUser;
 import com.example.demo.model.ProductBill;
+import com.example.demo.repository.UserRepository.UserRepository;
 import com.example.demo.service.productBillService.BillService;
 import com.example.demo.service.productBillService.ProductBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +22,14 @@ public class DonGiaController {
     ProductBillService productBillService;
     @Autowired
     BillService billService;
+    @Autowired
+    UserRepository userRepo;
+
+    @ModelAttribute("userNames")
+    public AccUser getDauGia() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepo.findByAccount_IdAccount(auth.getName());
+    }
 
     @RequestMapping("/dongia")
     public ModelAndView listAll(@RequestParam(defaultValue = "0") int page){
@@ -29,7 +41,7 @@ public class DonGiaController {
         return model;
     }
 
-    @PostMapping("/pageList")
+    @PostMapping("/pagaList")
     public ModelAndView getList(@RequestParam(defaultValue = "0") int page, @RequestParam String nameUser,
                                 @RequestParam String nameProduct) {
         ModelAndView modelAndView = new ModelAndView("/nha/DonGia");
