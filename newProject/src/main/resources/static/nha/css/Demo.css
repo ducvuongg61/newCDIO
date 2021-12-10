@@ -95,10 +95,6 @@ body,h1,h2,h3,h4,h5,h6 {
     color: #041E42;
     font-weight: 550;
 }
-
-
-
-
 .accordion__title  > h4{
     display: flex;
     align-items: center;

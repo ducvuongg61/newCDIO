@@ -28,9 +28,9 @@
         <div class="search__space">
             <form action="/admin/filter" method="post">
                 <label>Tên Người Dùng</label>
-                <input type="text" name="tenNguoiDung"  class="filter__input"/>
+                <input type="text" name="nameUser"  class="filter__input"/>
                 <label>Địa chỉ</label>
-                <input type="text" name="diaChi"  class="filter__input" id="mem-add"/>
+                <input type="text" name="address"  class="filter__input" id="mem-add"/>
                 <button class="btn  button__search"  type="submit">Lọc kết quả</button>
 <!--            <button id="add-btn" class="filter-btn"><a th:href="@{'/admin/add_member'}">Thêm mới </a><i-->
 <!--                    class="fa fa-plus"></i>-->
@@ -52,20 +52,20 @@
             </thead>
 
             <tbody class="table__tbody" >
-            <tr th:each="listUser,iterStat:${users}">
+            <tr th:each="listUser,iterStat:${addresses}">
                 <td th:text="${iterStat.count}"></td>
-                <td th:text="${listUser.name}"></td>
-                <td th:text="${listUser.sex}"></td>
-                <td th:text="${listUser.address}"></td>
-                <td th:text="${listUser.phoneUser}"></td>
-                <td th:text="${listUser.account.status}"></td>
+                <td th:text="${listUser.accUser.name}"></td>
+                <td th:text="${listUser.accUser.sex}"></td>
+                <td th:text="${listUser.nameAddress}"></td>
+                <td th:text="${listUser.accUser.phoneUser}"></td>
+                <td th:text="${listUser.accUser.account.status}"></td>
                 <td>
-                    <a th:href="@{/admin/edit/{id}(id = ${listUser.idUser})}">
+                    <a th:href="@{/admin/edit/{id}(id = ${listUser.accUser.idUser})}">
                         <button class="button__action background-blue " >
                             <span>Cập nhật</span>
                         </button>
                     </a>
-                    <a th:href="@{/admin/{id}/delete(id=${listUser.idUser})}">
+                    <a th:href="@{/admin/{id}/delete(id=${listUser.accUser.idUser})}">
                         <button class="button__action background-red">
                 <span>
                    &#88;
@@ -88,18 +88,18 @@
 <!--            </div>-->
 
             <span class="pagination">
-                <a th:href="@{'/admin/account'(page=${users.number - 1})}"
-                   th:if="${users.hasPrevious()}">
+                <a th:href="@{'/admin/account'(page=${addresses.number - 1})}"
+                   th:if="${addresses.hasPrevious()}">
                      <img class="img__arrow" src="/Images/arrrowleft.png" alt=""/>
                 </a>
             </span>
 
-            <span class="pagination paging" th:text="${users.number + 1}"></span>
-            <span  class="pagination"th:text="${users.totalPages}"></span>
+            <span class="pagination paging" th:text="${addresses.number + 1}"></span>
+            <span  class="pagination" th:text="${addresses.totalPages}"></span>
 
             <span class="pagination">
-                <a style="margin-left: 20px;" th:href="@{'/admin/account'(page=${users.number + 1})}"
-                   th:if="${users.hasNext()}">
+                <a style="margin-left: 20px;" th:href="@{'/admin/account'(page=${addresses.number + 1})}"
+                   th:if="${addresses.hasNext()}">
                     <img class="img_arrow" src="/Images/arrowright.png" alt=""/>
                 </a>
             </span>

@@ -31,4 +31,9 @@ public class ColorServiceImpl implements ColorService {
     public void delete(int idColor) {
         colorRepository.deleteById(idColor);
     }
+
+    @Override
+    public List<Color> findByIdProduct(int idProduct) {
+        return colorRepository.findAllByProduct_IdProduct(idProduct);
+    }
 }

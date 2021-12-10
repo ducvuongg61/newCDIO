@@ -66,11 +66,11 @@
                     <div th:text="${item.value.getProduct().getCategory().categoryName}"></div>
                 </td>
                 <td class="product-price}">
-                    <div th:class="product__price+${iterStat.count}" th:text="${item.value.getProduct().price}"></div>
-                    <input type="hidden" th:id="product__price+${iterStat.count}" th:value="${item.value.getProduct().price}">
+                    <div th:class="product__price+${iterStat.count}" th:text="${item.value.getColor().price}"></div>
+                    <input type="hidden" th:id="product__price+${iterStat.count}" th:value="${item.value.getColor().price}">
                 <td class="product-quantity">
                     <div class="plus-cart-minus">
-                        <input style="display:none;" type="hidden" th:id="maxquantily+${iterStat.count}" th:value="${item.value.product.quantity}">
+                        <input style="display:none;" type="hidden" th:id="maxquantily+${iterStat.count}" th:value="${item.value.color.quantity}">
                         <button class="minus-btn" th:onclick="handleDescrease[[${iterStat.count}]]()">&#8722;</button>
                         <input type="text" style="text-align:center" name="" th:class="plus-minus-cart-box+${iterStat.count}" th:id="submitQuantily+${iterStat.count}" th:value="${item.value.quantity}" />
                         <button class="plus-btn" th:onclick="handleIncrease[[${iterStat.count}]]()">&#43;</button>

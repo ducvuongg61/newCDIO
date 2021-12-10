@@ -1,7 +1,10 @@
 package com.example.demo.service.userService;
 
 import com.example.demo.model.AccUser;
+import com.example.demo.model.Role;
 import com.example.demo.repository.UserRepository.UserRepository;
+import com.example.demo.repository.accountRepository.AccountRepository;
+import com.example.demo.repository.roleRepository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,14 +16,15 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    RoleRepository roleRepository;
     @Override
     public void save(AccUser user) {
         userRepository.save(user);
     }
 
     @Override
-    public Page<AccUser> findAll(Pageable pageable) {
+    public Page<AccUser> findByAlAndAccountRoleAndAccountAndAccUserAndAddress(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 

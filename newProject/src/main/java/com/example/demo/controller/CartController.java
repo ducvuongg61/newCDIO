@@ -88,12 +88,15 @@ public class CartController {
         return modelAndView;
     }
 
-    @GetMapping("/showCart/getData/{id}")
-    public String show(@PathVariable int id, @RequestParam String quantity, @RequestParam String money, Model model, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap) {
+//    @GetMapping("/showCart/getData/{idProduct}&{idColor}")
+    @GetMapping("/showCart/getData/{idProduct}")
+    public String show(@PathVariable(value ="idProduct") int idProduct,
+//                       @PathVariable(value ="idColor") int idColor,
+                        @RequestParam String quantity, @RequestParam String money, Model model, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap) {
         totalMoney = Double.parseDouble(money);
         sumTotalMoney += totalMoney;
         totalQuantity = Integer.parseInt(quantity);
-        extracted(id, arrayQuantity, temp);
+        extracted(idProduct, arrayQuantity, temp);
         System.out.println("totalMoney:" + totalMoney);
         System.out.println("totalMoney:" + totalQuantity);
         model.addAttribute("money", money);
@@ -102,10 +105,11 @@ public class CartController {
         if (cartMap == null) {
             cartMap = new HashMap<>();
         }
-        Color color = colorService.findById(id);
+        Product product = productService.findById(idProduct);
+        Color color = colorService.findById(idProduct);
         if (color != null) {
             for (int i = 0; i < 10; i++) {
-                if (arrayQuantity[i] == id) {
+                if (arrayQuantity[i] == idProduct) {
                     color.setQuantity(color.getQuantity() - temp[i]);
                     if (color.getQuantity() < 1) {
                         color.setStatus("Out of product");
@@ -113,18 +117,20 @@ public class CartController {
                 }
             }
             colorService.save(color);
-            if (cartMap.containsKey(id)) {
-                Cart item = cartMap.get(id);
+            if (cartMap.containsKey(idProduct)) {
+                Cart item = cartMap.get(idProduct);
                 item.setColor(color);
+                item.setProduct(product);
                 item.setQuantity(item.getQuantity() + totalQuantity);
                 item.setMaxPrice(totalMoney);
-                cartMap.put(id, item);
+                cartMap.put(idProduct, item);
             } else {
                 Cart cart = new Cart();
                 cart.setColor(color);
+                cart.setProduct(product);
                 cart.setQuantity(totalQuantity);
                 cart.setMaxPrice(totalMoney);
-                cartMap.put(id, cart);
+                cartMap.put(idProduct, cart);
             }
         }
         model.addAttribute("carts", cartMap);

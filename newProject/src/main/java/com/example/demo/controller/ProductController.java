@@ -76,7 +76,7 @@ public class ProductController {
             model.addAttribute("admin", "là admin");
         }
         AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("userNames", user);
         model.addAttribute("listSP", productService.findAllByNotApprovedYet("Không duyệt", userName));
         return "/vuong/listkhongduyet";
     }

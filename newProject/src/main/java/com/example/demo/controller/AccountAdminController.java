@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.AccUser;
 import com.example.demo.model.Address;
+import com.example.demo.model.Role;
 import com.example.demo.repository.UserRepository.UserRepository;
 import com.example.demo.service.addressService.AddressService;
 import com.example.demo.service.userService.UserServiceImpl;
@@ -34,8 +35,12 @@ public class AccountAdminController {
         model.addAttribute("userNames",user);
         Page<AccUser> userPage;
         Pageable pageable = PageRequest.of(page,5);
-        userPage = userService.findAll(pageable);
+        userPage = userService.findByAlAndAccountRoleAndAccountAndAccUserAndAddress(pageable);
+        Page<Address> userPages;
+        Pageable pageables = PageRequest.of(page,5);
+        userPages = addressService.findAll(pageables);
         model.addAttribute("users",userPage);
+        model.addAttribute("addresses",userPages);
         return "/nha/admin/AccountAdmin";
     }
 

@@ -13,4 +13,7 @@ public interface ColorService {
 
     void delete(int idColor);
 
+    List<Color> findByIdProduct(int id);
+
+
 }

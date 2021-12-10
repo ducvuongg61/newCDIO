@@ -9,7 +9,7 @@ public class Address {
     private int idAddress;
     private String nameAddress;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "idUser")
     private AccUser accUser;
 

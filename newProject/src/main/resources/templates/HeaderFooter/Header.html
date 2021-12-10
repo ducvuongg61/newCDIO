@@ -50,11 +50,11 @@
         </div>
 
         <div class="header__search">
-            <form method="get" action="/timKiem" class="d-flex">
-                <input  placeholder="" class="header__search-input" type="search" name="tenSp"
+            <form method="get" action="/search" class="d-flex">
+                <input  placeholder="" class="header__search-input" type="search" name="nameProduct"
                         aria-label="Search">
                 <label class="header__search-label">Tìm kiếm</label>
-                <select name="maDanhMuc" class="form-control mr-2 custom-select">
+                <select name="idCategory" class="form-control mr-2 custom-select">
                     <option th:value="0">Tất cả danh mục</option>
                     <option th:each="danhmuc:${category}" th:text="${danhmuc.getCategoryName()}" th:value="${danhmuc.getIdCategory()}"></option>
                 </select>

@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.AccUser;
-import com.example.demo.model.Cart;
-import com.example.demo.model.Category;
-import com.example.demo.model.Product;
+import com.example.demo.model.*;
 import com.example.demo.repository.UserRepository.UserRepository;
 import com.example.demo.service.categoryService.CategoryService;
+import com.example.demo.service.colorService.ColorService;
 import com.example.demo.service.commentService.CommentService;
 import com.example.demo.service.product.ProductService;
 import com.example.demo.service.productBillService.ProductBillService;
@@ -36,6 +34,8 @@ public class BillController {
 
 //    @Autowired
 //    AuctionUserService auctionUserService;
+    @Autowired
+    ColorService colorService;
 
     @Autowired
     UserService userService;
@@ -116,11 +116,17 @@ public class BillController {
     @RequestMapping("/productDetail/{id}")
     public String productDetailBill(@PathVariable int id, Model model, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap){
         Product product;
+        //truyền idcolor để hiện thị product
         product =  productService.findById(id);
+        //Truyền idproduct để hiện color
+        Color color = colorService.findById(id);
+        List<Color> colorList = colorService.findByIdProduct(id);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getName().equals("anonymousUser")) {
             model.addAttribute("userName", auth.getName());
         }
+        model.addAttribute("codeObject",color);
+        model.addAttribute("color",colorList);
         model.addAttribute("product",product);
         model.addAttribute("cartMap",cartMap);
         return "Vinh/ProductDetail";
@@ -130,10 +136,13 @@ public class BillController {
     public String afterLoginProductDetailBill(@PathVariable int id, Model model, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap){
         Product product;
         product =  productService.findById(id);
+        //Truyền idproduct để hiện color
+        List<Color> colorList = colorService.findByIdProduct(id);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getName().equals("anonymousUser")) {
             model.addAttribute("userName", auth.getName());
         }
+        model.addAttribute("color",colorList);
         model.addAttribute("product",product);
         model.addAttribute("cartMap",cartMap);
         return "redirect:/productDetail/" +id;
