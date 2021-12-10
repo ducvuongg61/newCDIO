@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <form id="profileForm" class="css" th:action="@{/admin/edit_member}" th:method="post" th:object="${findUser}">
                         <input th:field="*{idUser}" type="hidden"/>
-                        <input th:field="*{account.accountRoles}" type="hidden">
+                        <input th:field="*{account.roles}" type="hidden">
                         <div class="form-row">
                             <div class="name">Họ và tên <span>*</span></div>
                             <div class="value">
@@ -51,7 +51,7 @@
                             <div class="name">Ngày sinh <span>*</span></div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input id="dateOfBirth" th:field="*{dateTime}" th:value="${findUser.dateTime}" type="date" class="input--style-5"
+                                    <input id="dateOfBirth" th:field="*{dateOfBirth}" th:value="${findUser.dateOfBirth}" type="date" class="input--style-5"
                                            required="true">
                                 </div>
                             </div>

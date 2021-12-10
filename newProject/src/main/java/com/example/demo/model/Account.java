@@ -12,7 +12,10 @@ public class Account {
     private String rePassword;
     private boolean status;
 
-    @ManyToMany(mappedBy = "accounts")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "accountRole" ,
+            joinColumns = @JoinColumn(name = "idAccount") ,
+            inverseJoinColumns = @JoinColumn(name = "idRole"))
     private Set<Role> roles;
 
     @OneToOne(mappedBy = "account")

@@ -28,7 +28,7 @@ public class AccUser {
             inverseJoinColumns = @JoinColumn(name = "idComment"))
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "accUser")
+    @OneToMany(mappedBy = "accUser",fetch = FetchType.EAGER)
     private Set<Address> address;
 
     public AccUser() {
