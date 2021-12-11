@@ -116,9 +116,9 @@ public class BillController {
     @RequestMapping("/productDetail/{id}")
     public String productDetailBill(@PathVariable int id, Model model, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap){
         Product product;
-        //truyền idcolor để hiện thị product
+        //truyền idproduct để hiện thị product
         product =  productService.findById(id);
-        //Truyền idproduct để hiện color
+        //Truyền idproduct để hiển thị nhiều color
         Color color = colorService.findById(id);
         List<Color> colorList = colorService.findByIdProduct(id);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
