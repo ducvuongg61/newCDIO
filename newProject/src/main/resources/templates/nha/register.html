@@ -22,36 +22,36 @@
             <div class="form__register-content">
 
                 <div class="form__field">
-                    <input type="text" class="form__field-input" placeholder=" " th:field="*{name}" autofocus>
+                    <input type="text" class="form__field-input" placeholder=" " th:field="*{name1}" autofocus>
                     <label class="form__field-label" >Họ và tên</label>
-                    <p th:if="${#fields.hasErrors('name1')}" th:errors="*{name}" class="form__field-error"></p>
+                    <p th:if="${#fields.hasErrors('name1')}" th:errors="*{name1}" class="form__field-error"></p>
                 </div>
 
                 <div class="form__field">
                     <p class="form__field-error" style="color: red;font-size: 13px" th:if="${errEmail}">Email đã tồn tại trong hệ thống</p>
-                    <input type="text"  class="form__field-input"  placeholder=" " th:field="*{gmail}" autofocus>
+                    <input type="text"  class="form__field-input"  placeholder=" " th:field="*{gmail1}" autofocus>
                     <label class="form__field-label" >Email</label>
-                    <p class="form__field-error" th:if="${#fields.hasErrors('gmail1')}" th:errors="*{gmail}"></p>
-                    <p class="form__field-error" th:if="${#fields.hasErrors('gmail1')}" th:errors="*{gmail}"></p>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('gmail1')}" th:errors="*{gmail1}"></p>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('gmail1')}" th:errors="*{gmail1}"></p>
                 </div>
             </div>
             <div class="form__register-content">
 
                 <div class="form__field">
 
-                    <input type="text" class="form__field-input"  placeholder=" " th:field="*{idUser}" autofocus>
+                    <input type="text" class="form__field-input"  placeholder=" " th:field="*{userName1}" autofocus>
                     <label class="form__field-label" >Tên đăng nhập</label>
                     <p  class="form__field-error" style="color: red;font-size: 13px" th:if="${errTK}">Tên tài khoản đã tồn tại</p>
-                    <p class="form__field-error" th:if="${#fields.hasErrors('userName1')}" th:errors="*{account.idAccount}"></p>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('userName1')}" th:errors="*{userName1}"></p>
 
                 </div>
 
                 <div class="form__field">
-                    <input type="password"  class="form__field-input"  placeholder=" " th:field="*{account.password}">
+                    <input type="password"  class="form__field-input"  placeholder=" " th:field="*{passWord1}">
                     <label class="form__field-label" >Mật khẩu</label>
 
                     <p class="form__field-error" th:if="${#fields.hasErrors('passWord1')}" ></p>
-                    <p class="form__field-error" th:errors="*{account.password}"></p>
+                    <p class="form__field-error" th:errors="*{passWord1}"></p>
                 </div>
 
             </div>
@@ -60,17 +60,17 @@
             <div class="form__register-content">
 
                 <div class="form__field">
-                    <input type="date" class="form__field-input"  placeholder=" " th:field="*{dateTime}" autofocus>
+                    <input type="date" class="form__field-input"  placeholder=" " th:field="*{dateTime1}" autofocus>
                     <p style="color: red;font-size: 13px" th:if="${#fields.hasErrors('dateTime1')}"
-                       th:errors="*{dateTime}"></p>
+                       th:errors="*{dateTime1}"></p>
                 </div>
 
                 <div class="form__field">
 
                     <div class="form__field-gender">
                         <select>
-                            <option value="1" id="nam" th:field="*{sex}">Nam</option>
-                            <option value="0" id="nu" th:field="*{sex}">Nu</option>
+                            <option value="1" id="nam" th:field="*{sex1}">Nam</option>
+                            <option value="0" id="nu" th:field="*{sex1}">Nu</option>
                         </select>
                         <!-- <input type="radio" placeholder=" ">
                         <label for="nam" class="form__field-label">Nam</label>
@@ -83,21 +83,21 @@
             <div class="form__register-content">
                 <div class="form__field">
 
-                    <input type="text" class="form__field-input" placeholder=" "  th:field="*{phoneUser}"  autofocus>
+                    <input type="text" class="form__field-input" placeholder=" "  th:field="*{phoneUser1}"  autofocus>
                     <label class="form__field-label">Số điện thoại</label>
-                    <p class="form__field-error"  th:if="${#fields.hasErrors('phoneUser1')}" th:errors="*{phoneUser}"></p>
+                    <p class="form__field-error"  th:if="${#fields.hasErrors('phoneUser1')}" th:errors="*{phoneUser1}"></p>
                 </div>
                 <div class="form__field">
 
-                    <input type="text" class="form__field-input" placeholder=" " th:field="*{address}" autofocus>
+                    <input type="text" class="form__field-input" placeholder=" " th:field="*{address1}" autofocus>
                     <label class="form__field-label" >Địa chỉ</label>
-                    <p class="form__field-error" th:if="${#fields.hasErrors('address1')}" th:errors="*{address}"></p>
+                    <p class="form__field-error" th:if="${#fields.hasErrors('address1')}" th:errors="*{address1}"></p>
                 </div>
             </div>
             <div class="form__field">
-                <input type="text" class="form__field-input" placeholder=" " th:field="*{numberCard}" />
+                <input type="text" class="form__field-input" placeholder=" " th:field="*{numberCard1}" />
                 <label class="form__field-label" >Căn cước cá nhân</label>
-                <p class="form__field-error" th:if="${#fields.hasErrors('numberCard1')}" th:errors="*{numberCard}"></p>
+                <p class="form__field-error" th:if="${#fields.hasErrors('numberCard1')}" th:errors="*{numberCard1}"></p>
             </div>
             <div class="form__checkbox">
                 <div class="form__checkbox-content">

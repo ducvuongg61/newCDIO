@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.AccUser;
-import com.example.demo.model.Account;
-import com.example.demo.model.Role;
+import com.example.demo.model.*;
 import com.example.demo.repository.UserRepository.UserRepository;
 import com.example.demo.service.accountService.AccountService;
+import com.example.demo.service.addressService.AddressService;
 import com.example.demo.service.roleService.RoleService;
 import com.example.demo.service.userService.UserService;
 import com.example.demo.util.WebUtils;
@@ -41,6 +40,9 @@ public class MainController {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    AddressService addressService;
+
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
 
@@ -60,18 +62,18 @@ public class MainController {
 
     @GetMapping(value = "/register")
     public String viewSignUp(Model model) {
-        model.addAttribute("register", new AccUser());
+        model.addAttribute("register", new AccountUser());
         return "/nha/register";
     }
 
     @PostMapping(value = "/register")
-    public String singUp(@Valid @ModelAttribute("register") AccUser accountUser, BindingResult bindingResult, Model model) {
-//        new AccUser().validate(accountUser, bindingResult);
+    public String singUp(@Valid @ModelAttribute("register") AccountUser accountUser, BindingResult bindingResult, Model model) {
+        new AccountUser().validate(accountUser, bindingResult);
         if (bindingResult.hasErrors()) {
             return "/nha/register";
         }
-        Account account = accountService.findById(accountUser.getName());
-        List<AccUser> email = userService.findByEmail(accountUser.getGmail());
+        Account account = accountService.findById(accountUser.getUserName1());
+        List<AccUser> email = userService.findByEmail(accountUser.getGmail1());
         if (account != null && email.size() != 0) {
             model.addAttribute("errTK", "Ten tai khoan da ton tai");
             model.addAttribute("errEmail", "Email da ton tai");
@@ -85,21 +87,29 @@ public class MainController {
             model.addAttribute("errEmail", "Email da ton tai");
             return "/nha/register";
         }
-
-        Set<Role> roles = roleService.findByRoleName("ROLE_CUSTOMER");
+        Set<Role> roles = roleService.findByRoleName("ROLE_CUSTOMER") ;
         System.out.println("quyền là  " + roles);
-        AccUser user = new AccUser();
-        user.setName(accountUser.getName());
-        Account account1 =new Account(accountUser.getName(), bCryptPasswordEncoder.encode(accountUser.getAccount().getPassword()), roles,true);
-        user.setAccount(account1);
-        user.setGmail(accountUser.getGmail());
-        user.setDateOfBirth(accountUser.getDateOfBirth());
-        user.setPhoneUser(accountUser.getPhoneUser());
-        user.setNumberCard(accountUser.getNumberCard());
-        user.setAddress(accountUser.getAddress());
-        user.setSex(accountUser.isSex());
-        userService.save(user);
-        System.out.println("user is : ==========" + user);
+
+        Address address = new Address();
+//        user.setName(accountUser.getName1());
+        Account account1 =new Account(accountUser.getUserName1(), bCryptPasswordEncoder.encode(accountUser.getPassWord1()),true, roles);
+//        user.setAccount(account1);
+//        user.setGmail(accountUser.getGmail1());
+//        user.setDateOfBirth(accountUser.getDateTime1());
+//        user.setPhoneUser(accountUser.getPhoneUser1());
+//        user.setNumberCard(accountUser.getNumberCard1());
+        AccUser user = new AccUser(accountUser.getName1(),Boolean.parseBoolean(accountUser.getSex1()),accountUser.getDateTime1(),accountUser.getGmail1(),
+                accountUser.getNumberCard1(),accountUser.getPhoneUser1(),account1);
+        address.setAccUser(user);
+        address.setNameAddress(accountUser.getAddress1());
+
+
+
+////        user.getAddress().add(address);
+//        userService.save(user);
+//        address.setNameAddress(accountUser.getAddress1());
+        addressService.save(address);
+        System.out.println("nguoi dun  ==========" + user);
         return "redirect:/login";
     }
 

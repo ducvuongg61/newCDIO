@@ -36,26 +36,26 @@
     <div class="receipt__card-address">
       <div class="receipt__card-address-info">
         <p>Mã Hóa Đơn</p>
-        <p>DH[[${hoaDon.bill.idBill}]]</p>
+        <p th:text="'DH'+${orderDetail.bill.idBill}"></p>
       </div>
       <div class="receipt__card-address-info">
         <p>Tên người nhận: </p>
-        <p th:text="${hoaDon.bill.user.name}"></p>
+        <p th:text="${orderDetail.bill.user.name}"></p>
       </div>
       <div class="receipt__card-address-info">
         <p>Số điện thoại</p>
-        <p th:text="${hoaDon.bill.productBills}"></p>
+        <p th:text="${orderDetail.bill.productBills}"></p>
       </div>
 
       <div class="receipt__card-address-info">
         <p>Trạng thái đơn hàng</p>
-        <p th:text="${hoaDon.bill.status}"></p>
+        <p th:text="${orderDetail.bill.status}"></p>
       </div>
 
-      <div class="receipt__card-address-info">
-        <p>Địa chỉ giao hàng</p>
-        <p th:text="${hoaDon.bill.addressOder}"></p>
-      </div>
+<!--      <div class="receipt__card-address-info">-->
+<!--        <p>Địa chỉ giao hàng</p>-->
+<!--        <p th:text="">Chưa làm ra </p>-->
+<!--      </div>-->
     </div>
 
     <div class="receipt__card-info">
@@ -72,7 +72,7 @@
         </div>
 
         <div class="receipt__card-price">
-          <p th:text="${#numbers.formatDecimal(cart.value.maxPrice, 0, 'POINT', 0, 'COMMA')}+' VND'"></p>
+          <p th:text="${cart.value.maxPrice}+' USD'"></p>
         </div>
       </div>
     </div>
@@ -83,7 +83,7 @@
           <h3>Total</h3>
         </div>
         <div class="receipt__card-bill-price">
-          <h3 th:text="${#numbers.formatDecimal(inputTotal, 0, 'POINT', 0, 'COMMA')}+' VND'"></h3>
+          <h3 th:text="${(inputTotal)}+' USD'"></h3>
         </div>
       </div>
     </div>
