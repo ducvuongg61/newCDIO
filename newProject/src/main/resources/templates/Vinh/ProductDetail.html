@@ -45,40 +45,40 @@
                         <img class="thumbnail" th:src="@{${'/Images/'+product.image3}}" alt="">
                     </div>
                     <div class="product__image">
-                        <img th:src="@{${'/Images/'+product.image1}}" id="image" alt="">
+                        <img th:src="@{${'/Images/'+product.image1}}" id="image" alt="project">
                     </div>
                 </div>
             </div>
             <div class="page__right">
                 <h2 class="product__title" th:text="${product.productName}"></h2>
                 <div class="product__price" >
-                    <p th:text="${codeObject.price}" id="price"></p>
+                    <p id="priceProduct">1</p>
                     <p style="margin-left: 10px">USD</p>
                 </div>
                 <div class="product__color">
                     <h3>Màu Sắc:</h3>
                     <div class="product__color-button">
-                        <div class="color-choose" th:each="colorlist:${color}">
-                            <div th:if="${colorlist.quantity}>0" >
-                                <input type="radio" th:id="${colorlist.color}" name="color" th:value="${colorlist.price}" checked>
-                                <label th:for="${colorlist.color}"><span th:text="${colorlist.color}"></span></label>
+                        <div class="color-choose" th:each="colorlist,iterStat:${color}">
+                            <div th:if="${colorlist.quantity}>0">
+                                <input type="radio"  class="radioBox" th:id="${colorlist.idColor}" th:max="${colorlist.quantity}" name="fav_language" th:value="${colorlist.price}" th:if="${iterStat.count==1}" checked>
+                                <label th:for="${colorlist.color}" th:if="${iterStat.count<1}"><span th:text="${colorlist.color}"></span></label>
+                                <input type="radio"  class="radioBox" th:id="${colorlist.idColor}" th:max="${colorlist.quantity}" name="fav_language" th:value="${colorlist.price}" th:if="${iterStat.count>1}" >
+                                <label th:for="${colorlist.color}" th:if="${iterStat.count>1}"><span th:text="${colorlist.color}"></span></label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="product__quantity">
-                    <div th:each="colorlist:${color}">
-                        <p id="${colorlist.}"></p>
-                    </div>
                     <h3>Số lượng: </h3>
                     <div class="product__quantity-button">
+                        <p id="hello"></p>
                         <button onclick="handleDescrease()">
                             <span>&#8722;</span>
                         </button>
-                        <div th:each="colorlist:${color}">
+                        <div>
                             <div>
                                 <input type="text" value="1" name="soluongs" id="count" readonly="readonly"/>
-                                <input type="text" th:value="${colorlist.quantity}" style="display: none" id="countMax"/>
+                                <input type="text" style="display: none" id="countMax"/>
                             </div>
                         </div>
                         <button onclick="handleIncrease()">
@@ -216,6 +216,104 @@
         }
     }
     submittt.innerHTML = resut;
+
+
+//    Color
+    const radioBoxElement = document.getElementsByClassName("radioBox");
+    console.log("radioBoxElement:",radioBoxElement);
+
+    const priceElements = document.getElementById("priceProduct").innerHTML;
+
+    for (let i = 0; i < radioBoxElement.length; i++) {
+        radioBoxElement[i].onclick = (e) => {
+            return handleOnChangeValue(e.target.value, e.target.max);
+        };
+    }
+    function quantityModel(){
+        var quantitys =0;
+    }
+
+    function handleOnChangeValue(value,quantity) {
+        quantityModel()
+        console.log("value:",value);
+        console.log("quantity:",quantity);
+        document.getElementById('priceProduct').innerHTML = (parseFloat(priceElements) + parseFloat(value)).toLocaleString();
+        document.getElementById('countMax').value = parseInt(quantity);
+         document.getElementById('hello').innerHTML = quantity
+         this.quantitys=quantity;
+    }
+
+    // const helloElement = document.getElementById('hello').innerHTML;
+    // console.log("helloElement: ", helloElement)
+
+    // test
+    // for (let i = 0; i < radioBoxElement.length; i++) {
+    //     radioBoxElement[i].onclick = (e) => {
+    //         return onChangeValue(e.target.max);
+    //     };
+    // }
+
+
+
+
+
+    // const aaa = document.getElementById('priceProduct').innerHTML
+    // console.log("aaa:"+aaa);
+
+    // const aaa = document.getElementById('countMax').value
+    // console.log("aaa:",aaa);
+
+    // tang giam
+    // let numberElement = document.getElementById('price').innerHTML;
+
+    // const priceElement = document.getElementById('price');
+
+    const countMaxElement = document.getElementById('countMax').value;
+
+
+
+    // dùng để xử lý xuất kết quả vào from method
+    const submit = document.getElementById('totalMonet');
+
+    const submitQuality = document.getElementById('totalQuantity');
+    // Khai báo  function
+
+
+
+
+    let countElement = document.getElementById('count');
+    let index = 1;
+
+    function handleDescrease(){
+        if(index <= 1) {
+            index = 1;
+            countElement.value = index
+            submit.value = parseFloat(numberElement) * parseFloat(index) ;
+        }else{
+            index = index - 1;
+            countElement.value = index
+        }
+        submitQuality.value = parseInt(index);
+        // priceElement.innerHTML = ((parseFloat(numberElement) * parseFloat(index) ) ).toLocaleString()
+        // submit.value = parseFloat(numberElement) * parseFloat(index);
+    }
+
+
+    function handleIncrease() {
+        quantityModel();
+        if(index < parseInt(this.quantitys)) {
+            console.log("index: ",index)
+            index = index + 1;
+            countElement.value = index
+        }else{
+            alert(" Da Vuot qua so luong")
+        }
+        submitQuality.value = parseInt(index);
+        // priceElement.innerHTML = ((parseFloat(numberElement) * parseFloat(index)) ).toLocaleString()
+        // submit.value = parseFloat(numberElement) * parseFloat(index);
+    }
+
+
 </script>
 <!-- Import Js -->
 <script src="/Vinh/js/main.js"></script>

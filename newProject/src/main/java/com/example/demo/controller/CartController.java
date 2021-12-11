@@ -107,6 +107,7 @@ public class CartController {
         }
         Product product = productService.findById(idProduct);
         Color color = colorService.findById(idProduct);
+        System.out.println("color"+color.getColor());
         if (color != null) {
             for (int i = 0; i < 10; i++) {
                 if (arrayQuantity[i] == idProduct) {
