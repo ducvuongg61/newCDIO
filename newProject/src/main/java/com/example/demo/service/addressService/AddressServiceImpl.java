@@ -31,4 +31,9 @@ public class AddressServiceImpl implements AddressService{
     public Page<Address> findByNameUser(String nameUser, Pageable pageable) {
         return addressRepository.findAddressByAccUser_Name(nameUser , pageable);
     }
+
+    @Override
+    public void save(Address address) {
+        addressRepository.save(address);
+    }
 }

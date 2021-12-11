@@ -9,11 +9,16 @@ public class Address {
     private int idAddress;
     private String nameAddress;
 
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "idUser")
     private AccUser accUser;
 
     public Address() {
+    }
+
+    public Address(String nameAddress, AccUser accUser) {
+        this.nameAddress = nameAddress;
+        this.accUser = accUser;
     }
 
     public Address(int idAddress, String nameAddress, AccUser accUser) {

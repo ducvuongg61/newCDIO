@@ -34,8 +34,7 @@ public class AccUser {
     public AccUser() {
     }
 
-    public AccUser(int idUser, String name, boolean sex, String dateOfBirth, String gmail, int numberCard, String phoneUser, Account account, Set<Bill> bills, Set<Comment> comments, Set<Address> address) {
-        this.idUser = idUser;
+    public AccUser(String name, boolean sex, String dateOfBirth, String gmail, int numberCard, String phoneUser, Account account) {
         this.name = name;
         this.sex = sex;
         this.dateOfBirth = dateOfBirth;
@@ -43,10 +42,10 @@ public class AccUser {
         this.numberCard = numberCard;
         this.phoneUser = phoneUser;
         this.account = account;
-        this.bills = bills;
-        this.comments = comments;
-        this.address = address;
     }
+
+
+
 
     public int getIdUser() {
         return idUser;

@@ -26,7 +26,7 @@
                 Địa Chỉ Thanh Toán
             </strong>
             <div>
-                <form action="/hoaDon/thanhToan" method="get" th:object="${donHang}">
+                <form action="/bill/pay" method="get" th:object="${donHang}">
                     <input type="hidden" th:field="*{maDonHang}">
                     <input type="hidden" th:field="*{nguoiDung}">
                     <input type="hidden" th:field="*{trangThai}">

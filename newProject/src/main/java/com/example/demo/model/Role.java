@@ -11,14 +11,14 @@ public class Role {
     private int idRole;
     private String roleName;
 
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<Account> accounts;
-
-    @ManyToMany()
-    @JoinTable(name = "accountRole" ,
-            joinColumns = @JoinColumn(name = "idRole") ,
-            inverseJoinColumns = @JoinColumn(name = "idAccount"))
+    @ManyToMany(mappedBy = "roles")
     private Set<Account> accounts;
+
+//    @ManyToMany()
+//    @JoinTable(name = "accountRole" ,
+//            joinColumns = @JoinColumn(name = "idRole") ,
+//            inverseJoinColumns = @JoinColumn(name = "idAccount"))
+//    private Set<Account> accounts;
 
     public Role() {
     }

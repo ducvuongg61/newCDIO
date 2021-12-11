@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Bill;
-import com.example.demo.model.Cart;
-import com.example.demo.model.Product;
-import com.example.demo.model.ProductBill;
+import com.example.demo.model.*;
 import com.example.demo.repository.UserRepository.UserRepository;
 import com.example.demo.service.payPalService.PayPalService;
 import com.example.demo.service.productBillService.BillService;
@@ -56,6 +53,7 @@ public class PaymentController {
         model.addAttribute("total", total);
         model.addAttribute("quantity", quantity);
         model.addAttribute("bill", new Bill());
+        model.addAttribute("address",new Address());
         model.addAttribute("carts",cartMap);
         return "Vinh/Pay";
     }

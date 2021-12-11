@@ -91,8 +91,10 @@ public class CartController {
 //    @GetMapping("/showCart/getData/{idProduct}&{idColor}")
     @GetMapping("/showCart/getData/{idProduct}")
     public String show(@PathVariable(value ="idProduct") int idProduct,
-//                       @PathVariable(value ="idColor") int idColor,
-                        @RequestParam String quantity, @RequestParam String money, Model model, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap) {
+                        @RequestParam String quantity,
+                       @RequestParam String money,
+                       @RequestParam(value ="idColor") int idColor,
+                       Model model, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap) {
         totalMoney = Double.parseDouble(money);
         sumTotalMoney += totalMoney;
         totalQuantity = Integer.parseInt(quantity);
@@ -106,7 +108,7 @@ public class CartController {
             cartMap = new HashMap<>();
         }
         Product product = productService.findById(idProduct);
-        Color color = colorService.findById(idProduct);
+        Color color = colorService.findById(idColor);
         System.out.println("color"+color.getColor());
         if (color != null) {
             for (int i = 0; i < 10; i++) {
@@ -201,46 +203,39 @@ public class CartController {
         return "Vinh/Pay";
     }
 
-//    @GetMapping("/bill/pay")
-//    public String thanhToan(@SessionAttribute("carts") HashMap<Integer, Cart> cartMap, @ModelAttribute Bill bill, Model model) {
-//        Double inputTotal = sumTotalMoney;
-//        List<String> nameProduct = new ArrayList<>();
-//        for (Map.Entry<Integer, Cart> entry : cartMap.entrySet()) {
-//            Cart value = entry.getValue();
-//            nameProduct.add(value.getProduct().getProductName());
-//        }
-//        HashMap<Double, Product> productListBill = new HashMap<>();
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        AccUser user = userService.findByAccount(auth.getName());
-//        LocalDate currentDate = LocalDate.now();
-//        bill.setCurrent(String.valueOf(currentDate));
-//        bill.setStatus("Đang giao");
-//        bill.setUser(user);
-//        bill.setTotalCost(totalMoney);
-//        billService.save(bill);
-////        ProductBillKey productBillKey = new ProductBillKey();
-//        ProductBill productBill = new ProductBill();
-//        for (Map.Entry<Integer, Cart> entry : cartMap.entrySet()) {
-//            Cart value = entry.getValue();
-//            productListBill.put(value.getMaxPrice(), value.getProduct());
-//            productBill.getBill().setIdBill(bill.getIdBill());
-//            productBill.getBill().setIdBill(value.getProduct().getIdProduct());
-//            productBill.setBill(bill);
-////            productBill.setId(productBillKey);
-//            productBill.setProduct(value.getProduct());
-//            productBill.setQuantity(totalQuantity);
-//            productBill.getProduct().;
-//            productBill.setPrice(value.getMaxPrice());
-//            billService.saveDetail(productBill);
-//        }
-//        model.addAttribute("inputTotal", inputTotal);
-//        model.addAttribute("carts", cartMap);
-//        model.addAttribute("hoaDon", orderDetail);
-//        model.addAttribute("listSp", productListBillTemp);
-//        model.addAttribute("productBill", productBill);
-//        model.addAttribute("productListBill", productListBill);
-//        return "Vinh/ReceiptPage";
-//    }
+    @GetMapping("/bill/pay")
+    public String thanhToan(@SessionAttribute("carts") HashMap<Integer, Cart> cartMap, @ModelAttribute Bill bill, Model model) {
+        Double inputTotal = sumTotalMoney;
+        List<String> nameProduct = new ArrayList<>();
+        for (Map.Entry<Integer, Cart> entry : cartMap.entrySet()) {
+            Cart value = entry.getValue();
+            nameProduct.add(value.getProduct().getProductName());
+        }
+        HashMap<Double, Product> productListBill = new HashMap<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        AccUser user = userService.findByAccount(auth.getName());
+        LocalDate currentDate = LocalDate.now();
+        bill.setCurrent(String.valueOf(currentDate));
+        bill.setStatus("Đang giao");
+        bill.setUser(user);
+        bill.setTotalCost(totalMoney);
+        billService.save(bill);
+        ProductBill productBill = new ProductBill();
+        for (Map.Entry<Integer, Cart> entry : cartMap.entrySet()) {
+            Cart value = entry.getValue();
+            productListBill.put(value.getMaxPrice(), value.getProduct());
+            productBill.setBill(bill);
+            productBill.setProduct(value.getProduct());
+            billService.saveDetail(productBill);
+        }
+        model.addAttribute("inputTotal",inputTotal);
+        model.addAttribute("carts",cartMap);
+        model.addAttribute("orderDetail", orderDetail);
+        model.addAttribute("productListBillTemp", productListBillTemp);
+        model.addAttribute("orderDetail", productBill);
+        model.addAttribute("productListBillTemp", productListBill);
+        return "Vinh/ReceiptPage";
+    }
 //
 //
 //    @GetMapping("/payPal")
@@ -248,55 +243,49 @@ public class CartController {
 //        return "paypal/index";
 //    }
 //
-//    @GetMapping("/pay")
-//    public String pay(HttpServletRequest request, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap,
-//                      @ModelAttribute Bill bill, Model model) {
-//        HashMap<Double, Product> listSpHoaDon = new HashMap<>();
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        AccUser user = userService.findByAccount(auth.getName());
-//        LocalDate currentDate = LocalDate.now();
-//        bill.setCurrent(String.valueOf(currentDate));
-//        bill.setStatus("Đang giao");
-//        bill.setUser(user);
-//        bill.setTotalCost(totalMoney);
-//        billService.save(bill);
-//        ProductBillKey productBillKey = new ProductBillKey();
-//        ProductBill productBill = new ProductBill();
-//        for (Map.Entry<Integer, Cart> entry : cartMap.entrySet()) {
-//            Cart value = entry.getValue();
-//            listSpHoaDon.put(value.getMaxPrice(), value.getProduct());
-//            productBillKey.setIdBill(bill.getIdBill());
-//            productBillKey.setIdBill(value.getProduct().getIdProduct());
-//            productBill.setBill(bill);
-//            productBill.setId(productBillKey);
-//            productBill.setProducts(value.getProduct());
-//            productBill.setQuantity(totalQuantity);
-//            productBill.setPrice(value.getMaxPrice());
-//            billService.saveDetail(productBill);
-//        }
-//        orderDetail = productBill;
-//        productListBillTemp = listSpHoaDon;
-//        String cancelUrl = PayPalUtils.getBaseURL(request) + "/" + URL_PAYPAL_CANCEL;
-//        String successUrl = PayPalUtils.getBaseURL(request) + "/" + URL_PAYPAL_SUCCESS;
-//        try {
-//            Payment payment = paypalService.createPayment(
-//                    sumTotalMoney,
-//                    "USD",
-//                    PayPalPaymentMethod.paypal,
-//                    PayPalPaymentIntent.sale,
-//                    "payment description",
-//                    cancelUrl,
-//                    successUrl);
-//            for (Links links : payment.getLinks()) {
-//                if (links.getRel().equals("approval_url")) {
-//                    return "redirect:" + links.getHref();
-//                }
-//            }
-//        } catch (PayPalRESTException e) {
-//            log.error(e.getMessage());
-//        }
-//        return "redirect:/";
-//    }
+    @GetMapping("/pay")
+    public String pay(HttpServletRequest request, @SessionAttribute("carts") HashMap<Integer, Cart> cartMap,
+                      @ModelAttribute Bill bill, Model model) {
+        HashMap<Double, Product> productListBill = new HashMap<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        AccUser user = userService.findByAccount(auth.getName());
+        LocalDate currentDate = LocalDate.now();
+        bill.setCurrent(String.valueOf(currentDate));
+        bill.setStatus("Đang giao");
+        bill.setUser(user);
+        bill.setTotalCost(totalMoney);
+        billService.save(bill);
+        ProductBill productBill = new ProductBill();
+        for (Map.Entry<Integer, Cart> entry : cartMap.entrySet()) {
+            Cart value = entry.getValue();
+            productListBill.put(value.getMaxPrice(), value.getProduct());
+            productBill.setBill(bill);
+            productBill.setProduct(value.getProduct());
+            billService.saveDetail(productBill);
+        }
+        orderDetail = productBill;
+        productListBillTemp = productListBill;
+        String cancelUrl = PayPalUtils.getBaseURL(request) + "/" + URL_PAYPAL_CANCEL;
+        String successUrl = PayPalUtils.getBaseURL(request) + "/" + URL_PAYPAL_SUCCESS;
+        try {
+            Payment payment = paypalService.createPayment(
+                    sumTotalMoney,
+                    "USD",
+                    PayPalPaymentMethod.paypal,
+                    PayPalPaymentIntent.sale,
+                    "payment description",
+                    cancelUrl,
+                    successUrl);
+            for (Links links : payment.getLinks()) {
+                if (links.getRel().equals("approval_url")) {
+                    return "redirect:" + links.getHref();
+                }
+            }
+        } catch (PayPalRESTException e) {
+            log.error(e.getMessage());
+        }
+        return "redirect:/";
+    }
 
     @GetMapping(URL_PAYPAL_CANCEL)
     public String cancelPay() {
