@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Danh sach mau sac</title>
+
+    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <!--  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <link rel="stylesheet" href="/Vinh/css/Footer.css">
+    <!--  <link rel="stylesheet" href="/nha/css/category/create.css">-->
+    <link rel="stylesheet" href="/nha/css/Demo.css">
+    <link rel="stylesheet" href="/Vinh/css/Header.css">
+
+
+</head>
+<body>
+<div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
+<div class="main">
+    <div th:insert="~{/nha/admin/ListProduct::main__left}"></div>
+    <div class="main__right">
+        <div class="search__space">
+            <form method="get">
+                <label>Tên Màu</label>
+                <input type="text" name="nameColor"  class="filter__input"/>
+                <button class="btn  button__search"  type="submit">Lọc kết quả</button>
+            </form>
+        </div>
+        <div>
+            <span class="alert alert-success" th:utext="${mgsecolor}" th:if="${mgsecolor}"></span>
+        </div>
+        <table class="table__container">
+            <thead class="table__thead">
+            <tr>
+                <th>STT</th>
+                <th>Mã màu</th>
+                <th>Tên màu</th>
+                <th>Giá màu </th>
+                <th>Số lượng</th>
+                <th>Trạng Thái</th>
+                <th>Người đăng giá màu</th>
+                <th>Màu của Sản Phẩm</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody class="table__tbody">
+            <tr th:each="color,iterstart : ${colorlist}">
+                <td><h4 th:text="${iterstart.count}"></h4></td>
+                <td><h4 th:text="${color.idColor}"></h4></td>
+                <td ><h4 th:text="${color.color}"></h4></td>
+                <td><h4 th:text="${color.price}"></h4></td>
+                <td><h4 th:text="${color.quantity}"></h4></td>
+                <td><h4 th:text="${color.status}"></h4></td>
+                <td><h4 th:text="${color.product.accounts.user.name}"></h4></td>
+                <td><h4 th:text="${color.product.productName}"></h4></td>
+                <td>
+                    <a th:href="@{/admin/color/edit(id = ${color.idColor})}">
+                        <button class="button__action background-blue " th:href="@{/admin/color/edit(id = ${color.idColor})}">
+                            <span>Cập nhật</span>
+                        </button>
+                    </a>
+                    <a th:href="@{/admin/color/delete/{id}(id = ${color.idColor})}">
+                        <button class="button__action background-red ">
+                            <span>X</span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="center">
+        <span class="pagination">
+                <a th:href="@{'/admin/listcolor'(page=${colorlist.number + 1})}"
+                   th:if="${colorlist.hasPrevious()}">
+                     <img class="img__arrow" src="/Images/arrrowleft.png" alt=""/>
+                </a>
+            </span>
+
+        <span class="pagination paging" th:text="${colorlist.number + 1}"></span>
+        <span  class="pagination" th:text="${colorlist.totalPages}"></span>
+
+        <span class="pagination">
+                <a style="margin-left: 20px;" th:href="@{'/admin/listcolor'(page=${colorlist.number + 1})}"
+                   th:if="${colorlist.hasNext()}">
+                    <img class="img_arrow" src="/Images/arrowright.png" alt=""/>
+                </a>
+        </span>
+    </div>
+</div>
+
+<div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
+</div>
+<script src="/bootstrap/js/jquery.js"></script>
+</body>
+</html>
