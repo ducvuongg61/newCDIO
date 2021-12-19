@@ -10,6 +10,7 @@ public class Auction {
     private double priceJump;
     private String startDate;
     private String endDate;
+    private String auctionTime;
 
     @OneToOne
     private Product product;
@@ -63,5 +64,13 @@ public class Auction {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String getAuctionTime() {
+        return auctionTime;
+    }
+
+    public void setAuctionTime(String auctionTime) {
+        this.auctionTime = auctionTime;
     }
 }
