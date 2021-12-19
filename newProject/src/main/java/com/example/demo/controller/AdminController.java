@@ -8,6 +8,8 @@ import com.example.demo.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +22,19 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired
-    UserRepository userRepo;
+    private UserRepository userRepo;
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
+
+    @ModelAttribute("userNames")
+    public AccUser getDauGia() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepo.findByAccount_IdAccount(auth.getName());
+    }
 
     @GetMapping(value="")
     public String AdminHome(Model model, Principal principal) {
@@ -57,8 +65,6 @@ public class AdminController {
 
     @GetMapping(value = "/{idProduct}/deleteProduct")
     public String delete(@PathVariable int idProduct , @ModelAttribute("product") Product product, Model model, Principal principal) {
-        AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("userNames", user);
         System.out.println("ID Product is :----------------------------" + idProduct);
         productService.delete(idProduct);
         return "redirect:/admin/list";
@@ -66,16 +72,13 @@ public class AdminController {
 
     @GetMapping(value = "/approve")
     public String AdminApprove(Model model, Principal principal) {
-        AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("userNames", user);
         model.addAttribute("product", productService.findByStatus("Chưa duyệt"));
         return "nha/admin/DuyetProduct";
     }
 
     @GetMapping(value = "/deleteNotApprovedYet/{idProduct}")
     public String deleteNotApprovedYet(@PathVariable int idProduct, Model model, Principal principal) {
-        AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("userNames", user);
+
         this.productService.delete(idProduct);
         return "redirect:/admin/approve";
     }
@@ -83,15 +86,13 @@ public class AdminController {
     @PostMapping(value = "/approved")
     public String AdminCreate(@RequestParam("submit") String submit, Product product, Model model, RedirectAttributes redirectAttributes, Principal principal) {
         if (submit.equals("duyet")) {
-            AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-            model.addAttribute("userNames", user);
+
             product.setStatus("Đã duyệt");
             this.productService.save(product);
             redirectAttributes.addFlashAttribute("mgs1", "Phê duyệt sản phẩm thành công!");
             return "redirect:/admin/approve";
         } else {
-            AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-            model.addAttribute("userNames", user);
+
             product.setStatus("Không duyệt");
             this.productService.save(product);
             return "redirect:/admin/approve";
@@ -100,8 +101,7 @@ public class AdminController {
 
     @GetMapping(value = "/edit")
     public String AdminViewEdit(@RequestParam("id") Integer id, Model model, Principal principal) {
-        AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("userNames", user);
+
         model.addAttribute("product", productService.findById(id));
         model.addAttribute("category", categoryService.findAll());
         model.addAttribute("notApprovedYet", "Chưa duyệt");
@@ -112,25 +112,20 @@ public class AdminController {
 
     @PostMapping(value = "/edit")
     public String AdminEdit(@ModelAttribute("product") Product product, Model model, RedirectAttributes redirectAttributes, Principal principal) {
-        AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-        model.addAttribute("userNames", user);
+
         this.productService.save(product);
         redirectAttributes.addFlashAttribute("mgs2", "sửa sản phẩm thành công!");
         return "redirect:/admin/list";
     }
 
     @GetMapping(value = "/search")
-    public String search(@RequestParam("nameProduct") String nameProduct, Model model, Principal principal) {
+    public String search(@RequestParam("nameProduct") String nameProduct, Model model) {
         List<Product> products = productService.findByName(nameProduct);
         if (products.size() == 0) {
             model.addAttribute("product", products);
             model.addAttribute("mgs", "khomg tim thay sp");
             return "/nha/admin/ListProduct";
         } else {
-            AccUser user = userRepo.findByAccount_IdAccount(principal.getName());
-            model.addAttribute("userNames", user);
-            Sort sort = Sort.by("nameProduct").descending();
-//            model.addAttribute("sanphams1", sanPhamService.findByNameadmin(tenSanPham);
             model.addAttribute("product", products);
             return "/nha/admin/ListProduct";
         }

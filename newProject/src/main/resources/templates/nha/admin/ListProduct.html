@@ -153,7 +153,7 @@
         <div class="search__form">
             <form action="/admin/search" method="get">
                 <label>Tên Sản Phẩm : </label>
-                <input type="text" class="filter__input" name="nameProduct" th:value="${nameProduct}" id="mem-name"/>
+                <input type="text" class="filter__input" name="nameProduct"  id="mem-name"/>
                 <button class="filter__btn" type="submit">Lọc kết quả</button>
             </form>
         </div>
@@ -189,9 +189,9 @@
                     </a>
                     <a th:href="@{/admin/{id}/deleteSanPham(id=${sanpham.idProduct})}">
                         <button class="button__action background-red">
-                <span>
-                  &#88;
-                </span>
+                            <span>
+                              &#88;
+                            </span>
                         </button>
                     </a>
                 </td>

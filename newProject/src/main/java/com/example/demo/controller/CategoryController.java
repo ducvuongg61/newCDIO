@@ -23,7 +23,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
     @Autowired
-    UserRepository userRepo;
+    private UserRepository userRepo;
 
     @ModelAttribute("userNames")
     public AccUser getDauGia() {
