@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Auction {
@@ -14,6 +15,9 @@ public class Auction {
 
     @OneToOne
     private Product product;
+
+    @OneToMany(mappedBy = "auctions",cascade = CascadeType.ALL)
+    private Set<AuctionUser> auctionUsers;
 
     public Auction() {
     }
@@ -72,5 +76,13 @@ public class Auction {
 
     public void setAuctionTime(String auctionTime) {
         this.auctionTime = auctionTime;
+    }
+
+    public Set<AuctionUser> getAuctionUsers() {
+        return auctionUsers;
+    }
+
+    public void setAuctionUsers(Set<AuctionUser> auctionUsers) {
+        this.auctionUsers = auctionUsers;
     }
 }

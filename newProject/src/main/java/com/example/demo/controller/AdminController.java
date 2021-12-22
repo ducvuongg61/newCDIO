@@ -78,7 +78,6 @@ public class AdminController {
 
     @GetMapping(value = "/deleteNotApprovedYet/{idProduct}")
     public String deleteNotApprovedYet(@PathVariable int idProduct, Model model, Principal principal) {
-
         this.productService.delete(idProduct);
         return "redirect:/admin/approve";
     }
@@ -86,7 +85,6 @@ public class AdminController {
     @PostMapping(value = "/approved")
     public String AdminCreate(@RequestParam("submit") String submit, Product product, Model model, RedirectAttributes redirectAttributes, Principal principal) {
         if (submit.equals("duyet")) {
-
             product.setStatus("Đã duyệt");
             this.productService.save(product);
             redirectAttributes.addFlashAttribute("mgs1", "Phê duyệt sản phẩm thành công!");
@@ -112,7 +110,6 @@ public class AdminController {
 
     @PostMapping(value = "/edit")
     public String AdminEdit(@ModelAttribute("product") Product product, Model model, RedirectAttributes redirectAttributes, Principal principal) {
-
         this.productService.save(product);
         redirectAttributes.addFlashAttribute("mgs2", "sửa sản phẩm thành công!");
         return "redirect:/admin/list";

@@ -18,7 +18,7 @@ public class Product {
     @JoinColumn(name = "account", referencedColumnName = "idAccount")
     private Account accounts;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
     @OneToMany(mappedBy = "product" , cascade = CascadeType.ALL)

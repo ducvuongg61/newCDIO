@@ -10,7 +10,7 @@ public class AuctionUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAuctionUser;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Auction.class)
     @JoinColumn(name = "idAuction")
     private Auction auctions;
 
@@ -63,4 +63,5 @@ public class AuctionUser {
     public void setAuctionEndTime(Time auctionEndTime) {
         this.auctionEndTime = auctionEndTime;
     }
+
 }
