@@ -1,6 +1,10 @@
 package com.example.demo.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Auction {
@@ -8,17 +12,22 @@ public class Auction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAuction;
     private double priceJump;
-    private String startDate;
-    private String endDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
     private String auctionTime;
 
     @OneToOne
     private Product product;
 
+    @OneToMany(mappedBy = "auctions",cascade = CascadeType.ALL)
+    private Set<AuctionUser> auctionUsers;
+
     public Auction() {
     }
 
-    public Auction(int idAuction, double priceJump, String startDate, String endDate, Product product) {
+    public Auction(int idAuction, double priceJump, Date startDate, Date endDate, Product product) {
         this.idAuction = idAuction;
         this.priceJump = priceJump;
         this.startDate = startDate;
@@ -42,19 +51,19 @@ public class Auction {
         this.priceJump = priceJump;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -72,5 +81,13 @@ public class Auction {
 
     public void setAuctionTime(String auctionTime) {
         this.auctionTime = auctionTime;
+    }
+
+    public Set<AuctionUser> getAuctionUsers() {
+        return auctionUsers;
+    }
+
+    public void setAuctionUsers(Set<AuctionUser> auctionUsers) {
+        this.auctionUsers = auctionUsers;
     }
 }

@@ -63,7 +63,6 @@ public class CategoryController {
 
     @GetMapping(value = "/category/edit")
     public String ViewEdit(@RequestParam("id") Integer id, Model model, Principal principal) {
-    
         model.addAttribute("category", categoryService.findById(id));
         return "/nha/category/edit";
     }
@@ -71,7 +70,6 @@ public class CategoryController {
     @PostMapping(value = "/category/edit")
     public String Edit(Category category, Model model, Principal principal) {
         this.categoryService.save(category);
-    
         model.addAttribute("mgsedit", "Sửa danh mục thành công.");
         model.addAttribute("category", categoryService.findAll());
         return "/nha/category/list";

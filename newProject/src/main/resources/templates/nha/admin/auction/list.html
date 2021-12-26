@@ -1,20 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Danh sach mau sac</title>
-
-    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-    <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
-    <!--  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-    <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -37,8 +26,7 @@
     <!--  <link rel="stylesheet" href="/nha/css/category/create.css">-->
     <link rel="stylesheet" href="/nha/css/Demo.css">
     <link rel="stylesheet" href="/Vinh/css/Header.css">
-
-
+    <title>Quan lý sản phẩm đấu giá</title>
 </head>
 <body>
 <div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
@@ -47,45 +35,45 @@
     <div class="main__right">
         <div class="search__space">
             <form method="get">
-                <label>Tên Màu</label>
-                <input type="text" name="nameColor"  class="filter__input"/>
+                <label>Tên Sản Phẩm</label>
+                <input type="text" name="nameAuction"  class="filter__input"/>
+                <label>Thời gian</label>
+                <input type="text" name="AuctionTime"  class="filter__input"/>
                 <button class="btn  button__search"  type="submit">Lọc kết quả</button>
             </form>
         </div>
         <div>
-            <span class="alert alert-success" th:utext="${mgsecolor}" th:if="${mgsecolor}"></span>
+            <span class="alert alert-success" th:utext="${mgseauction}" th:if="${mgseauction}"></span>
         </div>
         <table class="table__container">
             <thead class="table__thead">
             <tr>
                 <th>STT</th>
-                <th>Mã màu</th>
-                <th>Tên màu</th>
-                <th>Giá màu </th>
-                <th>Số lượng</th>
-                <th>Trạng Thái</th>
-                <th>Người đăng giá màu</th>
-                <th>Màu của Sản Phẩm</th>
+                <th>Mã đấu giá</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Bước giá</th>
+                <th>Ngày bắt đầu </th>
+                <th>Ngày kết thúc</th>
+                <th>Thời gian đấu giá</th>
                 <th>Hành động</th>
             </tr>
             </thead>
             <tbody class="table__tbody">
-            <tr th:each="color,iterstart:${colorlist}">
+            <tr th:each="auction,iterstart:${auctionlist}">
                 <td><h4 th:text="${iterstart.count}"></h4></td>
-                <td><h4 th:text="${color.idColor}"></h4></td>
-                <td ><h4 th:text="${color.color}"></h4></td>
-                <td><h4 th:text="${color.price}"></h4></td>
-                <td><h4 th:text="${color.quantity}"></h4></td>
-                <td><h4 th:text="${color.status}"></h4></td>
-                <td><h4 th:text="${color.product.accounts.user.name}"></h4></td>
-                <td><h4 th:text="${color.product.productName}"></h4></td>
+                <td><h4 th:text="${auction.idAuction}"></h4></td>
+                <td><h4 th:text="${auction.product.productName}"></h4></td>
+                <td><h4 th:text="${auction.priceJump}"></h4></td>
+                <td><h4 th:text="${auction.startDate}"></h4></td>
+                <td><h4 th:text="${auction.endDate}"></h4></td>
+                <td><h4 th:text="${auction.auctionTime}"></h4></td>
                 <td>
-                    <a th:href="@{/admin/color/edit/{id}(id = ${color.idColor})}">
+                    <a th:href="@{/admin/auction/edit/{idAuction}(idAuction = ${auction.idAuction})}">
                         <button class="button__action background-blue " >
                             <span>Xem chi tiết</span>
                         </button>
                     </a>
-                    <a th:href="@{/admin/color/delete/{id}(id = ${color.idColor})}">
+                    <a th:href="@{/admin/auction/delete/{idAuction}(idAuction = ${auction.idAuction})}">
                         <button class="button__action background-red ">
                             <span>X</span>
                         </button>
@@ -94,29 +82,27 @@
             </tr>
             </tbody>
         </table>
-        <div class="center">
+    </div>
+    <div class="center">
         <span class="pagination">
-                <a th:href="@{'/admin/listcolor'(page=${colorlist.number - 1})}"
-                   th:if="${colorlist.hasPrevious()}">
+                <a th:href="@{'/admin/auction/list'(page=${auctionlist.number -1})}"
+                   th:if="${auctionlist.hasPrevious()}">
                      <img class="img__arrow" src="/Images/arrrowleft.png" alt=""/>
                 </a>
             </span>
 
-            <span class="pagination paging" th:text="${colorlist.number + 1}"></span>
-            <span  class="pagination" th:text="${colorlist.totalPages}"></span>
+        <span class="pagination paging" th:text="${auctionlist.number + 1}"></span>
+        <span  class="pagination" th:text="${auctionlist.totalPages}"></span>
 
-            <span class="pagination">
-                <a style="margin-left: 20px;" th:href="@{'/admin/listcolor'(page=${colorlist.number + 1})}"
-                   th:if="${colorlist.hasNext()}">
+        <span class="pagination">
+                <a style="margin-left: 20px;" th:href="@{'/admin/auction/list'(page=${auctionlist.number + 1})}"
+                   th:if="${auctionlist.hasNext()}">
                     <img class="img_arrow" src="/Images/arrowright.png" alt=""/>
                 </a>
         </span>
-        </div>
     </div>
 </div>
 
 <div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
-</div>
-<script src="/bootstrap/js/jquery.js"></script>
 </body>
 </html>

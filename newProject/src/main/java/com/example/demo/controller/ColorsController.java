@@ -35,6 +35,10 @@ public class ColorsController {
     @GetMapping("/listcolor")
     public String colorList(@RequestParam(defaultValue = "0") int page,
                             Optional<String> nameColor,Optional<String> nameProduct, Model model){
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
+            model.addAttribute("admin", "là admin");
+        }
         Pageable pageableSort = PageRequest.of(page, 5);
         if(!nameColor.isPresent()){
             if(nameProduct.isPresent()){
@@ -50,19 +54,25 @@ public class ColorsController {
         }
         return "/nha/color/list";
     }
-    @GetMapping("/deleteColor/{idColor}")
+    @GetMapping("/color/delete/{idColor}")
     public String deleteColor(@PathVariable Integer idColor,RedirectAttributes redirectAttributesl){
         colorService.delete(idColor);
         redirectAttributesl.addFlashAttribute("mgsecolor", "Deleted!!");
         return "redirect:/admin/listcolor";
     }
-    @GetMapping("/edit/color/{idColor}")
+    @GetMapping("/color/edit/{idColor}")
     public String editColor(@PathVariable int idColor,Model model){
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
             model.addAttribute("admin", "là admin");
         }
-        model.addAttribute("colorEdit",colorService.findById(idColor));
+        model.addAttribute("color",colorService.findById(idColor));
         return "/nha/color/edit";
     }
+//    @PostMapping( "/color/edit")
+//    public String saveEditColor( Color color,RedirectAttributes redirectAttributes){
+//        this.colorService.save(color);
+//        redirectAttributes.addFlashAttribute("mgsecolor", "Updated " + color.getColor() +"success!");
+//        return "redirect:/admin/listcolor";
+//    }
 }

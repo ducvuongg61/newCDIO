@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/Vinh/css/Header.css">
     <link rel="stylesheet" href="/Vinh/css/Footer.css">
     <link rel="stylesheet" href="/nha/css/Demo.css">
-    <title>Chỉnh sửa màu</title>
+    <title>Chỉnh sửa sản phẩm đấu giá</title>
 </head>
 <body>
 <div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
@@ -29,49 +29,58 @@
                     </div></center>
                 </div>
                 <div class="card-body">
-                    <form id="profileForm" class="css" action="/admin/color/edit" method="post" th:object="${color}">
-                        <input th:field="*{idColor}" type="hidden"/>
-                        <input th:field="*{accounts}" type="hidden">
+                    <form id="profileForm" class="css" action="/admin/auction/edit" method="post" th:object="${auction}">
+                        <input th:field="*{idAuction}" type="hidden"/>
                         <input th:field="*{product}" type="hidden">
                         <div class="form-row">
-                            <div class="name">Tên màu sản phẩm <span>*</span></div>
+                            <div class="name">Tên Sản Phẩm<span>*</span></div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input id="name" th:field="*{color}" type="text" class="input--style-5"
+                                    <input id="name" th:field="*{product.productName}" type="text" class="input--style-5"
                                            required="true">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Giá <span>*</span></div>
+                            <div class="name">Bước Giá<span>*</span></div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input id="price" th:field="*{price}" type="text" class="input--style-5"
+                                    <input id="price" th:field="*{priceJump}" type="text" class="input--style-5"
                                            required="true">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Giá <span>*</span></div>
+                            <div class="name">Ngày Bắt Đầu<span>*</span></div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input id="quantity" th:field="*{quantity}" type="text" class="input--style-5"
-                                           required="true">
+                                    <input id="startDate" th:field="*{startDate}" type="date" class="input--style-5" required="true">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Địa chỉ <span>*</span></div>
+                            <div class="name">Ngày Kết Thúc<span>*</span></div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input id="status" th:field="*{status}" type="text" class="input--style-5"
+                                    <input id="endDate" th:field="*{endDate}" type="date" class="input--style-5" required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Thời Gian Đấu Giá<span>*</span></div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input id="status" th:field="*{auctionTime}" type="time" class="input--style-5"
                                            required="true">
                                 </div>
                             </div>
                         </div>
                         <div class="containerBtn">
                             <div>
-                                <button class="btn btn--radius-2 btn--red" type="submit"><a th:href="@{/admin/listcolor}">Hủy</a>
+                                <button class="btn btn--radius-2 btn--red" type="submit" value="Submit">Lưu</button>
+                            </div>
+                            <div>
+                                <button class="btn btn--radius-2 btn--red" type="submit"><a th:href="@{/admin/auction/list}">Hủy</a>
                                 </button>
                             </div>
                         </div>

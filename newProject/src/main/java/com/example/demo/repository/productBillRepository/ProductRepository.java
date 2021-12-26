@@ -42,4 +42,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("select p from  Product p,Auction a where p.status = ?1 and p.category.idCategory = ?2 and p.idProduct=a.product.idProduct and p.idProduct=a.product.idProduct ")
     List<Product> findByStatusAndCategory_IdCategoryAndAuction_IdProductOrderByPrice(String status, Integer idCategory);
+
 }

@@ -31,6 +31,9 @@ public class AccUser {
     @OneToMany(mappedBy = "accUser",fetch = FetchType.EAGER)
     private Set<Address> address;
 
+    @OneToMany(mappedBy = "users")
+    private Set<AuctionUser> auctionUsers;
+
     public AccUser() {
     }
 
@@ -133,5 +136,13 @@ public class AccUser {
 
     public void setAddress(Set<Address> address) {
         this.address = address;
+    }
+
+    public Set<AuctionUser> getAuctionUsers() {
+        return auctionUsers;
+    }
+
+    public void setAuctionUsers(Set<AuctionUser> auctionUsers) {
+        this.auctionUsers = auctionUsers;
     }
 }

@@ -498,7 +498,7 @@ body,h1,h2,h3,h4,h5,h6 {
 
 .paging::after {
     position: absolute;
-    content: '/';
+    content: ' /';
     top: 0px;
 
 }
