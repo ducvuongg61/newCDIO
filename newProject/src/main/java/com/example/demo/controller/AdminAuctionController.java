@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class AdminAuctionController {
     @Autowired
     AuctionService auctionService;
+
 
     @Autowired
     ProductService productService;
@@ -37,23 +39,23 @@ public class AdminAuctionController {
 
     @GetMapping("/auction/list")
     public String listAuction(@RequestParam(defaultValue = "0") int page,
-                              Optional<String> nameProduct, Optional<String> AuctionTime, Model model){
+                              Optional<String> nameProduct, Optional<String> auctionTime, Model model){
         if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
             model.addAttribute("admin", "là admin");
         }
         Pageable pageableSort = PageRequest.of(page, 5);
         if(!nameProduct.isPresent()){
-            if(AuctionTime.isPresent()){
-                model.addAttribute("nameAuction",AuctionTime.get());
-                model.addAttribute("auctionlist",null);
+            if(auctionTime.isPresent()){
+                model.addAttribute("nameAuction",auctionTime.get());
+                model.addAttribute("auctionlist",auctionService.findByAuctionTimeContains(auctionTime.get(),pageableSort));
             }else{
                 model.addAttribute("auctionlist",auctionService.findByAllPage(pageableSort));
             }
         }else{
-            if(AuctionTime.isPresent()){
+            if(auctionTime.isPresent()){
                 model.addAttribute("nameColor",nameProduct.get());
-                model.addAttribute("nameProduct",AuctionTime.get());
+                model.addAttribute("nameProduct",auctionTime.get());
                 model.addAttribute("auctionlist",null);
             }else{
                 model.addAttribute("nameAuction",nameProduct.get());
@@ -66,9 +68,29 @@ public class AdminAuctionController {
     @GetMapping("/auction/delete/{idAuction}")
     public String deleteAuction(@PathVariable int idAuction, RedirectAttributes redirectAttributesl){
         Auction auction = auctionService.findById(idAuction);
-//        System.out.println("delete"+auction.getProduct().getIdProduct());
         productService.delete(auction.getProduct().getIdProduct());
         redirectAttributesl.addFlashAttribute("mgseauction", "Deleted!");
         return "redirect:/admin/auction/list";
     }
+
+    @GetMapping("/auction/edit/{idAuction}")
+    public String editAuction(@PathVariable int idAuction, Model model){
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
+            model.addAttribute("admin", "là admin");
+        }
+        model.addAttribute("auction",auctionService.findById(idAuction));
+        return "/nha/admin/auction/edit";
+    }
+
+    @PostMapping("/auction/edit")
+    public String submitEditAuction(Auction auction,RedirectAttributes redirectAttributes){
+        auctionService.save(auction);
+        redirectAttributes.addFlashAttribute("mgseauction" , "Update " +auction.getProduct().getProductName()+"success");
+        return "redirect:/admin/auction/list";
+    }
+
+
+    
+
 }

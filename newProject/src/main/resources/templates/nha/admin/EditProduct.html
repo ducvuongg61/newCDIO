@@ -24,6 +24,7 @@
   <div class="main__right">
     <form method="post" action="/admin/edit" th:object="${product}">
       <fieldset>
+        <input th:field="*{datePost}" type="hidden"/>
         <div class="services-top">
           <h3 class="btn btn-secondary"> Sửa Sản Phẩm </h3>
         </div>
@@ -86,7 +87,7 @@
           <label class="col-sm-2 col-form-label">Ngày đăng ký:</label>
           <div class="col-sm-8">
             <span style="display: none"  th:utext="*{datePost}"></span>
-            <input type="date" th:field="*{datePost}" class="form-control is-invalid" hidden="hidden">
+            <input type="text" th:field="*{datePost}" class="form-control is-invalid" hidden="hidden">
           </div>
         </div>
         <div class="form-group row">

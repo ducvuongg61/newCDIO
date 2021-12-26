@@ -145,6 +145,40 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header" id="headingSeven">
+                    <h5 class="mb-0">
+                        <div class="accordion__title">
+                            <h4 style="text-decoration: none" data-toggle="collapse" data-target="#collapseSeven"
+                                aria-expanded="false" aria-controls="collapseSeven">
+                                Quản Lý Màu Sắc
+                            </h4>
+                        </div>
+                    </h5>
+                </div>
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                    <div class="card-body">
+                        <p><a href="/admin/listcolor">Danh sách màu sắc</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingEight">
+                    <h5 class="mb-0">
+                        <div class="accordion__title">
+                            <h4 style="text-decoration: none" data-toggle="collapse" data-target="#collapseEight"
+                                aria-expanded="false" aria-controls="collapseEight">
+                                Quản Lý Đấu Giá
+                            </h4>
+                        </div>
+                    </h5>
+                </div>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+                    <div class="card-body">
+                        <p><a href="/admin/auction/list">Danh sách Đấu Giá</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -216,8 +250,6 @@
                 </a>
             </span>
         </div>
-
-
         <div class="center" th:if="${nameProduct != null}">
             <span class="pagination">
                 <a th:if="${product.hasPrevious()}"

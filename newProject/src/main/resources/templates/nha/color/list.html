@@ -94,8 +94,7 @@
             </tr>
             </tbody>
         </table>
-    </div>
-    <div class="center">
+        <div class="center">
         <span class="pagination">
                 <a th:href="@{'/admin/listcolor'(page=${colorlist.number - 1})}"
                    th:if="${colorlist.hasPrevious()}">
@@ -103,15 +102,16 @@
                 </a>
             </span>
 
-        <span class="pagination paging" th:text="${colorlist.number + 1}"></span>
-        <span  class="pagination" th:text="${colorlist.totalPages}"></span>
+            <span class="pagination paging" th:text="${colorlist.number + 1}"></span>
+            <span  class="pagination" th:text="${colorlist.totalPages}"></span>
 
-        <span class="pagination">
+            <span class="pagination">
                 <a style="margin-left: 20px;" th:href="@{'/admin/listcolor'(page=${colorlist.number + 1})}"
                    th:if="${colorlist.hasNext()}">
                     <img class="img_arrow" src="/Images/arrowright.png" alt=""/>
                 </a>
         </span>
+        </div>
     </div>
 </div>
 

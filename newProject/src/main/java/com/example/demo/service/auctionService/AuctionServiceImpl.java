@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AuctionServiceImpl implements AuctionService{
     @Autowired
@@ -34,5 +36,10 @@ public class AuctionServiceImpl implements AuctionService{
     @Override
     public Auction findById(int idAuction) {
         return auctionRepository.findById(idAuction).orElse(null);
+    }
+
+    @Override
+    public Page<Auction> findByAuctionTimeContains(String auctionTime, Pageable pageableSort) {
+        return auctionRepository.findAllByAuctionTimeContains(auctionTime,pageableSort);
     }
 }
