@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Trang chủ</title>
+    <title>Update Product</title>
     <link rel="stylesheet" href="/vuong/css/css1/ionicons.min.css">
     <link rel="stylesheet" href="/vuong/css/style.css">
 
@@ -29,17 +29,7 @@
           content="Auction Responsive web template, Bootstrap Web Templates, Flat Web Templates, AndriodCompatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
     <!--Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-          type='text/css'>
-    <!-- start-smoth-scrolling -->
-
-    <!--    Vinh-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
-
-<!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -93,60 +83,51 @@
 </script>
 
 <div class="container">
-    <form method="post" action="/product/create" th:object="${products}">
+    <form method="post" action="/product/productDone" th:object="${colors}">
         <fieldset>
             <div class="services-top">
-                <h3 class="btn btn-secondary">Thêm Sản Phẩm</h3>
+                <h3 class="btn btn-secondary">Cập nhật sản phẩm</h3>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Tên sản phẩm *</label>
+                <label class="col-sm-2 col-form-label">Tên Sản Phẩm *</label>
                 <div class="col-sm-8">
-                    <input type="text" th:field="*{productName}" class="form-control is-invalid"/>
-                    <p style="color: #ff0000" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
-
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Danh Mục *</label>
-                <div class="col-sm-8">
-                    <select class="form-control custom-select is-invalid" th:field="*{category}">
-                        <option th:each="cate: ${category}" th:text="${cate.categoryName}"
-                                th:value="${cate.idCategory}"></option>
+                    <select class="form-control custom-select is-invalid" th:field="*{product}">
+                        <option th:each="cate: ${productNoMoney}" th:text="${cate.productName}"
+                                th:value="${cate.getIdProduct()}"></option>
                     </select>
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Hình ảnh sản phẩm *</label>
+                <label class="col-sm-2 col-form-label">Số Lượng *</label>
                 <div class="col-sm-8">
-                    <input type="file" th:field="*{image1}" class="form-control-file is-invalid">
-                    <input type="file" th:field="*{image2}" class="form-control-file is-invalid">
-                    <input type="file" th:field="*{image3}" class="form-control-file is-invalid">
+                    <input type="number" th:field="*{quantity}" class="form-control is-invalid">
+<!--                                <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>-->
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Thông tin chi tiết</label>
-                <div class="col-sm-10">
-                    <textarea type="textarea" th:field="*{description}" class="form-control is-invalid" rows="6"> </textarea>
-                    <p style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Ngày đăng</label>
+                <label class="col-sm-2 col-form-label">Màu :</label>
                 <div class="col-sm-8">
-                    <input readonly type="date" th:field="*{datePost}" th:value="*{datePost}"
-                           class="form-control is-invalid" hidden="hidden">
-                    <span th:utext="*{datePost}"></span>
+                    <input type="text" th:field="*{color}" class="form-control is-invalid">
+                    <!--                                <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>-->
                 </div>
             </div>
 
-            <div class="form-group row" hidden="hidden">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giá :</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{price}" class="form-control is-invalid">
+<!--                                <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>-->
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tình Trạng</label>
                 <div class="col-sm-8">
-                    <span th:utext="${notApprovedYet}"></span>
+                    <span th:utext="${stocking}"></span>
                     <select class="form-control is-invalid" th:field="*{status}" hidden="hidden">
-                        <option th:value="${notApprovedYet}">
-                            <span th:utext="${notApprovedYet}"></span>
+                        <option th:value="${stocking}">
+                            <span th:utext="${stocking}"></span>
                         </option>
                     </select>
                 </div>
@@ -168,8 +149,7 @@
                 <div class="col-sm-2">
                 </div>
                 <div class="col-sm-1">
-                    <input type="submit" style="background:#1ab7ea;color: white" class="form-control"
-                           value="Thêm">
+                    <input type="submit" style="background:#1ab7ea;color: white" class="form-control" value="Thêm">
                 </div>
             </div>
         </fieldset>

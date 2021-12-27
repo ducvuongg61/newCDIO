@@ -86,7 +86,18 @@
                         <a th:href="@{/product/create}">Thêm Sản Phẩm</a>
                     </button>
                 </div>
+                <div class="services-top" >
+                    <button class="btn ">
+                        <a th:href="@{/product/upProductMoney}">Cập nhập sản phẩm</a>
+                    </button>
+                </div>
+                <div class="services-top" >
+                    <button class="btn ">
+                        <a th:href="@{/product/waitList}">Danh sách chờ</a>
+                    </button>
+                </div>
         </div>
+
             <div style="clear: both">
                 <span class="alert alert-success" th:if="${mgsedit}">Sửa sản phẩm thành công!</span>
             </div>
@@ -107,23 +118,26 @@
                             <div class="img-dau-gia">
                                 <a><img
                                         style="cursor: pointer"
-                                        th:src="@{${'/Images/' + product.image1}}"
+                                        th:src="@{${'/Images/' + product.getProduct().getImage1()}}"
                                         alt="lỗi ảnh!"></a>
                             </div>
                             <div class="caption">
-                                <a th:href="@{/product-detail/{id}(id=${product.idProduct})}"><h3
-                                        th:text="${product.productName}" class="nameProduct"></h3>
-                                    <p th:text="${product.category.categoryName}"></p></a>
+                                <a th:href="@{/productDetail/{id}(id=${product.getProduct().getIdProduct()})}"><h3
+                                        th:text="${product.product.productName}" class="nameProduct"></h3>
+                                    <p th:text="${product.product.category.categoryName}"></p>
+                                    <p th:text="${product.color}"></p>
+
+                                </a>
                                 <div class="row rowProduct" style=" padding: 0em 0em 0.5em 0em;border-bottom: 0px">
                                     <span class="col-md-6 time"></span>
                                     <p class="col-md-6 price" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'COMMA')}+'₫'"></p>
                                 </div>
                                 <div class="row" style="display: flex">
-                                    <a th:href="@{/product/view(id = ${product.idProduct})}"
+                                    <a th:href="@{/product/view(id = ${product.product.idProduct})}"
                                        class="btn btn-dau-gia  button__detail ">Chi tiết</a>
                                     <button class="btn btn-dau-gia btn-danger" data-toggle="modal"
                                             data-target="#exampleModal"
-                                            th:onclick="preparedelete([[${product.idProduct}]],[[${product.productName}]])">
+                                            th:onclick="preparedelete([[${product.product.idProduct}]],[[${product.product.productName}]])">
                                         Xóa
                                     </button>
                                 </div>

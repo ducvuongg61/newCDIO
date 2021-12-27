@@ -14,12 +14,12 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public Page<Address> findByNameAddress(String address, Pageable pageable) {
-        return addressRepository.findByNameAddressContains(address , pageable);
+        return addressRepository.findByNameAddress(address , pageable);
     }
 
     @Override
     public Page<Address> findByNameAddressAndNameUser(String nameUser, String address, Pageable pageable) {
-        return addressRepository.findByNameAddressAndAccUser_NameContains(nameUser , address , pageable);
+        return addressRepository.findByNameAddressAndAccUser_Name(nameUser , address , pageable);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public Page<Address> findByNameUser(String nameUser, Pageable pageable) {
-        return addressRepository.findAddressByAccUser_NameContains(nameUser , pageable);
+        return addressRepository.findAddressByAccUser_Name(nameUser , pageable);
     }
 
     @Override

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>List No Money</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -56,7 +57,7 @@
     <div class="container">
         <div class="services-main">
             <div class="services-top">
-                <h3 class="btn btn-secondary">Sản phẩm Đang Chờ Admin Duyệt Của Bạn</h3>
+                <h3 class="btn btn-secondary">Sản phẩm Đang Chờ Cập Nhật Thêm Thông Tin</h3>
             </div>
             <center>
                 <div>
@@ -77,28 +78,24 @@
                     <div class="col-sm-6 col-md-2 ser item-dau-gia" th:each="productList:${listSP}">
                         <div class="thumbnail itemProduct">
                             <div class="img-dau-gia">
-                                <a><img th:src="@{${'/Images/' + productList.product.image1}}" alt="lỗi ảnh!"></a>
+                                <a><img th:src="@{${'/Images/' + productList.image1}}" alt="lỗi ảnh!"></a>
                             </div>
                             <div class="caption">
-                                <a th:href="@{/product-detail/{id}(id=${productList.product.idProduct})}"><h3
-                                        th:text="${productList.product.productName}" class="nameProduct"></h3>
-                                    <p th:text="${productList.product.category.categoryName}"></p></a>
-                                <div class="row rowProduct" style=" padding: 0em 0em 0.5em 0em;border-bottom: 0px">
-                                    <span class="col-md-6 time"></span>
-                                    <p class="col-md-6 price"
-                                       th:text="${#numbers.formatDecimal(productList.price, 0, 'POINT', 0, 'COMMA')}+'₫'"></p>
-                                </div>
+                                <a th:href="@{/product-detail/{id}(id=${productList.idProduct})}"><h3 th:text="${productList.productName}" class="nameProduct"></h3>
+                                    <p th:text="${productList.category.categoryName}"></p></a>
                                 <div class="row">
                                     <div class="col-6">
-                                        <a th:href="@{/product/edit(id = ${productList.product.idProduct})}"
+                                        <a th:href="@{/product/edit(id = ${productList.idProduct})}"
                                            class="btn btn-dau-gia btn-secondary">Sửa</a>
-                                        <a th:href="@{/product/view(id = ${productList.product.idProduct})}"
+                                        <a th:href="@{/product/view(id = ${productList.idProduct})}"
                                            class="btn btn-dau-gia btn-secondary">Chi tiết</a>
+                                        <a th:href="@{/product/productDone}"
+                                           class="btn btn-dau-gia btn-secondary">Cập Nhật</a>
                                     </div>
                                     <div class="col-6">
                                         <button class="btn btn-dau-gia btn-secondary" data-toggle="modal"
                                                 data-target="#exampleModal"
-                                                th:onclick="preparedelete([[${productList.product.idProduct}]],[[${productList.product.productName}]])">
+                                                th:onclick="preparedelete([[${productList.idProduct}]],[[${productList.productName}]])">
                                             Xóa
                                         </button>
                                     </div>
@@ -115,23 +112,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
             </div>
             <div class="modal-body">
-                <p>Mã sản Phẩm :
-                    <span id="maSanPham"></span></p>
-                <p>Bạn có chắc chắn muốn xóa
-                    <span id="tenSanPham"></span>
-                    Không ?</p>
+                <p>Mã sản Phẩm :<span id="maSanPham"></span></p>
+                <p>Bạn có chắc chắn muốn xóa<span id="tenSanPham"></span>Không ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy
                 </button>
-                <button onclick="deleteService($('#maSanPham').html())" type="button"
-                        class="btn btn-default" data-dismiss="modal">
+                <button onclick="deleteService($('#maSanPham').html())" type="button" class="btn btn-default" data-dismiss="modal">
                     Xóa
                 </button>
             </div>

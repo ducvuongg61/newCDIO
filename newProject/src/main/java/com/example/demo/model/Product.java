@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -21,7 +18,7 @@ public class Product {
     @JoinColumn(name = "account", referencedColumnName = "idAccount")
     private Account accounts;
 
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product")
     private Set<Comment> comments;
 
     @OneToMany(mappedBy = "product" , cascade = CascadeType.ALL)
@@ -39,14 +36,13 @@ public class Product {
     private String image3;
     @Column(length = 2500)
     private String description;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date datePost;
+    private String datePost;
     private String status;
 
     public Product() {
     }
 
-    public Product(int idProduct, Category category, Account accounts, Set<Comment> comments, Set<Color> color, Auction auction, Set<ProductBill> productBills, String productName, String image1, String image2, String image3, String description, Date datePost, String status) {
+    public Product(int idProduct, Category category, Account accounts, Set<Comment> comments, Set<Color> color, Auction auction, Set<ProductBill> productBills, String productName, String image1, String image2, String image3, String description, String datePost, String status) {
         this.idProduct = idProduct;
         this.category = category;
         this.accounts = accounts;
@@ -159,11 +155,11 @@ public class Product {
         this.description = description;
     }
 
-    public Date getDatePost() {
+    public String getDatePost() {
         return datePost;
     }
 
-    public void setDatePost(Date datePost) {
+    public void setDatePost(String datePost) {
         this.datePost = datePost;
     }
 

@@ -1,10 +1,6 @@
 package com.example.demo.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class Auction {
@@ -12,22 +8,16 @@ public class Auction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAuction;
     private double priceJump;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date startDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date endDate;
-    private String auctionTime;
+    private String startDate;
+    private String endDate;
 
     @OneToOne
     private Product product;
 
-    @OneToMany(mappedBy = "auctions",cascade = CascadeType.ALL)
-    private Set<AuctionUser> auctionUsers;
-
     public Auction() {
     }
 
-    public Auction(int idAuction, double priceJump, Date startDate, Date endDate, Product product) {
+    public Auction(int idAuction, double priceJump, String startDate, String endDate, Product product) {
         this.idAuction = idAuction;
         this.priceJump = priceJump;
         this.startDate = startDate;
@@ -51,19 +41,19 @@ public class Auction {
         this.priceJump = priceJump;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -73,21 +63,5 @@ public class Auction {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public String getAuctionTime() {
-        return auctionTime;
-    }
-
-    public void setAuctionTime(String auctionTime) {
-        this.auctionTime = auctionTime;
-    }
-
-    public Set<AuctionUser> getAuctionUsers() {
-        return auctionUsers;
-    }
-
-    public void setAuctionUsers(Set<AuctionUser> auctionUsers) {
-        this.auctionUsers = auctionUsers;
     }
 }

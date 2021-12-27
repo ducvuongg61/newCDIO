@@ -45,18 +45,13 @@ public class MainController {
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
-
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
-
         System.out.println("User Name: " + userName);
-
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
         // 1 cái util( dùng chung) dùng để hiển thị principal
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
-
         return "/nha/userInfoPage";
     }
 
@@ -89,10 +84,9 @@ public class MainController {
         }
         Set<Role> roles = roleService.findByRoleName("ROLE_CUSTOMER") ;
         System.out.println("quyền là  " + roles);
-
         Address address = new Address();
 //        user.setName(accountUser.getName1());
-        Account account1 =new Account(accountUser.getUserName1(), bCryptPasswordEncoder.encode(accountUser.getPassWord1()),true, roles);
+        Account account1 = new Account(accountUser.getUserName1(), bCryptPasswordEncoder.encode(accountUser.getPassWord1()),true, roles);
 //        user.setAccount(account1);
 //        user.setGmail(accountUser.getGmail1());
 //        user.setDateOfBirth(accountUser.getDateTime1());
@@ -102,9 +96,6 @@ public class MainController {
                 accountUser.getNumberCard1(),accountUser.getPhoneUser1(),account1);
         address.setAccUser(user);
         address.setNameAddress(accountUser.getAddress1());
-
-
-
 ////        user.getAddress().add(address);
 //        userService.save(user);
 //        address.setNameAddress(accountUser.getAddress1());

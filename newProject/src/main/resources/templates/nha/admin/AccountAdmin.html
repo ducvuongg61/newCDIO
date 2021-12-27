@@ -26,15 +26,15 @@
     <div th:insert="~{/nha/admin/ListProduct::main__left}" ></div>
     <div class="main__right">
         <div class="search__space">
-            <form action="/admin/filter" method="get">
+            <form action="/admin/filter" method="post">
                 <label>Tên Người Dùng</label>
                 <input type="text" name="nameUser"  class="filter__input"/>
                 <label>Địa chỉ</label>
                 <input type="text" name="address"  class="filter__input" id="mem-add"/>
                 <button class="btn  button__search"  type="submit">Lọc kết quả</button>
-                <!--            <button id="add-btn" class="filter-btn"><a th:href="@{'/admin/add_member'}">Thêm mới </a><i-->
-                <!--                    class="fa fa-plus"></i>-->
-                <!--            </button>-->
+<!--            <button id="add-btn" class="filter-btn"><a th:href="@{'/admin/add_member'}">Thêm mới </a><i-->
+<!--                    class="fa fa-plus"></i>-->
+<!--            </button>-->
             </form>
         </div>
         <table class="table__container">
@@ -47,7 +47,6 @@
                 <th>Địa Chỉ</th>
                 <th>Số Điện Thoại</th>
                 <th>Trạng Thái</th>
-                <th>Quyền</th>
                 <th>Hành Động</th>
             </tr>
             </thead>
@@ -59,10 +58,6 @@
                 <td th:text="${listUser.accUser.sex}"></td>
                 <td th:text="${listUser.nameAddress}"></td>
                 <td th:text="${listUser.accUser.phoneUser}"></td>
-                <td>
-                    <span th:each="role:${listUser.accUser.account.roles}" th:text="${role.roleName}">
-                    </span>
-                </td>
                 <td th:text="${listUser.accUser.account.status}"></td>
                 <td>
                     <a th:href="@{/admin/edit/{id}(id = ${listUser.accUser.idUser})}">
@@ -83,14 +78,14 @@
         </table>
         <!--        Phan trang-->
         <div class="center">
-            <!--            <div style="margin-bottom: 15px;"><span th:text="${nguoidungs.number + 1}"></span>/<span-->
-            <!--                    th:text="${nguoidungs.totalPages}"></span></div>-->
-            <!--            <div style="display: inline-block;">-->
-            <!--                <a th:href="@{'/admin/account'(page=${nguoidungs.number - 1})}"-->
-            <!--                   th:if="${nguoidungs.hasPrevious()}">Trước</a>-->
-            <!--                <a style="margin-left: 20px;" th:href="@{'/admin/account'(page=${nguoidungs.number + 1})}"-->
-            <!--                   th:if="${nguoidungs.hasNext()}">Sau</a>-->
-            <!--            </div>-->
+<!--            <div style="margin-bottom: 15px;"><span th:text="${nguoidungs.number + 1}"></span>/<span-->
+<!--                    th:text="${nguoidungs.totalPages}"></span></div>-->
+<!--            <div style="display: inline-block;">-->
+<!--                <a th:href="@{'/admin/account'(page=${nguoidungs.number - 1})}"-->
+<!--                   th:if="${nguoidungs.hasPrevious()}">Trước</a>-->
+<!--                <a style="margin-left: 20px;" th:href="@{'/admin/account'(page=${nguoidungs.number + 1})}"-->
+<!--                   th:if="${nguoidungs.hasNext()}">Sau</a>-->
+<!--            </div>-->
 
             <span class="pagination">
                 <a th:href="@{'/admin/account'(page=${addresses.number - 1})}"
@@ -169,6 +164,40 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-<div  th:insert="~{/HeaderFooter/Footer::footer_clinet}"></div>
+<div  th:insert="~{/HeaderFooter/Footer::footer_clinet}">
+
+    <div class="footer__content">
+
+        <div class="footer__img">
+            <img src="/Images/Logo-Neffex.png" />
+        </div>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Về Neffex</h5>
+            <li class="footer__item">Thông tin về chúng tôi</li>
+            <li class="footer__item">Danh sách cửa hàng</li>
+            <li class="footer__item">Liên hệ</li>
+            <li class="footer__item">Flash sale</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Theo dõi chúng tôi tại</h5>
+            <li class="footer__item">
+                Facebook
+            </li>
+            <li class="footer__item">Instagram</li>
+            <li class="footer__item">Google</li>
+            <li class="footer__item">Twitter</li>
+        </ul>
+
+        <ul class="footer__list">
+            <h5 class="footer__list-title">Thanh toán</h5>
+            <img src="/Images/visalogo.svg" alt="">
+            <img src="https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png" alt="">
+            <img src="/Images/JCBlogo.svg" alt="">
+            <img src="/Images/mastercard.webp" alt="">
+        </ul>
+    </div>
+</div>
 </body>
 </html>

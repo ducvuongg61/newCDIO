@@ -3,8 +3,6 @@ package com.example.demo.service.colorService;
 import com.example.demo.model.Color;
 import com.example.demo.repository.colorRepository.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,14 +32,28 @@ public class ColorServiceImpl implements ColorService {
         colorRepository.deleteById(idColor);
     }
 
-
     @Override
     public List<Color> findByIdProduct(int idProduct) {
         return colorRepository.findAllByProduct_IdProduct(idProduct);
     }
 
     @Override
-    public Page<Color> findAllPage(Pageable pageable) {
-        return colorRepository.findAll(pageable);
+    public List<Color> findAllProduct(String idAccount) {
+        return colorRepository.findAllByProduct_Accounts_IdAccount(idAccount);
+    }
+
+    @Override
+    public List<Color> findAllApprovedProduct(String status, String idAccount) {
+        return colorRepository.findAllByProduct_StatusAndProduct_Accounts_IdAccount(status , idAccount);
+    }
+
+    @Override
+    public List<Color> findProduct(String status, Integer idCategory) {
+        return colorRepository.findByProduct_StatusAndProduct_Category_IdCategory(status, idCategory);
+    }
+
+    @Override
+    public List<Color> findByProduct_Status(String status) {
+        return colorRepository.findByProduct_Status(status);
     }
 }

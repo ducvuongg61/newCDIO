@@ -25,18 +25,18 @@
 <div th:insert="~{/HeaderFooter/Header::header-cline}"></div>
 <!-- Main -->
 <div class="main">
-<!--    <div class="search__space">-->
-<!--        <form method="get" action="/timKiem" class="d-flex">-->
-<!--            <input class="form-control input__search " type="search" name="tenSp" placeholder="Tên Sản Phẩm"-->
-<!--                   aria-label="Search" >-->
-<!--            <select name="maDanhMuc" class="form-control mr-2 custom-select">-->
-<!--                <option th:value="0">Tất cả danh mục</option>-->
-<!--                <option th:each="danhmuc: ${danhmucs}" th:text="${danhmuc.categoryName}" th:value="${danhmuc.idCategory}"></option>-->
-<!--            </select>-->
-<!--            <button type="submit" class="btn btn-secondary button__search" >Tìm kiếm-->
-<!--            </button>-->
-<!--        </form>-->
-<!--    </div>-->
+    <!--    <div class="search__space">-->
+    <!--        <form method="get" action="/timKiem" class="d-flex">-->
+    <!--            <input class="form-control input__search " type="search" name="tenSp" placeholder="Tên Sản Phẩm"-->
+    <!--                   aria-label="Search" >-->
+    <!--            <select name="maDanhMuc" class="form-control mr-2 custom-select">-->
+    <!--                <option th:value="0">Tất cả danh mục</option>-->
+    <!--                <option th:each="danhmuc: ${danhmucs}" th:text="${danhmuc.categoryName}" th:value="${danhmuc.idCategory}"></option>-->
+    <!--            </select>-->
+    <!--            <button type="submit" class="btn btn-secondary button__search" >Tìm kiếm-->
+    <!--            </button>-->
+    <!--        </form>-->
+    <!--    </div>-->
     <div class="main__banner">
         <!--        <img class="d-block w-100" src="/Images/k2.jpg" alt="First slide">-->
 
@@ -74,12 +74,12 @@
     <div class="main__bestseller" th:if="${products}" >
         <div class="main__bestseller-list" th:each="sanPham:${products}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image1}}" alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><img th:src="@{${'/Images/' + sanPham.image1}}" alt="img">
                 </a>
                 <div class="main__bestseller-info">
-                    <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
+                    <a th:href="@{/product-detail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
 
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+                    <p th:text="${sanPham.price}"></p>
                 </div>
             </div>
         </div>
@@ -93,8 +93,9 @@
 
         <div class="main__spotlight-item">
             <img
+                    lazy-src="https://cf.shopee.vn/file/6f8bb9cd5e698e22169bc433c22936f2_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                 alt=""
+                    alt=""
             >
 
             <div class="main__spotlight-info">
@@ -105,6 +106,7 @@
 
         <div class="main__spotlight-item">
             <img
+                    lazy-src="https://cf.shopee.vn/file/ce2e781d70c4ba3a6ff51425a936bbb1_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt=""
             >
@@ -116,6 +118,7 @@
 
         <div class="main__spotlight-item">
             <img
+                    lazy-src="https://cf.shopee.vn/file/a4665b23a84979e8141cdf5f7207ba00_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt=""
             >
@@ -127,7 +130,7 @@
 
         <div class="main__spotlight-item">
             <img
-
+                    lazy-src="https://cf.shopee.vn/file/a9b87eee4ac18b0151db95f7aaba59a4_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt=""
             >
@@ -139,7 +142,7 @@
 
         <div class="main__spotlight-item">
             <img
-
+                    lazy-src="https://cf.shopee.vn/file/7879897bdeab80c0bec123ca76f00205_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt=""
             >
@@ -151,7 +154,7 @@
 
         <div class="main__spotlight-item">
             <img
-
+                    lazy-src="https://cf.shopee.vn/file/b4fc6dc540e2d540b209184cb4fd2e28_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt="">
             <div class="main__spotlight-info">
@@ -163,7 +166,7 @@
 
         <div class="main__spotlight-item">
             <img
-
+                    lazy-src=" https://cf.shopee.vn/file/548b056c7600667ed4c382b2a77e349c_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt="">
             <div class="main__spotlight-info">
@@ -174,7 +177,7 @@
 
         <div class="main__spotlight-item">
             <img
-
+                    lazy-src=" https://cf.shopee.vn/file/6de59939316b634e2f6f81ce4fa7fd09_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt="">
             <div class="main__spotlight-info">
@@ -185,7 +188,7 @@
 
         <div class="main__spotlight-item">
             <img
-
+                    lazy-src="https://cf.shopee.vn/file/c7946e2d60105b0b1d2c6df81a0b4f91_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt="">
             <div class="main__spotlight-info">
@@ -196,7 +199,7 @@
 
         <div class="main__spotlight-item">
             <img
-
+                    lazy-src="https://cf.shopee.vn/file/a256a89d3b7b4b80224e768d9ff6fdff_tn"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
                     alt=""
             >
@@ -211,15 +214,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${MensFashion}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
 
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -228,16 +233,18 @@
         <h4 class="main__bestseller-title">Sản phẩm WomanFashion </h4>
 
         <div class="main__bestseller-list" th:each="sanPham:${WomanFashion}">
-            <div  class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}" >
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img"
-                    >
+            <div class="main__bestseller-item">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -247,14 +254,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Accessory}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}"><p th:text="${sanPham.productName}"></p></a>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -264,14 +274,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Bags}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -281,14 +294,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Camera}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -298,14 +314,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${FootwareMan}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -315,15 +334,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${FootwareWoman}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img"
-                    >
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -333,13 +354,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Health}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -349,13 +374,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Houseware}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -365,13 +394,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Laptop}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -381,15 +414,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Makeup}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img"
-                    >
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -399,12 +434,16 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${MotherAndBaby}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC" alt="img">
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
 
                 </div>
             </div>
@@ -415,13 +454,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Smartphone}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                    >
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -431,15 +474,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Television}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img"
-                    >
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -449,17 +494,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Watch}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-                    <img th:src="@{${'/Images/' + sanPham.image1}}"
-                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                         alt="img"
-                    >
-
-
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
@@ -469,19 +514,17 @@
 
         <div class="main__bestseller-list" th:each="sanPham:${Sport}">
             <div class="main__bestseller-item">
-                <a th:href="@{/productDetail/{id}(id=${sanPham.idProduct})}">
-<!--                    <img th:src="@{${'/Images/' + sanPham.image}}" alt="img">-->
-
-<!--                    Dang lam o day nek -->
-                    <img
-                        th:src="@{${'/Images/' + sanPham.image1}}"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC"
-                        alt="img"
-                    >
+                <a th:href="@{/product-detail/{id}(id=${sanPham.getProduct().idProduct})}">
+                    <img th:src="@{${'/Images/' + sanPham.getProduct().image1}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC">
                 </a>
                 <div class="main__bestseller-info">
-                    <p th:text="${sanPham.productName}"></p>
-                      <!-- <p th:text="${sanPham.price}"></p> -->
+
+                    <p th:text="${sanPham.getProduct().getProductName()}"></p>
+
+                    <p th:text="${sanPham.price}"></p>
+
+                    <p th:text="${sanPham.getColor()}"></p>
+
                 </div>
             </div>
         </div>
